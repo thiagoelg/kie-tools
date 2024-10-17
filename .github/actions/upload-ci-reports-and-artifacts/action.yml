@@ -24,13 +24,19 @@ inputs:
   partition_index:
     description: "Index of the partition whose artifacts are being uploaded."
     required: true
+  working_dir:
+    description: "kie-tools path"
+    required: false
+    default: "."
 
 runs:
   using: "composite"
   steps:
     - name: "Setup CI patterns"
       id: ci_patterns
-      uses: ./.github/actions/setup-ci-patterns
+      uses: ./kie-tools/.github/actions/setup-ci-patterns
+      with:
+        working_dir: ${{ inputs.working_dir }}
 
     - name: "Install zip (Windows only)"
       if: runner.os == 'Windows'

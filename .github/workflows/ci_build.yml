@@ -50,12 +50,15 @@ jobs:
 
       - name: "Checkout @ GitHub default"
         uses: actions/checkout@v3
+        with:
+          path: ./kie-tools
 
       - name: "Checkout @ Simulated squashed-merge if PR"
         id: checkout_pr
-        uses: ./.github/actions/checkout-pr
+        uses: ./kie-tools/.github/actions/checkout-pr
         with:
           ref: ${{ github.base_ref }}
+          path: ./kie-tools
 
       - name: "Setup pnpm"
         uses: pnpm/action-setup@v3
@@ -69,12 +72,16 @@ jobs:
 
       - name: "Setup CI patterns"
         id: ci_patterns
-        uses: ./.github/actions/setup-ci-patterns
+        uses: ./kie-tools/.github/actions/setup-ci-patterns
+        with:
+          working_dir: ./kie-tools
 
       - name: "Setup build mode {none,full,partial}"
         id: setup_build_mode
         shell: bash
         run: |
+
+          cd ./kie-tools
 
           npm -g install bun@1.1.6 turbo@2.1.2
 
@@ -104,15 +111,51 @@ jobs:
 
       - name: "Setup environment"
         if: steps.setup_build_mode.outputs.mode != 'none'
-        uses: ./.github/actions/setup-env
+        uses: ./kie-tools/.github/actions/setup-env
+        with:
+          working_dir: ./kie-tools
+
+      - name: "Setup Kogito ref"
+        id: setup_kogito_ref
+        if: steps.setup_build_mode.outputs.mode != 'none' && runner.os == 'Linux'
+        shell: bash
+        run: |
+          cd ./kie-tools
+          pnpm bootstrap:root
+          echo "kogitoRef=$(pnpm -F root-env exec build-env versions.kogito | sed 's/-SNAPSHOT//')" >> $GITHUB_OUTPUT
+
+      - name: "Build Drools"
+        if: steps.setup_build_mode.outputs.mode != 'none' && runner.os == 'Linux'
+        uses: ./kie-tools/.github/actions/build-drools
+        with:
+          ref: ${{ steps.setup_kogito_ref.outputs.kogitoRef }}
+
+      - name: "Build Optaplanner"
+        if: steps.setup_build_mode.outputs.mode != 'none' && runner.os == 'Linux'
+        uses: ./kie-tools/.github/actions/build-optaplanner
+        with:
+          ref: ${{ steps.setup_kogito_ref.outputs.kogitoRef }}
+
+      - name: "Build Kogito Runtimes"
+        if: steps.setup_build_mode.outputs.mode != 'none' && runner.os == 'Linux'
+        uses: ./kie-tools/.github/actions/build-kogito-runtimes
+        with:
+          ref: ${{ steps.setup_kogito_ref.outputs.kogitoRef }}
+
+      - name: "Build Kogito Apps"
+        if: steps.setup_build_mode.outputs.mode != 'none' && runner.os == 'Linux'
+        uses: ./kie-tools/.github/actions/build-kogito-apps
+        with:
+          ref: ${{ steps.setup_kogito_ref.outputs.kogitoRef }}
 
       - name: "Bootstrap"
         if: steps.setup_build_mode.outputs.mode != 'none'
         env:
           PLAYWRIGHT_BASE__installDeps: "true"
-        uses: ./.github/actions/bootstrap
+        uses: ./kie-tools/.github/actions/bootstrap
         with:
           pnpm_filter_string: ${{ steps.setup_build_mode.outputs.bootstrapPnpmFilterString }}
+          working_dir: ./kie-tools
 
       - name: "FULL → Build"
         if: steps.setup_build_mode.outputs.mode == 'full'
@@ -130,7 +173,8 @@ jobs:
           DISPLAY: ":99.0"
           START_SERVER_AND_TEST_INSECURE: "true"
           NODE_OPTIONS: "--max_old_space_size=4096"
-        run: >-
+        run: |
+          cd ./kie-tools
           eval "pnpm ${{ steps.setup_build_mode.outputs.fullBuildPnpmFilterString }} --workspace-concurrency=1 build:prod"
 
       - name: "PARTIAL → Build upstream"
@@ -140,6 +184,7 @@ jobs:
           KIE_TOOLS_BUILD__buildContainerImages: ${{ runner.os == 'Linux' }}
           KIE_TOOLS_BUILD__buildExamples: "true"
         run: |
+          cd ./kie-tools
           eval "pnpm ${{ steps.setup_build_mode.outputs.upstreamPnpmFilterString }} build:dev"
 
       - name: "PARTIAL → Build changed and downstream"
@@ -156,6 +201,7 @@ jobs:
           START_SERVER_AND_TEST_INSECURE: "true"
           NODE_OPTIONS: "--max_old_space_size=4096"
         run: |
+          cd ./kie-tools
           eval "pnpm ${{ steps.setup_build_mode.outputs.affectedPnpmFilterString }} --workspace-concurrency=1 build:prod"
 
       - name: "Check tests result (`main` only)"
@@ -173,7 +219,7 @@ jobs:
                                 .map(p => p.trim())
                                 .filter(p => p);
 
-            const script = require("./scripts/check-junit-report-results/src/index.js");
+            const script = require("./kie-tools/scripts/check-junit-report-results/src/index.js");
             await script({ core, glob, patterns });
 
       - name: "Check build-env access errors log"
@@ -188,14 +234,16 @@ jobs:
         if: always() && !cancelled() && steps.setup_build_mode.outputs.mode != 'none'
         shell: bash
         run: |
+          cd ./kie-tools
           git diff
           [ "0" == "$(git diff | wc -l | tr -d ' ')" ]
 
       - name: "Upload reports and artifacts"
         if: always() && !cancelled() && steps.setup_build_mode.outputs.mode != 'none'
-        uses: ./.github/actions/upload-ci-reports-and-artifacts
+        uses: ./kie-tools/.github/actions/upload-ci-reports-and-artifacts
         with:
           partition_index: ${{ matrix.partition }}
+          working_dir: ./kie-tools
 
       - name: "Upload end-to-end tests results to Buildkite (`main` only)"
         if: always() && !cancelled() && steps.setup_build_mode.outputs.mode != 'none' && !github.event.pull_request
@@ -205,6 +253,7 @@ jobs:
           BUILDKITE_BRANCH: ${{ github.ref_name }}
           BUILDKITE_MESSAGE: ${{ github.event.commits[0].message }}
         run: |
+          cd ./kie-tools
           eval "find -P * -type f ${{ steps.ci_patterns.outputs.end_to_end_tests_reports_patterns_for_find }}"
           echo "---------------------------- starting upload -----------------------"
           eval "find -P * -type f ${{ steps.ci_patterns.outputs.end_to_end_tests_reports_patterns_for_find }}" | xargs -I{} curl -X POST \

@@ -70,7 +70,7 @@ runs:
           echo "Merge changes from $USER/$HEAD_REF"
           git remote add $USER https://github.com/$USER/$PR_HEAD_REPO_NAME.git
           git fetch $USER $HEAD_REF
-          
+
           echo "Before merging..."
           git log -n 1
           echo "base_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
