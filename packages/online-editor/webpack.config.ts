@@ -88,8 +88,38 @@ export default async (webpackEnv: any, webpackArgv: any) => {
         plugins: [
           new HtmlWebpackPlugin({
             template: "./static/index.html",
-            inject: false,
+            filename: "index.html",
+            inject: true,
             minify: false,
+            chunks: ["index"],
+          }),
+          new HtmlWebpackPlugin({
+            template: "./static/envelope/dmn-envelope.html",
+            filename: "dmn-envelope.html",
+            inject: true,
+            minify: false,
+            chunks: ["dmn-envelope"],
+          }),
+          new HtmlWebpackPlugin({
+            template: "./static/envelope/new-dmn-editor-envelope.html",
+            filename: "new-dmn-editor-envelope.html",
+            inject: true,
+            minify: false,
+            chunks: ["new-dmn-editor-envelope"],
+          }),
+          new HtmlWebpackPlugin({
+            template: "./static/envelope/bpmn-envelope.html",
+            filename: "bpmn-envelope.html",
+            inject: true,
+            minify: false,
+            chunks: ["bpmn-envelope"],
+          }),
+          new HtmlWebpackPlugin({
+            template: "./static/envelope/pmml-envelope.html",
+            filename: "pmml-envelope.html",
+            inject: true,
+            minify: false,
+            chunks: ["pmml-envelope"],
           }),
           new HtmlReplaceWebpackPlugin([
             {
@@ -129,10 +159,6 @@ export default async (webpackEnv: any, webpackArgv: any) => {
                 to: "./gwt-editors/bpmn",
                 globOptions: { ignore: ["**/WEB-INF/**/*", "**/*.html"] },
               },
-              { from: "./static/envelope/pmml-envelope.html", to: "./pmml-envelope.html" },
-              { from: "./static/envelope/bpmn-envelope.html", to: "./bpmn-envelope.html" },
-              { from: "./static/envelope/dmn-envelope.html", to: "./dmn-envelope.html" },
-              { from: "./static/envelope/new-dmn-editor-envelope.html", to: "./new-dmn-editor-envelope.html" },
               {
                 from: path.join(path.dirname(require.resolve("@kie-tools/pmml-editor/package.json")), "/static/images"),
                 to: "./images",
@@ -161,6 +187,11 @@ export default async (webpackEnv: any, webpackArgv: any) => {
             module: /@kubernetes-models/,
           },
         ],
+        output: {
+          path: path.resolve("./dist"),
+          filename: "[name].[contenthash].js",
+          chunkFilename: "[name].[contenthash].bundle.js",
+        },
       }),
       devServer: {
         server: buildEnv.onlineEditor.dev.https ? "https" : "http",
