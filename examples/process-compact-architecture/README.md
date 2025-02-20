@@ -1,3 +1,20 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one
+   or more contributor license agreements.  See the NOTICE file
+   distributed with this work for additional information
+   regarding copyright ownership.  The ASF licenses this file
+   to you under the Apache License, Version 2.0 (the
+   "License"); you may not use this file except in compliance
+   with the License.  You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+
 # Process Compact Architecture Quarkus Example
 
 This example showcases a basic implementation of a **Hiring** Process that drives a _Candidate_ through different
@@ -167,7 +184,7 @@ public class Offer {
 
 ## Infrastructure requirements
 
-To help bootstrapping the Infrastructure Services, the example provides a `docker-compose.yml` file. This quickstart provides three ways of running the example application. In development ("dev") mode, the user can start a minimal infrastructure using `docker-compose` and must run the Kogito application manually. In "example" mode the `docker-compose` file will start the minimal infrastructure services and the Kogito application, requiring the project to be compiled first to generate the process's container images. At least, the `docker-compose` "full" model will start the minimal infrastructure services, the Kogito application, and Management Console, still requiring the project to be compiled first to generate the process's container images. To use `docker-compose` we must first create a `.env` file in the example root, and it should have the following variables:
+To help bootstrapping the Infrastructure Services, the example provides a `docker-compose.yml` file. This quickstart provides three ways of running the example application. In development ("development") mode, the user can start a minimal infrastructure using `docker-compose` and must run the Kogito application manually. In "example" mode the `docker-compose` file will start the minimal infrastructure services and the Kogito application, requiring the project to be compiled first to generate the process's container images. At least, the `docker-compose` "container" model will start the minimal infrastructure services, the Kogito application, and Management Console, still requiring the project to be compiled first to generate the process's container images. To use `docker-compose` we must first create a `.env` file in the example root, and it should have the following variables:
 
 ```
 PROJECT_VERSION=
@@ -175,18 +192,20 @@ KOGITO_MANAGEMENT_CONSOLE_IMAGE=
 COMPOSE_PROFILES=
 ```
 
+- `STREAM_NAME`: Should be set with the project stream name.
 - `PROJECT_VERSION`: Should be set with the current Kogito version being used: `PROJECT_VERSION=`
-- `KOGITO_MANAGEMENT_CONSOLE_IMAGE`: Should be set with the Kogito Management Console image `quay.io/kogito/management-console:${PROJECT_VERSION}`
+- `KOGITO_MANAGEMENT_CONSOLE_IMAGE`: Should be set with the Kogito Management Console image `docker.io/apache/incubator-kie-kogito-management-console:${PROJECT_VERSION}`
 - `COMPOSE_PROFILES`: filters which services will run.
 
 ### Development mode
 
-For development mode, the `.env` must have the `COMPOSE_PROFILES=dev`:
+For development mode, the `.env` must have the `COMPOSE_PROFILES=development`:
 
 ```
-PROJECT_VERSION=
-KOGITO_MANAGEMENT_CONSOLE_IMAGE=quay.io/kogito/management-console:${PROJECT_VERSION}
-COMPOSE_PROFILES=dev
+STREAM_NAME=main
+PROJECT_VERSION=0.0.0
+KOGITO_MANAGEMENT_CONSOLE_IMAGE=docker.io/apache/incubator-kie-kogito-management-console:${STREAM_NAME}
+COMPOSE_PROFILES=development
 ```
 
 ### Example mode
@@ -194,19 +213,21 @@ COMPOSE_PROFILES=dev
 For example mode, the `.env` must have the `COMPOSE_PROFILES=example`:
 
 ```
-PROJECT_VERSION=
-KOGITO_MANAGEMENT_CONSOLE_IMAGE=quay.io/kogito/management-console:${PROJECT_VERSION}
+STREAM_NAME=main
+PROJECT_VERSION=0.0.0
+KOGITO_MANAGEMENT_CONSOLE_IMAGE=docker.io/apache/incubator-kie-kogito-management-console:${STREAM_NAME}
 COMPOSE_PROFILES=example
 ```
 
-### Full mode
+### Container mode
 
-For full mode, the `.env` must have the `COMPOSE_PROFILES=full`:
+For container mode, the `.env` must have the `COMPOSE_PROFILES=container`:
 
 ```
-PROJECT_VERSION=
-KOGITO_MANAGEMENT_CONSOLE_IMAGE=quay.io/kogito/management-console:${PROJECT_VERSION}
-COMPOSE_PROFILES=full
+STREAM_NAME=main
+PROJECT_VERSION=0.0.0
+KOGITO_MANAGEMENT_CONSOLE_IMAGE=docker.io/apache/incubator-kie-kogito-management-console:${STREAM_NAME}
+COMPOSE_PROFILES=container
 ```
 
 ### Handling services
@@ -287,10 +308,10 @@ you can manually change the .env file with `COMPOSE_PROFILES=example`, and them 
 docker compose up
 ```
 
-- **dev**: Starts only the minimal infrastructure to run the example (PostgreSQL, pgadmin)
+- **development**: Starts only the minimal infrastructure to run the example (PostgreSQL, pgadmin)
 - **example**: Starts the services in _dev_ profile and this example's app. Requires the example to be compiled
   with `mvn clean package -Pcontainer`.
-- **full** (default): includes all the above and **Management Console**. Requires the example to be compiled with `mvn clean package -Pcontainer`.
+- **container** (default): includes all the above and **Management Console**. Requires the example to be compiled with `mvn clean package -Pcontainer`.
 
 ### Running in Development mode
 
@@ -670,3 +691,29 @@ process _User Tasks_.
          <figcaption>Hiring Process sucessfully completed</figcaption>
       </figure>
    </div>
+
+---
+
+Apache KIE (incubating) is an effort undergoing incubation at The Apache Software
+Foundation (ASF), sponsored by the name of Apache Incubator. Incubation is
+required of all newly accepted projects until a further review indicates that
+the infrastructure, communications, and decision making process have stabilized
+in a manner consistent with other successful ASF projects. While incubation
+status is not necessarily a reflection of the completeness or stability of the
+code, it does indicate that the project has yet to be fully endorsed by the ASF.
+
+Some of the incubating project’s releases may not be fully compliant with ASF
+policy. For example, releases may have incomplete or un-reviewed licensing
+conditions. What follows is a list of known issues the project is currently
+aware of (note that this list, by definition, is likely to be incomplete):
+
+- Hibernate, an LGPL project, is being used. Hibernate is in the process of
+  relicensing to ASL v2
+- Some files, particularly test files, and those not supporting comments, may
+  be missing the ASF Licensing Header
+
+If you are planning to incorporate this work into your product/project, please
+be aware that you will need to conduct a thorough licensing review to determine
+the overall implications of including this work. For the current status of this
+project through the Apache Incubator visit:
+https://incubator.apache.org/projects/kie.html

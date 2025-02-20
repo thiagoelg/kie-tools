@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@kie-tools-examples/process-user-tasks-subsystem",
+  "name": "@kie-tools-examples/process-accelerator",
   "version": "0.0.0",
   "description": "",
   "license": "Apache-2.0",
@@ -25,8 +25,6 @@
     "start": "mvn quarkus:dev"
   },
   "dependencies": {
-    "@kie-tools/jbpm-quarkus-devui": "workspace:*",
-    "@kie-tools/kogito-management-console": "workspace:*",
     "@kie-tools/maven-base": "workspace:*"
   },
   "devDependencies": {

@@ -17,10 +17,15 @@
  * under the License.
  */
 
-const { env } = require("./env");
-const { setupMavenConfigFile, buildTailFromPackageJsonDependencies } = require("@kie-tools/maven-base");
+const { varsWithName, composeEnv } = require("@kie-tools-scripts/build-env");
 
-setupMavenConfigFile(`
-    -Drevision=${env.processEventDriven.version}
-    -Dmaven.repo.local.tail=${buildTailFromPackageJsonDependencies()}
-`);
+module.exports = composeEnv([require("@kie-tools/root-env/env")], {
+  vars: varsWithName({}),
+  get env() {
+    return {
+      processAccelerator: {
+        version: require("../package.json").version,
+      },
+    };
+  },
+});

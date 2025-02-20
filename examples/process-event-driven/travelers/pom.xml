@@ -26,82 +26,14 @@
 >
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.ibm.kogito.examples</groupId>
+    <groupId>org.kie</groupId>
     <artifactId>process-event-driven</artifactId>
+    <version>${revision}</version>
   </parent>
   <artifactId>process-event-driven-travelers</artifactId>
   <name>Kogito Example :: Process Event Driven :: Travelers</name>
-  <properties>
-    <quarkus.platform.version>3.8.6</quarkus.platform.version>
-    <quarkus-plugin.version>3.8.6</quarkus-plugin.version>
-  </properties>
-
-  <!--
-    Repositories and Plugin Repositories configuration is here 
-    for simplification purposes. In real-world applications this 
-    configuration would go to a Maven `settings.xml` file.
-  -->
-  <repositories>
-    <repository>
-      <id>ibm-kogito-enterprise-maven-repository</id>
-      <url>http://localhost:9000/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>ibm-kogito-enterprise-maven-repository</id>
-      <url>http://localhost:9000/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.platform.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.ibm.kogito</groupId>
-        <artifactId>kogito-bom</artifactId>
-        <version>${kogito.bom.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
-    <!-- Kogito -->
-    <dependency>
-      <groupId>com.ibm.kogito</groupId>
-      <artifactId>kogito-ilmt-compliance-quarkus-pamoe</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jbpm</groupId>
-      <artifactId>jbpm-with-drools-quarkus</artifactId>
-    </dependency>
-
-    <!-- Kogito event handling -->
-    <dependency>
-      <groupId>org.kie</groupId>
-      <artifactId>kie-addons-quarkus-messaging</artifactId>
-    </dependency>
-
     <!-- Quarkus -->
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -123,6 +55,17 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-with-drools-quarkus</artifactId>
+    </dependency>
+
+    <!-- Kogito event handling -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-addons-quarkus-messaging</artifactId>
+    </dependency>
   </dependencies>
 
   <profiles>
@@ -143,25 +86,31 @@
       <properties>
         <quarkus.profile>dev</quarkus.profile>
       </properties>
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-quarkus-devui-bom</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
       <dependencies>
         <!-- jBPM Dev UI -->
         <dependency>
           <groupId>org.jbpm</groupId>
           <artifactId>jbpm-quarkus-devui</artifactId>
         </dependency>
-        <!-- Persistence -->
         <dependency>
-          <groupId>org.kie</groupId>
-          <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
+          <groupId>io.quarkus</groupId>
+          <artifactId>quarkus-jdbc-h2</artifactId>
         </dependency>
         <!-- Data-Index Addon -->
         <dependency>
           <groupId>org.kie</groupId>
           <artifactId>kogito-addons-quarkus-data-index-jpa</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-jdbc-h2</artifactId>
         </dependency>
       </dependencies>
     </profile>
@@ -173,7 +122,6 @@
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.quarkus}</version>
         <executions>
           <execution>
             <goals>
