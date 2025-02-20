@@ -34,7 +34,7 @@ COMPOSE_PROFILES=full
 
 ```
 
-- `PROJECT_VERSION`: Should be set with the current Kie version being used: `PROJECT_VERSION=main`
+- `PROJECT_VERSION`: Should be set with the current version being used: `PROJECT_VERSION=main`
 - `KOGITO_MANAGEMENT_CONSOLE_IMAGE`: Should be set with the Kogito Management Console image `docker.io/apache/incubator-kie-kogito-management-console:${PROJECT_VERSION}`
 - `COMPOSE_PROFILES`: filters which services will run.
 
