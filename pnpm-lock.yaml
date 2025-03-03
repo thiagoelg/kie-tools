@@ -5378,9 +5378,6 @@ importers:
       '@kie-tools/i18n-common-dictionary':
         specifier: workspace:*
         version: link:../i18n-common-dictionary
-      monaco-editor:
-        specifier: ^0.39.0
-        version: 0.39.0
       react:
         specifier: '>=17.0.2 <19.0.0'
         version: 17.0.2
@@ -8105,9 +8102,6 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      monaco-editor:
-        specifier: ^0.39.0
-        version: 0.39.0
       react:
         specifier: '>=17.0.2 <19.0.0'
         version: 17.0.2
@@ -12893,6 +12887,9 @@ importers:
       '@kie-tools-core/envelope-bus':
         specifier: workspace:*
         version: link:../envelope-bus
+      '@kie-tools-core/monaco-editor':
+        specifier: workspace:*
+        version: link:../monaco-editor
       '@kie-tools-core/notifications':
         specifier: workspace:*
         version: link:../notifications
@@ -12908,9 +12905,6 @@ importers:
       '@patternfly/react-core':
         specifier: ^4.276.6
         version: 4.276.6(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
-      monaco-editor:
-        specifier: ^0.39.0
-        version: 0.39.0
       monaco-yaml:
         specifier: ^4.0.4
         version: 4.0.4(monaco-editor@0.39.0)
