@@ -24,6 +24,8 @@ export interface DmnEditorSettingsContextType {
   isReadOnly: boolean;
 }
 
+console.log("temporary change for testing the CI");
+
 const DmnEditorSettingsContext = React.createContext<DmnEditorSettingsContextType>({} as any);
 
 export function useSettings() {
