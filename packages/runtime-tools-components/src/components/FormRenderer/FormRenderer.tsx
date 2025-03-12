@@ -23,7 +23,7 @@ import { AutoFields, AutoForm, ErrorsField } from "@kie-tools/uniforms-patternfl
 import { componentOuiaProps, OUIAProps } from "../../ouiaTools";
 import { FormAction, lookupValidator, ModelConversionTool } from "../../utils";
 import { FormFooter } from "../FormFooter";
-import "../styles.css";
+import "../../styles.css";
 
 export interface FormRendererApi {
   doReset: () => void;

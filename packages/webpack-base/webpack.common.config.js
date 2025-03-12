@@ -57,7 +57,7 @@ module.exports = (webpackEnv) => {
       ]
     : [];
 
-  const importsNotUsedAsValues = live ? { importsNotUsedAsValues: "preserve" } : {};
+  // const importsNotUsedAsValues = live ? { importsNotUsedAsValues: "preserve" } : {};
 
   return {
     mode,
@@ -82,7 +82,7 @@ module.exports = (webpackEnv) => {
               options: {
                 transpileOnly,
                 compilerOptions: {
-                  ...importsNotUsedAsValues,
+                  // ...importsNotUsedAsValues,
                   sourceMap: sourceMaps,
                 },
               },

@@ -20,6 +20,18 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 import Keycloak from "keycloak-js";
 import { ANONYMOUS_USER, KeycloakUserContext, User, UserContext } from "../contexts/KogitoAppContext";
 
+declare global {
+  interface Window {
+    KOGITO_ENV_MODE: string;
+    KOGITO_CONSOLES_KEYCLOAK_DISABLE_HEALTH_CHECK: boolean;
+    KOGITO_CONSOLES_KEYCLOAK_UPDATE_TOKEN_VALIDITY: number;
+    KOGITO_CONSOLES_KEYCLOAK_HEALTH_CHECK_URL: string;
+    KOGITO_CONSOLES_KEYCLOAK_REALM: string;
+    KOGITO_CONSOLES_KEYCLOAK_URL: string;
+    KOGITO_CONSOLES_KEYCLOAK_CLIENT_ID: string;
+  }
+}
+
 export interface KogitoConsolesKeycloakEnv {
   KOGITO_CONSOLES_KEYCLOAK_DISABLE_HEALTH_CHECK?: boolean;
   KOGITO_CONSOLES_KEYCLOAK_UPDATE_TOKEN_VALIDITY?: number;

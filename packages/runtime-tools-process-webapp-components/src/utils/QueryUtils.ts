@@ -17,7 +17,7 @@
  * under the License.
  */
 import { User } from "@kie-tools/runtime-tools-components/dist/contexts/KogitoAppContext";
-import { QueryFilter, SortBy } from "@kie-tools/runtime-tools-process-enveloped-components/src/taskInbox";
+import { QueryFilter, SortBy } from "@kie-tools/runtime-tools-process-enveloped-components/dist/taskInbox";
 import _ from "lodash";
 
 const createSearchTextArray = (taskNames: string[]) => {
@@ -61,7 +61,7 @@ const createUserAssignmentClause = (currentUser?: User) => {
 
 export const buildTaskInboxWhereArgument = (activeFilters: QueryFilter, currentUser?: User) => {
   if (activeFilters) {
-    const filtersClause = [];
+    const filtersClause: Array<any> = [];
     if (activeFilters.taskStates.length > 0) {
       filtersClause.push({
         state: { in: activeFilters.taskStates },

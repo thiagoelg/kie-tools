@@ -24,14 +24,14 @@ import {
   PageSection,
   PageSidebar,
 } from "@patternfly/react-core/dist/js/components/Page";
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Brand } from "@patternfly/react-core/dist/js/components/Brand";
 import { useEnv } from "../env/hooks/EnvContext";
 import { useRoutes } from "../navigation/Hooks";
 import { useHistory } from "react-router";
 import { ManagementConsoleToolbar } from "./ManagementConsoleToolbar";
 import { AboutButton } from "../aboutModal/AboutButton";
-import { PageSectionHeader } from "@kie-tools/runtime-tools-components/dist/components/PageSectionHeader";
+import { PageSectionHeader } from "@kie-tools/runtime-tools-components/src/components/PageSectionHeader";
 import { BreadcrumbPathType } from "../runtime/RuntimePageLayoutContext";
 
 type Props = {

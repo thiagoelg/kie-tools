@@ -28,7 +28,7 @@ import {
 } from "@patternfly/react-core/dist/js/components/Dropdown";
 import { Split, SplitItem } from "@patternfly/react-core/dist/js/layouts/Split";
 import { OUIAProps, componentOuiaProps } from "../../ouiaTools";
-import "../styles.css";
+import "../../styles.css";
 import { CheckIcon } from "@patternfly/react-icons/dist/js/icons/check-icon";
 
 interface IOwnProps {

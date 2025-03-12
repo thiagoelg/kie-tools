@@ -22,7 +22,7 @@ import _ from "lodash";
 import { ActionList, ActionListItem } from "@patternfly/react-core/dist/js/components/ActionList";
 import { convertActionsToButton, FormAction } from "../../utils";
 import { componentOuiaProps, OUIAProps } from "../../ouiaTools";
-import "../styles.css";
+import "../../styles.css";
 
 interface IOwnProps {
   actions?: FormAction[];

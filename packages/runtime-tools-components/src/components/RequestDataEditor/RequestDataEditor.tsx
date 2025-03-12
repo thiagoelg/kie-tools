@@ -25,7 +25,7 @@ import {
   RequestDataEditorOperation,
 } from "./RequestDataEditorController";
 import { EditorTheme } from "@kie-tools-core/editor/dist/api";
-import "../styles.css";
+import "../../styles.css";
 
 interface Props {
   content: string;

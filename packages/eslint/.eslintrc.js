@@ -88,14 +88,31 @@ module.exports = {
             paths: [
               {
                 name: "@patternfly/react-core",
-                message: "Please use specific imports from @patternfly/react-core/dist/js/components/**)",
+                message: "Please use specific imports from @patternfly/react-core/dist/js/components/**",
               },
               {
                 name: "@patternfly/react-icons",
-                message: "Please use specific imports from @patternfly/react-icons/dist/js/icons/**)",
+                message: "Please use specific imports from @patternfly/react-icons/dist/js/icons/**",
               },
             ],
             patterns: ["!@patternfly/react-core/dist/*", "!@patternfly/react-icons/dist/*"],
+          },
+        ],
+      },
+    },
+    {
+      files: ["*.ts", "*.tsx"],
+      // ignores: ["*.mdx", "*.stories.tsx", "*.test.ts", "*.test.tsx"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            patterns: [
+              {
+                group: ["@kie-tools/*/src/*", "@kie-tools-core/*/src/*"],
+                message: "Please import from the build artifacts using ./dist/* instead of ./src/*",
+              },
+            ],
           },
         ],
       },
