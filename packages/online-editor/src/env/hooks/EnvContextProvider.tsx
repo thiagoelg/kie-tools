@@ -40,6 +40,8 @@ export function EnvContextProvider(props: Props) {
             return;
           }
 
+          console.log(response.headers.get("Etag"));
+
           if (!response.ok) {
             throw new Error(`Failed to fetch ${ENV_FILE_PATH}: ${response.statusText}`);
           }

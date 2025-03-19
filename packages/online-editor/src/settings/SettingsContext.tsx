@@ -30,6 +30,15 @@ import { QueryParams } from "../navigation/Routes";
 import { useQueryParams } from "../queryParams/QueryParamsContext";
 import { SettingsTabs } from "./SettingsModalBody";
 import { useEditorEnvelopeLocator } from "../envelopeLocator/hooks/EditorEnvelopeLocatorContext";
+import {
+  SETTINGS_FILE_PATH,
+  SETTINGS_FS_NAME,
+  SETTINGS_FS_NAME_WITH_VERSION,
+  SETTINGS_VERSION_NUMBER,
+  settingsBroadcastChannel,
+  settingsFsCache,
+  settingsFsService,
+} from "./SettingsApi";
 
 export type SettingsContextType = {
   settings: {
@@ -66,15 +75,6 @@ export function useSettingsDispatch() {
   return useContext(SettingsDispatchContext);
 }
 
-const fsCache = new LfsFsCache();
-const fsService = new LfsStorageService();
-const broadcastChannel = new BroadcastChannel("settings");
-
-const SETTINGS_FILE_PATH = "/settings.json";
-const SETTINGS_FS_NAME = "settings";
-
-const SETTINGS_FILE_LATEST_VERSION = 0;
-
 export function SettingsContextProvider(props: PropsWithChildren<{}>) {
   const { env } = useEnv();
   const editorEnvelopeLocator = useEditorEnvelopeLocator();
@@ -88,19 +88,21 @@ export function SettingsContextProvider(props: PropsWithChildren<{}>) {
   }, [editorEnvelopeLocator]);
 
   const refresh = useCallback(async (args?: { canceled: Holder<boolean> }) => {
-    const fs = fsCache.getOrCreateFs(SETTINGS_FS_NAME);
-    const content = await (await fsService.getFile(fs, SETTINGS_FILE_PATH))?.getFileContents();
+    const fs = settingsFsCache.getOrCreateFs(SETTINGS_FS_NAME_WITH_VERSION);
+    const content = await (await settingsFsService.getFile(fs, SETTINGS_FILE_PATH))?.getFileContents();
     if (args?.canceled.get()) {
       return;
     }
+
+    console.log({ settings: JSON.parse(decoder.decode(content)) });
 
     setSettings(JSON.parse(decoder.decode(content)));
   }, []);
 
   const persistSettings = useCallback(
     async (settings: SettingsContextType["settings"]) => {
-      const fs = fsCache.getOrCreateFs(SETTINGS_FS_NAME);
-      await fsService.createOrOverwriteFile(
+      const fs = settingsFsCache.getOrCreateFs(SETTINGS_FS_NAME);
+      await settingsFsService.createOrOverwriteFile(
         fs,
         new LfsStorageFile({
           path: SETTINGS_FILE_PATH,
@@ -109,7 +111,7 @@ export function SettingsContextProvider(props: PropsWithChildren<{}>) {
       );
 
       // This goes to other broadcast channel instances, on other tabs
-      broadcastChannel.postMessage("UPDATE_SETTINGS");
+      settingsBroadcastChannel.postMessage("UPDATE_SETTINGS");
 
       // This updates this tab
       refresh();
@@ -121,7 +123,7 @@ export function SettingsContextProvider(props: PropsWithChildren<{}>) {
   useCancelableEffect(
     useCallback(
       (canceled) => {
-        broadcastChannel.onmessage = () => refresh(canceled);
+        settingsBroadcastChannel.onmessage = () => refresh(canceled);
       },
       [refresh]
     )
@@ -132,13 +134,16 @@ export function SettingsContextProvider(props: PropsWithChildren<{}>) {
     useCallback(
       ({ canceled }) => {
         async function run() {
-          const fs = fsCache.getOrCreateFs(SETTINGS_FS_NAME);
-          if (!(await fsService.exists(fs, SETTINGS_FILE_PATH))) {
+          const fs = settingsFsCache.getOrCreateFs(SETTINGS_FS_NAME);
+          if (!(await settingsFsService.exists(fs, SETTINGS_FILE_PATH))) {
             if (canceled.get()) {
               return;
             }
 
+            console.log("READING ENV VARS FOR SETTINGS!!!");
+
             const envExtendedServicesUrl = new URL(env.KIE_SANDBOX_EXTENDED_SERVICES_URL);
+            console.log({ envExtendedServicesUrl });
             // 0.0.0.0 is "equivalent" to localhost, but browsers don't like having mixed http/https urls with the exception of localhost
             const envExtendedServicesHost = `${envExtendedServicesUrl.protocol}//${
               envExtendedServicesUrl.hostname === "0.0.0.0" ? "localhost" : envExtendedServicesUrl.hostname
@@ -146,7 +151,7 @@ export function SettingsContextProvider(props: PropsWithChildren<{}>) {
             const envExtendedServicesPort = envExtendedServicesUrl.port;
 
             await persistSettings({
-              version: SETTINGS_FILE_LATEST_VERSION,
+              version: SETTINGS_VERSION_NUMBER,
               corsProxy: {
                 url: env.KIE_SANDBOX_CORS_PROXY_URL,
               },
@@ -159,6 +164,7 @@ export function SettingsContextProvider(props: PropsWithChildren<{}>) {
               },
             });
           } else {
+            console.log("Ooops, skipping!");
             refresh();
           }
         }
