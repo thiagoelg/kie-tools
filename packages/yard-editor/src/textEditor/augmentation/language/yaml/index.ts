@@ -17,12 +17,12 @@
  * under the License.
  */
 
-import { setDiagnosticsOptions } from "monaco-yaml";
-import { JSONSchema7 } from "json-schema";
+import * as monaco from "monaco-editor";
+import { configureMonacoYaml } from "monaco-yaml";
 import { YARD_SCHEMA } from "@kie-tools/yard-language-service/dist/assets/schemas";
 
 export function initYamlSchemaDiagnostics() {
-  setDiagnosticsOptions({
+  configureMonacoYaml(monaco, {
     hover: true,
     completion: true,
     validate: true,
@@ -31,7 +31,7 @@ export function initYamlSchemaDiagnostics() {
       {
         uri: "https://start.kubesmarts.org/schemas/yard/draft-07/YaRD-schema.json",
         fileMatch: ["*"],
-        schema: YARD_SCHEMA as JSONSchema7,
+        schema: YARD_SCHEMA,
       },
     ],
   });
