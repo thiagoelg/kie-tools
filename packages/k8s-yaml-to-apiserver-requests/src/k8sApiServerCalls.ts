@@ -26,6 +26,7 @@ export async function callK8sApiServer(args: {
   k8sApiServerUrl: string;
   k8sNamespace: string;
   k8sServiceAccountToken: string;
+  k8sDryRun?: boolean;
 }) {
   const apiCalls = args.k8sResourceYamls.map((yamlDocument) => {
     const rawEndpoints = args.k8sApiServerEndpointsByResourceKind
@@ -54,6 +55,9 @@ export async function callK8sApiServer(args: {
   const results = [];
   for (const apiCall of apiCalls) {
     const endpointUrl = new URL(apiCall.rawEndpoint);
+    if (args.k8sDryRun) {
+      endpointUrl.searchParams.set("dryRun", "All");
+    }
     const interpolatedPathname = endpointUrl.pathname.replace(
       ":namespace",
       apiCall.yaml.metadata?.namespace ?? args.k8sNamespace

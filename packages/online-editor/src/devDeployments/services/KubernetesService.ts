@@ -205,6 +205,7 @@ export class KubernetesService {
     actions?: ResourceActions[];
     tokens?: TokenMap;
     parametersTokens?: TokenMap;
+    dryRun?: boolean;
   }) {
     const processedYamls = args.k8sResourceYamls.map((yamlContent) => {
       let resultYaml = yamlContent;
@@ -235,6 +236,7 @@ export class KubernetesService {
       k8sApiServerUrl: this.args.connection.host,
       k8sNamespace: this.args.connection.namespace,
       k8sServiceAccountToken: this.args.connection.token,
+      k8sDryRun: args.dryRun,
     });
   }
 
