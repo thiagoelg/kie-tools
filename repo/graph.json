@@ -2419,6 +2419,11 @@
         "weight": 1
       },
       {
+        "source": "@kie-tools/text-editor",
+        "target": "@kie-tools-core/webpack-base",
+        "weight": 1
+      },
+      {
         "source": "@kie-tools/yard-editor",
         "target": "@kie-tools-core/editor",
         "weight": 1

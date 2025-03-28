@@ -48,6 +48,9 @@ const extensionLanguageMap = new Map<string, string>([
   [".scesim", "xml"],
   [".pmml", "xml"],
   [".md", "markdown"],
+  [".json", "json"],
+  [".yaml", "yaml"],
+  [".yml", "yaml"],
 ]);
 
 const RefForwardingMonacoEditor: React.ForwardRefRenderFunction<MonacoEditorApi | undefined, Props> = (

@@ -12899,9 +12899,18 @@ importers:
       '@kie-tools-core/workspace':
         specifier: workspace:*
         version: link:../workspace
+      '@monaco-editor/react':
+        specifier: ^4.7.0
+        version: 4.7.0(monaco-editor@0.39.0)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       '@patternfly/react-core':
         specifier: ^4.276.6
         version: 4.276.6(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
+      ajv:
+        specifier: ^8.17.1
+        version: 8.17.1
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       monaco-yaml:
         specifier: ^5.3.1
         version: 5.3.1(monaco-editor@0.39.0)
@@ -12921,6 +12930,9 @@ importers:
       '@babel/preset-react':
         specifier: ^7.16.0
         version: 7.16.0(@babel/core@7.16.12)
+      '@kie-tools-core/webpack-base':
+        specifier: workspace:*
+        version: link:../webpack-base
       '@kie-tools/eslint':
         specifier: workspace:*
         version: link:../eslint
@@ -12930,9 +12942,24 @@ importers:
       '@kie-tools/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      '@types/js-yaml':
+        specifier: ^4.0.5
+        version: 4.0.5
       '@types/react':
         specifier: ^17.0.6
         version: 17.0.21
+      '@types/react-dom':
+        specifier: ^17.0.5
+        version: 17.0.8
+      copy-webpack-plugin:
+        specifier: ^11.0.0
+        version: 11.0.0(webpack@5.94.0(webpack-cli@4.10.0))
+      copyfiles:
+        specifier: ^2.4.1
+        version: 2.4.1
+      monaco-editor-webpack-plugin:
+        specifier: ^7.0.1
+        version: 7.0.1(monaco-editor@0.39.0)(monaco-yaml@5.3.1(monaco-editor@0.39.0))(webpack@5.94.0(webpack-cli@4.10.0))
       rimraf:
         specifier: ^3.0.2
         version: 3.0.2
@@ -12942,6 +12969,18 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
+      webpack:
+        specifier: ^5.94.0
+        version: 5.94.0(webpack-cli@4.10.0)
+      webpack-cli:
+        specifier: ^4.10.0
+        version: 4.10.0(webpack-dev-server@4.15.1)(webpack@5.94.0)
+      webpack-dev-server:
+        specifier: ^4.15.1
+        version: 4.15.1(webpack-cli@4.10.0)(webpack@5.94.0)
+      webpack-merge:
+        specifier: ^5.9.0
+        version: 5.10.0
 
   packages/tsconfig: {}
 
@@ -18141,6 +18180,16 @@ packages:
     peerDependencies:
       react: '>= 15'
       react-dom: '>= 15'
+
+  '@monaco-editor/loader@1.5.0':
+    resolution: {integrity: sha512-hKoGSM+7aAc7eRTRjpqAZucPmoNOC4UUbknb/VNoTkEIkCPhqV8LfbsgM1webRM7S/z21eHEx9Fkwx8Z/C/+Xw==}
+
+  '@monaco-editor/react@4.7.0':
+    resolution: {integrity: sha512-cyzXQCtO47ydzxpQtCGSQGOC8Gk3ZUeBXFAxD+CWXYFo5OqZyZUonFl0DwUlTyAfRHntBfw2p3w4s9R6oe1eCA==}
+    peerDependencies:
+      monaco-editor: '>= 0.25.0 < 1'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@motionone/animation@10.15.1':
     resolution: {integrity: sha512-mZcJxLjHor+bhcPuIFErMDNyrdb2vJur8lSfMCsuCB4UyV8ILZLvK+t+pg56erv8ud9xQGK/1OGPt10agPrCyQ==}
@@ -29569,6 +29618,9 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
+  state-local@1.0.7:
+    resolution: {integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==}
+
   static-extend@0.1.2:
     resolution: {integrity: sha512-72E9+uLc27Mt718pMHt9VMNiAL4LMsmDbBva8mxWUCkT07fSzEGMYUCk0XWY6lp0j6RBAG4cJ3mWuZv2OE3s0g==}
     engines: {node: '>=0.10.0'}
@@ -39411,6 +39463,17 @@ snapshots:
       react-textarea-autosize: 8.3.3(@types/react@17.0.21)(react@17.0.2)
     transitivePeerDependencies:
       - '@types/react'
+
+  '@monaco-editor/loader@1.5.0':
+    dependencies:
+      state-local: 1.0.7
+
+  '@monaco-editor/react@4.7.0(monaco-editor@0.39.0)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)':
+    dependencies:
+      '@monaco-editor/loader': 1.5.0
+      monaco-editor: 0.39.0
+      react: 17.0.2
+      react-dom: 17.0.2(react@17.0.2)
 
   '@motionone/animation@10.15.1':
     dependencies:
@@ -56419,6 +56482,8 @@ snapshots:
       wait-on: 7.2.0(debug@4.3.4)
     transitivePeerDependencies:
       - supports-color
+
+  state-local@1.0.7: {}
 
   static-extend@0.1.2:
     dependencies:

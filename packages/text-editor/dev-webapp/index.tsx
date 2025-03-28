@@ -17,17 +17,9 @@
  * under the License.
  */
 
-const { varsWithName, composeEnv } = require("@kie-tools-scripts/build-env");
+import "@patternfly/react-core/dist/styles/base.css";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { App } from "./App";
 
-module.exports = composeEnv([require("@kie-tools/root-env/env")], {
-  vars: varsWithName({}),
-  get env() {
-    return {
-      textEditor: {
-        dev: {
-          port: 9009,
-        },
-      },
-    };
-  },
-});
+ReactDOM.render(<App />, document.getElementById("app")!);
