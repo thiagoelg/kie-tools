@@ -44,7 +44,7 @@ export const App = () => {
       new EditorEnvelopeLocator(window.location.origin, [
         new EnvelopeMapping({
           type: "text",
-          filePathGlob: "**/*.+(yml|yaml|json|txt)",
+          filePathGlob: "**/*.+(yml|yaml|json)",
           resourcesPathPrefix: "",
           envelopeContent: { type: EnvelopeContentType.PATH, path: "text-editor-envelope.html" },
         }),
@@ -79,7 +79,7 @@ export const App = () => {
   }, [editor]);
 
   const onSetContent = useCallback((normalizedPosixPathRelativeToTheWorkspaceRoot: string, content: string) => {
-    const match = /\.(yml|yaml|json|txt)$/.exec(normalizedPosixPathRelativeToTheWorkspaceRoot.toLowerCase());
+    const match = /\.(yml|yaml|json)$/.exec(normalizedPosixPathRelativeToTheWorkspaceRoot.toLowerCase());
     const dotExtension = match ? match[0] : extname(normalizedPosixPathRelativeToTheWorkspaceRoot);
     const extension = dotExtension.slice(1);
     const fileName = basename(normalizedPosixPathRelativeToTheWorkspaceRoot);

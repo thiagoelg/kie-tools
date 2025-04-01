@@ -49,8 +49,11 @@ export const TextEditorEmptyState = (props: AllProps) => (
     </EmptyStateBody>
     <FileChooser setContent={props.setContent} />
     <EmptyStateSecondaryActions>
-      <Button variant="link" onClick={(e) => props.newContent("txt")}>
-        New Text
+      <Button variant="link" onClick={(e) => props.newContent("json")}>
+        New JSON
+      </Button>
+      <Button variant="link" onClick={(e) => props.newContent("yaml")}>
+        New YAML
       </Button>
     </EmptyStateSecondaryActions>
   </EmptyState>

@@ -53,6 +53,10 @@ digraph G {
   "@kie-tools-examples/uniforms-patternfly" [ color = "orange", fontcolor = "orange", style = "dashed, rounded" ];
   "@kie-tools-core/patternfly-base" [ color = "purple", fontcolor = "purple", style = "rounded" ];
   "@kie-tools/uniforms-patternfly" [ color = "blue", fontcolor = "blue", style = "rounded" ];
+  "bamoe-developer-tools" [ color = "blue", fontcolor = "blue", style = "rounded" ];
+  "@kie-tools/form-code-generator-vscode-command" [ color = "blue", fontcolor = "blue", style = "rounded" ];
+  "@kie-tools/scesim-editor-envelope" [ color = "blue", fontcolor = "blue", style = "rounded" ];
+  "@kie-tools/vscode-java-code-completion-extension-plugin" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
   "@kie-tools/boxed-expression-component" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools-core/operating-system" [ color = "purple", fontcolor = "purple", style = "rounded" ];
   "@kie-tools/feel-input-component" [ color = "blue", fontcolor = "blue", style = "rounded" ];
@@ -61,8 +65,6 @@ digraph G {
   "@kie-tools/bpmn-marshaller" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/xml-parser-ts-codegen" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "bpmn-vscode-extension" [ color = "blue", fontcolor = "blue", style = "rounded" ];
-  "@kie-tools/form-code-generator-vscode-command" [ color = "blue", fontcolor = "blue", style = "rounded" ];
-  "@kie-tools/vscode-java-code-completion-extension-plugin" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
   "chrome-extension-pack-kogito-kie-editors" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
   "@kie-tools/chrome-extension-test-helper" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "chrome-extension-serverless-workflow-editor" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
@@ -118,7 +120,6 @@ digraph G {
   "@kie-tools/dmn-runner" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/extended-services-api" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "dmn-vscode-extension" [ color = "blue", fontcolor = "blue", style = "rounded" ];
-  "@kie-tools/scesim-editor-envelope" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools-core/keyboard-shortcuts" [ color = "purple", fontcolor = "purple", style = "rounded" ];
   "@kie-tools-core/notifications" [ color = "purple", fontcolor = "purple", style = "rounded" ];
   "@kie-tools-core/envelope-bus" [ color = "purple", fontcolor = "purple", style = "rounded" ];
@@ -137,6 +138,7 @@ digraph G {
   "@kie-tools/runtime-tools-process-dev-ui-webapp" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/jobs-service-webapp" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/yaml-language-server" [ color = "blue", fontcolor = "blue", style = "rounded" ];
+  "@kie-tools/k8s-resource-editor" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools-core/k8s-yaml-to-apiserver-requests" [ color = "purple", fontcolor = "purple", style = "rounded" ];
   "kie-editors-dev-vscode-extension" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
   "@kie-tools/pmml-editor" [ color = "blue", fontcolor = "blue", style = "rounded" ];
@@ -276,6 +278,13 @@ digraph G {
   "@kie-tools-examples/uniforms-patternfly" -> "@kie-tools-core/patternfly-base" [ style = "solid", color = "orange" ];
   "@kie-tools-examples/uniforms-patternfly" -> "@kie-tools/uniforms-patternfly" [ style = "solid", color = "orange" ];
   "@kie-tools-examples/uniforms-patternfly" -> "@kie-tools-core/webpack-base" [ style = "dashed", color = "orange" ];
+  "bamoe-developer-tools" -> "@kie-tools-core/vscode-extension" [ style = "solid", color = "blue" ];
+  "bamoe-developer-tools" -> "@kie-tools/dmn-editor-envelope" [ style = "solid", color = "blue" ];
+  "bamoe-developer-tools" -> "@kie-tools/form-code-generator-vscode-command" [ style = "solid", color = "blue" ];
+  "bamoe-developer-tools" -> "@kie-tools/kie-bc-editors" [ style = "solid", color = "blue" ];
+  "bamoe-developer-tools" -> "@kie-tools/scesim-editor-envelope" [ style = "solid", color = "blue" ];
+  "bamoe-developer-tools" -> "@kie-tools/stunner-editors" [ style = "dashed", color = "blue" ];
+  "bamoe-developer-tools" -> "@kie-tools/vscode-java-code-completion-extension-plugin" [ style = "dashed", color = "blue" ];
   "@kie-tools/boxed-expression-component" -> "@kie-tools-core/operating-system" [ style = "solid", color = "blue" ];
   "@kie-tools/boxed-expression-component" -> "@kie-tools/feel-input-component" [ style = "solid", color = "blue" ];
   "@kie-tools/boxed-expression-component" -> "@kie-tools/playwright-base" [ style = "dashed", color = "blue" ];
@@ -444,6 +453,8 @@ digraph G {
   "@kie-tools/jest-base" -> "@kie-tools/root-env" [ style = "dashed", color = "blue" ];
   "@kie-tools/jobs-service-webapp" -> "@kie-tools-core/webpack-base" [ style = "dashed", color = "blue" ];
   "@kie-tools/json-yaml-language-service" -> "@kie-tools/yaml-language-server" [ style = "solid", color = "blue" ];
+  "@kie-tools/k8s-resource-editor" -> "@kie-tools-core/editor" [ style = "solid", color = "blue" ];
+  "@kie-tools/k8s-resource-editor" -> "@kie-tools-core/webpack-base" [ style = "dashed", color = "blue" ];
   "@kie-tools-core/k8s-yaml-to-apiserver-requests" -> "@kie-tools/eslint" [ style = "dashed", color = "purple" ];
   "@kie-tools-core/k8s-yaml-to-apiserver-requests" -> "@kie-tools/root-env" [ style = "dashed", color = "purple" ];
   "@kie-tools-core/k8s-yaml-to-apiserver-requests" -> "@kie-tools/tsconfig" [ style = "dashed", color = "purple" ];

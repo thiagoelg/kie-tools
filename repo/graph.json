@@ -96,6 +96,12 @@
       { "id": "@kie-tools-examples/uniforms-patternfly" },
       { "id": "@kie-tools/uniforms-patternfly" },
       { "id": "@kie-tools/jest-base" },
+      { "id": "bamoe-developer-tools" },
+      { "id": "@kie-tools/form-code-generator-vscode-command" },
+      { "id": "@kie-tools/scesim-editor-envelope" },
+      { "id": "@kie-tools/vscode-java-code-completion-extension-plugin" },
+      { "id": "@kie-tools/jbpm-form-code-generator-themes" },
+      { "id": "@kie-tools/scesim-editor" },
       { "id": "@kie-tools/boxed-expression-component" },
       { "id": "@kie-tools-core/operating-system" },
       { "id": "@kie-tools/feel-input-component" },
@@ -107,9 +113,6 @@
       { "id": "@kie-tools/xml-parser-ts-codegen" },
       { "id": "@kie-tools/xml-parser-ts" },
       { "id": "bpmn-vscode-extension" },
-      { "id": "@kie-tools/form-code-generator-vscode-command" },
-      { "id": "@kie-tools/vscode-java-code-completion-extension-plugin" },
-      { "id": "@kie-tools/jbpm-form-code-generator-themes" },
       { "id": "chrome-extension-pack-kogito-kie-editors" },
       { "id": "@kie-tools/chrome-extension-test-helper" },
       { "id": "chrome-extension-serverless-workflow-editor" },
@@ -162,8 +165,6 @@
       { "id": "@kie-tools/dmn-runner" },
       { "id": "@kie-tools/extended-services-api" },
       { "id": "dmn-vscode-extension" },
-      { "id": "@kie-tools/scesim-editor-envelope" },
-      { "id": "@kie-tools/scesim-editor" },
       { "id": "@kie-tools/extended-services" },
       { "id": "@kie-tools/extended-services-java" },
       { "id": "extended-services-vscode-extension" },
@@ -174,6 +175,7 @@
       { "id": "@kie-tools/runtime-tools-process-webapp-components" },
       { "id": "@kie-tools/runtime-tools-shared-webapp-components" },
       { "id": "@kie-tools/jobs-service-webapp" },
+      { "id": "@kie-tools/k8s-resource-editor" },
       { "id": "@kie-tools-core/k8s-yaml-to-apiserver-requests" },
       { "id": "kie-editors-dev-vscode-extension" },
       { "id": "@kie-tools/pmml-editor" },
@@ -884,6 +886,86 @@
         "weight": 1
       },
       {
+        "source": "bamoe-developer-tools",
+        "target": "@kie-tools-core/vscode-extension",
+        "weight": 1
+      },
+      {
+        "source": "bamoe-developer-tools",
+        "target": "@kie-tools/dmn-editor-envelope",
+        "weight": 1
+      },
+      {
+        "source": "bamoe-developer-tools",
+        "target": "@kie-tools/form-code-generator-vscode-command",
+        "weight": 1
+      },
+      {
+        "source": "bamoe-developer-tools",
+        "target": "@kie-tools/kie-bc-editors",
+        "weight": 1
+      },
+      {
+        "source": "bamoe-developer-tools",
+        "target": "@kie-tools/scesim-editor-envelope",
+        "weight": 1
+      },
+      {
+        "source": "bamoe-developer-tools",
+        "target": "@kie-tools/stunner-editors",
+        "weight": 1
+      },
+      {
+        "source": "bamoe-developer-tools",
+        "target": "@kie-tools/vscode-java-code-completion-extension-plugin",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/form-code-generator-vscode-command",
+        "target": "@kie-tools/jbpm-form-code-generator-themes",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/scesim-editor-envelope",
+        "target": "@kie-tools-core/editor",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/scesim-editor-envelope",
+        "target": "@kie-tools/scesim-editor",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/vscode-java-code-completion-extension-plugin",
+        "target": "@kie-tools/maven-base",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/jbpm-form-code-generator-themes",
+        "target": "@kie-tools/form-code-generator-bootstrap4-theme",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/jbpm-form-code-generator-themes",
+        "target": "@kie-tools/form-code-generator-patternfly-theme",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/scesim-editor",
+        "target": "@kie-tools-core/react-hooks",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/scesim-editor",
+        "target": "@kie-tools/boxed-expression-component",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/scesim-editor",
+        "target": "@kie-tools/scesim-marshaller",
+        "weight": 1
+      },
+      {
         "source": "@kie-tools/boxed-expression-component",
         "target": "@kie-tools-core/operating-system",
         "weight": 1
@@ -1031,26 +1113,6 @@
       {
         "source": "bpmn-vscode-extension",
         "target": "@kie-tools/vscode-java-code-completion-extension-plugin",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/form-code-generator-vscode-command",
-        "target": "@kie-tools/jbpm-form-code-generator-themes",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/vscode-java-code-completion-extension-plugin",
-        "target": "@kie-tools/maven-base",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/jbpm-form-code-generator-themes",
-        "target": "@kie-tools/form-code-generator-bootstrap4-theme",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/jbpm-form-code-generator-themes",
-        "target": "@kie-tools/form-code-generator-patternfly-theme",
         "weight": 1
       },
       {
@@ -1704,31 +1766,6 @@
         "weight": 1
       },
       {
-        "source": "@kie-tools/scesim-editor-envelope",
-        "target": "@kie-tools-core/editor",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/scesim-editor-envelope",
-        "target": "@kie-tools/scesim-editor",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/scesim-editor",
-        "target": "@kie-tools-core/react-hooks",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/scesim-editor",
-        "target": "@kie-tools/boxed-expression-component",
-        "weight": 1
-      },
-      {
-        "source": "@kie-tools/scesim-editor",
-        "target": "@kie-tools/scesim-marshaller",
-        "weight": 1
-      },
-      {
         "source": "@kie-tools/extended-services",
         "target": "@kie-tools/root-env",
         "weight": 1
@@ -1825,6 +1862,16 @@
       },
       {
         "source": "@kie-tools/jobs-service-webapp",
+        "target": "@kie-tools-core/webpack-base",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/k8s-resource-editor",
+        "target": "@kie-tools-core/editor",
+        "weight": 1
+      },
+      {
+        "source": "@kie-tools/k8s-resource-editor",
         "target": "@kie-tools-core/webpack-base",
         "weight": 1
       },
@@ -2811,6 +2858,7 @@
     ],
     ["@kie-tools-examples/sonataflow-greeting", "examples/sonataflow-greeting"],
     ["@kie-tools-examples/uniforms-patternfly", "examples/uniforms-patternfly"],
+    ["bamoe-developer-tools", "packages/bamoe-developer-tools"],
     ["@kie-tools/boxed-expression-component", "packages/boxed-expression-component"],
     ["@kie-tools/bpmn-marshaller", "packages/bpmn-marshaller"],
     ["bpmn-vscode-extension", "packages/bpmn-vscode-extension"],
@@ -2886,6 +2934,7 @@
     ["@kie-tools/jest-base", "packages/jest-base"],
     ["@kie-tools/jobs-service-webapp", "packages/jobs-service-webapp"],
     ["@kie-tools/json-yaml-language-service", "packages/json-yaml-language-service"],
+    ["@kie-tools/k8s-resource-editor", "packages/k8s-resource-editor"],
     ["@kie-tools-core/k8s-yaml-to-apiserver-requests", "packages/k8s-yaml-to-apiserver-requests"],
     ["@kie-tools-core/keyboard-shortcuts", "packages/keyboard-shortcuts"],
     ["@kie-tools/kie-bc-editors", "packages/kie-bc-editors"],

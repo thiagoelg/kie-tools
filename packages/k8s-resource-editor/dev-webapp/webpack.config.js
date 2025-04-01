@@ -47,7 +47,19 @@ module.exports = (webpackEnv) =>
           },
         ],
       }),
-      new MonacoWebpackPlugin(),
+      new MonacoWebpackPlugin({
+        languages: ["json"],
+        customLanguages: [
+          {
+            label: "yaml",
+            entry: ["monaco-yaml", "vs/basic-languages/yaml/yaml.contribution"],
+            worker: {
+              id: "monaco-yaml/yamlWorker",
+              entry: "monaco-yaml/yaml.worker.js",
+            },
+          },
+        ],
+      }),
     ],
     module: {
       rules: [...patternflyBase.webpackModuleRules],

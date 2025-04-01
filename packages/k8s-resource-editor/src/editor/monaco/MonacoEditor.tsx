@@ -24,7 +24,7 @@ import {
   useKogitoEditorEnvelopeContext,
 } from "@kie-tools-core/editor/dist/api";
 import { useSharedValue } from "@kie-tools-core/envelope-bus/dist/hooks";
-import { editor } from "@kie-tools-core/monaco-editor";
+import { editor } from "monaco-editor";
 import { extname } from "path";
 import * as React from "react";
 import { useEffect, useImperativeHandle, useMemo, useRef } from "react";
@@ -41,16 +41,9 @@ interface Props {
 }
 
 const extensionLanguageMap = new Map<string, string>([
-  [".bpmn", "xml"],
-  [".bpmn2", "xml"],
-  [".dmn", "xml"],
-  [".scesim", "xml"],
-  [".pmml", "xml"],
-  [".md", "markdown"],
   [".json", "json"],
   [".yaml", "yaml"],
   [".yml", "yaml"],
-  [".txt", "plaintext"],
 ]);
 
 const RefForwardingMonacoEditor: React.ForwardRefRenderFunction<MonacoEditorApi | undefined, Props> = (
