@@ -20,7 +20,7 @@
   "scripts": {
     "build:dev": "rimraf dist && tsc -p tsconfig.json && pnpm copy:css",
     "build:prod": "pnpm lint && rimraf dist && tsc -p tsconfig.json && pnpm copy:css",
-    "copy:css": "copyfiles -u 2 \"src/**/*.{sass,scss,css,svg,png}\" dist/",
+    "copy:css": "copyfiles -u 1 \"src/**/*.{sass,scss,css,svg,png}\" dist",
     "lint": "run-script-if --bool \"$(build-env linters.run)\" --then \"kie-tools--eslint ./src\""
   },
   "dependencies": {
@@ -36,7 +36,7 @@
     "@patternfly/react-table": "^5.4.1",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "axios": "^1.7.4",
+    "axios": "^1.9.0",
     "copyfiles": "^2.4.1",
     "history": "^4.9.0",
     "keycloak-js": "^23.0.5",
