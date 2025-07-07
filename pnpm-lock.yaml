@@ -4862,15 +4862,24 @@ importers:
         specifier: 0.2.3
         version: 0.2.3
     devDependencies:
+      '@kie-tools-core/drools-and-kogito':
+        specifier: workspace:*
+        version: link:../drools-and-kogito
       '@kie-tools/root-env':
         specifier: workspace:*
         version: link:../root-env
       '@kie-tools/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       rimraf:
         specifier: ^3.0.2
         version: 3.0.2
+      run-script-os:
+        specifier: ^1.1.6
+        version: 1.1.6
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
@@ -5057,6 +5066,15 @@ importers:
       webpack-merge:
         specifier: ^5.9.0
         version: 5.9.0
+
+  packages/drools-and-kogito:
+    devDependencies:
+      '@kie-tools-scripts/build-env':
+        specifier: workspace:*
+        version: link:../../scripts/build-env
+      '@kie-tools/root-env':
+        specifier: workspace:*
+        version: link:../root-env
 
   packages/editor:
     dependencies:
@@ -7315,6 +7333,9 @@ importers:
 
   packages/kn-plugin-workflow:
     dependencies:
+      '@kie-tools-core/drools-and-kogito':
+        specifier: workspace:*
+        version: link:../drools-and-kogito
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
@@ -7366,10 +7387,11 @@ importers:
         version: 1.1.6
 
   packages/kogito-data-index-ephemeral-image:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/python-venv':
         specifier: workspace:*
         version: link:../python-venv
@@ -7393,10 +7415,11 @@ importers:
         version: 1.1.6
 
   packages/kogito-data-index-postgresql-image:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/python-venv':
         specifier: workspace:*
         version: link:../python-venv
@@ -7464,10 +7487,11 @@ importers:
         version: 1.1.6
 
   packages/kogito-jit-runner-image:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/python-venv':
         specifier: workspace:*
         version: link:../python-venv
@@ -7491,10 +7515,11 @@ importers:
         version: 1.1.6
 
   packages/kogito-jobs-service-allinone-image:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/python-venv':
         specifier: workspace:*
         version: link:../python-venv
@@ -7518,10 +7543,11 @@ importers:
         version: 1.1.6
 
   packages/kogito-jobs-service-ephemeral-image:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/python-venv':
         specifier: workspace:*
         version: link:../python-venv
@@ -7545,10 +7571,11 @@ importers:
         version: 1.1.6
 
   packages/kogito-jobs-service-postgresql-image:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/python-venv':
         specifier: workspace:*
         version: link:../python-venv
@@ -7639,6 +7666,10 @@ importers:
         version: 5.5.3
 
   packages/maven-base:
+    dependencies:
+      '@kie-tools-core/drools-and-kogito':
+        specifier: workspace:*
+        version: link:../drools-and-kogito
     devDependencies:
       '@kie-tools/root-env':
         specifier: workspace:*
@@ -11130,10 +11161,11 @@ importers:
         version: 5.9.0
 
   packages/serverless-workflow-diagram-editor:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/root-env':
         specifier: workspace:*
         version: link:../root-env
@@ -11901,13 +11933,14 @@ importers:
         version: 5.9.0
 
   packages/sonataflow-builder-image:
+    dependencies:
+      '@kie-tools/maven-base':
+        specifier: workspace:*
+        version: link:../maven-base
     devDependencies:
       '@kie-tools/image-builder':
         specifier: workspace:*
         version: link:../image-builder
-      '@kie-tools/maven-base':
-        specifier: workspace:*
-        version: link:../maven-base
       '@kie-tools/maven-m2-repo-via-http-image':
         specifier: workspace:*
         version: link:../maven-m2-repo-via-http-image
@@ -12630,10 +12663,11 @@ importers:
         version: 5.9.0
 
   packages/stunner-editors:
-    devDependencies:
+    dependencies:
       '@kie-tools/maven-base':
         specifier: workspace:*
         version: link:../maven-base
+    devDependencies:
       '@kie-tools/root-env':
         specifier: workspace:*
         version: link:../root-env
