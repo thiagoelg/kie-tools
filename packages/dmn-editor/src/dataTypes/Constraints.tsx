@@ -27,10 +27,10 @@ import { ConstraintsEnum, isEnum } from "./ConstraintsEnum";
 import { ConstraintsRange, isRange } from "./ConstraintsRange";
 import { KIE__tConstraintType } from "@kie-tools/dmn-marshaller/dist/schemas/kie-1_0/ts-gen/types";
 import { DataTypeIndex, EditItemDefinition } from "./DataTypes";
-import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/js/components/ToggleGroup";
+import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/esm/components/ToggleGroup";
 import { constrainableBuiltInFeelTypes, isCollection, isStruct } from "./DataTypeSpec";
 import moment from "moment";
-import { TextInput } from "@patternfly/react-core/dist/js/components/TextInput";
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { ConstraintDate } from "./ConstraintComponents/ConstraintDate";
 import { ConstraintDateTime } from "./ConstraintComponents/ConstraintDateTime";
 import {

@@ -19,7 +19,7 @@
 
 import * as React from "react";
 import { useDmnEditor } from "./DmnEditorContext";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import {
   EmptyState,
   EmptyStateBody,
@@ -27,11 +27,11 @@ import {
   EmptyStateActions,
   EmptyStateHeader,
   EmptyStateFooter,
-} from "@patternfly/react-core/dist/js/components/EmptyState";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
+} from "@patternfly/react-core/dist/esm/components/EmptyState";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
 import { FallbackProps } from "react-error-boundary";
-import { ClipboardCopy, ClipboardCopyVariant } from "@patternfly/react-core/dist/js/components/ClipboardCopy";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
+import { ClipboardCopy, ClipboardCopyVariant } from "@patternfly/react-core/dist/esm/components/ClipboardCopy";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/esm/icons/external-link-alt-icon";
 import { useCallback, useEffect } from "react";
 import { useDmnEditorI18n } from "./i18n";
 

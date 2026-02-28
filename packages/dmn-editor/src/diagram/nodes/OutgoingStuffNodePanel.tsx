@@ -20,7 +20,7 @@
 import * as React from "react";
 import * as RF from "reactflow";
 import { EdgeType, NodeType } from "../connections/graphStructure";
-import { Flex, FlexItem } from "@patternfly/react-core/dist/js/layouts/Flex";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import {
   AssociationPath,
   AuthorityRequirementPath,

@@ -19,7 +19,7 @@
 
 import * as React from "react";
 import { useMemo, useCallback, useEffect } from "react";
-import { TextInput } from "@patternfly/react-core/dist/js/components/TextInput";
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import "./Constraint.css";
 import { ConstraintProps } from "./Constraint";
 import { useDmnEditorI18n } from "../../i18n";

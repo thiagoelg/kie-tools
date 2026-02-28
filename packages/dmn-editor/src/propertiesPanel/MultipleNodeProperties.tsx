@@ -19,14 +19,14 @@
 
 import * as React from "react";
 import { useState, useMemo } from "react";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
-import { Form, FormSection } from "@patternfly/react-core/dist/js/components/Form";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/js/components/Text";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { Form, FormSection } from "@patternfly/react-core/dist/esm/components/Form";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
 import { FontOptions } from "./FontOptions";
 import { useDmnEditorStoreApi } from "../store/StoreContext";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { TimesIcon } from "@patternfly/react-icons/dist/js/icons/times-icon";
-import { Truncate } from "@patternfly/react-core/dist/js/components/Truncate";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { TimesIcon } from "@patternfly/react-icons/dist/esm/icons/times-icon";
+import { Truncate } from "@patternfly/react-core/dist/esm/components/Truncate";
 import { PropertiesPanelHeader } from "./PropertiesPanelHeader";
 import { ShapeOptions } from "./ShapeOptions";
 import { useDmnEditorI18n } from "../i18n";

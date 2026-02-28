@@ -23,7 +23,7 @@ import {
   DrawerCloseButton,
   DrawerHead,
   DrawerPanelContent,
-} from "@patternfly/react-core/dist/js/components/Drawer";
+} from "@patternfly/react-core/dist/esm/components/Drawer";
 import { buildXmlHref } from "@kie-tools/dmn-marshaller/dist/xml/xmlHrefs";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { useMemo } from "react";

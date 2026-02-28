@@ -18,8 +18,8 @@
  */
 
 import * as React from "react";
-import { Label } from "@patternfly/react-core/dist/js/components/Label";
-import { InfoIcon } from "@patternfly/react-icons/dist/js/icons/info-icon";
+import { Label } from "@patternfly/react-core/dist/esm/components/Label";
+import { InfoIcon } from "@patternfly/react-icons/dist/esm/icons/info-icon";
 import { useDmnEditorStoreApi } from "../../store/StoreContext";
 
 export function InfoNodePanel(props: { isVisible: boolean }) {

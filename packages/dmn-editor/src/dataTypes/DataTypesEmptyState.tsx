@@ -18,8 +18,8 @@
  */
 
 import * as React from "react";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import {
   EmptyState,
   EmptyStateBody,
@@ -27,9 +27,9 @@ import {
   EmptyStateActions,
   EmptyStateHeader,
   EmptyStateFooter,
-} from "@patternfly/react-core/dist/js/components/EmptyState";
-import { CubesIcon } from "@patternfly/react-icons/dist/js/icons/cubes-icon";
-import { PasteIcon } from "@patternfly/react-icons/dist/js/icons/paste-icon";
+} from "@patternfly/react-core/dist/esm/components/EmptyState";
+import { CubesIcon } from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
+import { PasteIcon } from "@patternfly/react-icons/dist/esm/icons/paste-icon";
 import { useSettings } from "../settings/DmnEditorSettingsContext";
 import { ImportJavaClassesWrapper } from "./ImportJavaClasses";
 import { useDmnEditorI18n } from "../i18n";

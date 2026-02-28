@@ -26,9 +26,9 @@ import { DiagramLhsPanel } from "../store/Store";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { addStandaloneNode } from "../mutations/addStandaloneNode";
 import { CONTAINER_NODES_DESIRABLE_PADDING, getBounds } from "./maths/DmnMaths";
-import { Popover } from "@patternfly/react-core/dist/js/components/Popover";
+import { Popover } from "@patternfly/react-core/dist/esm/components/Popover";
 import { ExternalNodesPanel } from "../externalNodes/ExternalNodesPanel";
-import { MigrationIcon } from "@patternfly/react-icons/dist/js/icons/migration-icon";
+import { MigrationIcon } from "@patternfly/react-icons/dist/esm/icons/migration-icon";
 import {
   AlternativeInputDataIcon,
   BkmIcon,
@@ -42,15 +42,15 @@ import {
 import { DrdSelectorPanel } from "./DrdSelectorPanel";
 import { addOrGetDrd, getDefaultDrdName } from "../mutations/addOrGetDrd";
 import { InlineFeelNameInput } from "../feel/InlineFeelNameInput";
-import { BarsIcon } from "@patternfly/react-icons/dist/js/icons/bars-icon";
+import { BarsIcon } from "@patternfly/react-icons/dist/esm/icons/bars-icon";
 import { DrgNodesPanel } from "./DrgNodesPanel";
-import { CaretDownIcon } from "@patternfly/react-icons/dist/js/icons/caret-down-icon";
+import { CaretDownIcon } from "@patternfly/react-icons/dist/esm/icons/caret-down-icon";
 import { useInViewSelect } from "../responsiveness/useInViewSelect";
 import { useDmnEditor } from "../DmnEditorContext";
 import { getDrdId } from "./drd/drdId";
 import { useSettings } from "../settings/DmnEditorSettingsContext";
 import { useExternalModels } from "../includedModels/DmnEditorDependenciesContext";
-import { Icon } from "@patternfly/react-core/dist/js/components/Icon";
+import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
 import { useDmnEditorI18n } from "../i18n";
 
 export const MIME_TYPE_FOR_DMN_EDITOR_NEW_NODE_FROM_PALETTE = "application/kie-dmn-editor--new-node-from-palette";

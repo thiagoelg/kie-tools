@@ -23,12 +23,12 @@ import {
   DrawerCloseButton,
   DrawerHead,
   DrawerPanelContent,
-} from "@patternfly/react-core/dist/js/components/Drawer";
+} from "@patternfly/react-core/dist/esm/components/Drawer";
 import { useMemo } from "react";
 import { buildXmlHref } from "@kie-tools/dmn-marshaller/dist/xml/xmlHrefs";
 import { SingleNodeProperties } from "./SingleNodeProperties";
 import { generateBoxedExpressionIndex } from "../boxedExpressions/boxedExpressionIndex";
-import { Form, FormSection } from "@patternfly/react-core/dist/js/components/Form";
+import { Form, FormSection } from "@patternfly/react-core/dist/esm/components/Form";
 import { RelationInformationItemCell } from "./BoxedExpressionPropertiesPanelComponents/RelationInformationItemCell";
 import { DecisionTableInputHeaderCell } from "./BoxedExpressionPropertiesPanelComponents/DecisionTableInputHeaderCell";
 import { DecisionTableOutputHeaderCell } from "./BoxedExpressionPropertiesPanelComponents/DecisionTableOutputHeaderCell";

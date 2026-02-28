@@ -61,11 +61,11 @@ import {
   TimeSeriesModel,
   TreeModel,
 } from "@kie-tools/pmml-editor-marshaller/dist/marshaller/model/pmml4_4";
-import { Label } from "@patternfly/react-core/dist/js/components/Label";
-import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/js/components/Text";
-import { Flex, FlexItem } from "@patternfly/react-core/dist/js/layouts/Flex";
-import { ArrowRightIcon } from "@patternfly/react-icons/dist/js/icons/arrow-right-icon";
-import { InfoIcon } from "@patternfly/react-icons/dist/js/icons/info-icon";
+import { Label } from "@patternfly/react-core/dist/esm/components/Label";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core/dist/esm/components/Text";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { ArrowRightIcon } from "@patternfly/react-icons/dist/esm/icons/arrow-right-icon";
+import { InfoIcon } from "@patternfly/react-icons/dist/esm/icons/info-icon";
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as RF from "reactflow";

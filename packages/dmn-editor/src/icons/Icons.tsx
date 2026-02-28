@@ -32,7 +32,7 @@ import {
 import { switchExpression } from "@kie-tools-core/switch-expression-ts";
 import { NodeType } from "../diagram/connections/graphStructure";
 import { NODE_TYPES } from "../diagram/nodes/NodeTypes";
-import { QuestionCircleIcon } from "@patternfly/react-icons/dist/js/icons/question-circle-icon";
+import { QuestionCircleIcon } from "@patternfly/react-icons/dist/esm/icons/question-circle-icon";
 
 const radius = 34;
 const svgViewboxPadding = Math.sqrt(Math.pow(radius, 2) / 2) - radius / 2; // This lets us create a square that will perfectly fit inside the button circle.

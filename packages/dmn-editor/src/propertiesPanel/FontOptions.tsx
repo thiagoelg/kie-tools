@@ -19,13 +19,13 @@
 
 import { DMN_LATEST__DMNShape } from "@kie-tools/dmn-marshaller";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { FormSection } from "@patternfly/react-core/dist/js/components/Form";
-import { NumberInput } from "@patternfly/react-core/dist/js/components/NumberInput";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { FormSection } from "@patternfly/react-core/dist/esm/components/Form";
+import { NumberInput } from "@patternfly/react-core/dist/esm/components/NumberInput";
 import { Select, SelectOption, SelectVariant } from "@patternfly/react-core/deprecated";
-import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/js/components/ToggleGroup";
-import { PencilAltIcon } from "@patternfly/react-icons/dist/js/icons/pencil-alt-icon";
-import { UndoAltIcon } from "@patternfly/react-icons/dist/js/icons/undo-alt-icon";
+import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/esm/components/ToggleGroup";
+import { PencilAltIcon } from "@patternfly/react-icons/dist/esm/icons/pencil-alt-icon";
+import { UndoAltIcon } from "@patternfly/react-icons/dist/esm/icons/undo-alt-icon";
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDmnEditor } from "../DmnEditorContext";
@@ -38,7 +38,7 @@ import { PropertiesPanelHeader } from "./PropertiesPanelHeader";
 import "./FontOptions.css";
 import { generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
 import { useSettings } from "../settings/DmnEditorSettingsContext";
-import { Icon } from "@patternfly/react-core/dist/js/components/Icon";
+import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
 import { useDmnEditorI18n } from "../i18n";
 
 // https://www.w3schools.com/cssref/css_websafe_fonts.php

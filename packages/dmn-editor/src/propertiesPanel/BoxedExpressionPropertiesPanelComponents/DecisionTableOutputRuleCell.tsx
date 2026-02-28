@@ -24,8 +24,8 @@ import { BoxedExpressionIndex } from "../../boxedExpressions/boxedExpressionInde
 import { DMN_LATEST__tDecisionTable, DMN_LATEST__tLiteralExpression } from "@kie-tools/dmn-marshaller";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
 import { useBoxedExpressionUpdater } from "./useBoxedExpressionUpdater";
-import { ClipboardCopy } from "@patternfly/react-core/dist/js/components/ClipboardCopy";
-import { FormGroup } from "@patternfly/react-core/dist/js/components/Form";
+import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy";
+import { FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { ConstraintsFromTypeConstraintAttribute } from "../../dataTypes/Constraints";
 import { BoxedDecisionTable, DmnBuiltInDataType } from "@kie-tools/boxed-expression-component/dist/api";
 import { useDmnEditor } from "../../DmnEditorContext";

@@ -20,8 +20,8 @@
 import "./Draggable.css";
 import * as React from "react";
 import { useState, useCallback, useContext, useMemo, useLayoutEffect } from "react";
-import { Icon } from "@patternfly/react-core/dist/js/components/Icon";
-import GripVerticalIcon from "@patternfly/react-icons/dist/js/icons/grip-vertical-icon";
+import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
+import GripVerticalIcon from "@patternfly/react-icons/dist/esm/icons/grip-vertical-icon";
 import { generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
 
 export interface DraggableStateContext {

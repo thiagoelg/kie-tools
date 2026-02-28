@@ -19,14 +19,14 @@
 
 import * as React from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { TimePicker } from "@patternfly/react-core/dist/js/components/TimePicker";
+import { TimePicker } from "@patternfly/react-core/dist/esm/components/TimePicker";
 import "./Constraint.css";
 import "./ConstraintTime.css";
 import { ConstraintProps } from "./Constraint";
 import { Select, SelectOption, SelectVariant } from "@patternfly/react-core/deprecated";
 import { useDmnEditor } from "../../DmnEditorContext";
 import { useInViewSelect } from "../../responsiveness/useInViewSelect";
-import { Tooltip } from "@patternfly/react-core/dist/js/components/Tooltip";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import moment from "moment";
 import { useDmnEditorI18n } from "../../i18n";
 

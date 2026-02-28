@@ -21,6 +21,7 @@
     "@kie-tools/root-env": "workspace:*",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.9.4",
     "raw-loader": "^4.0.2",
     "sass": "^1.90.0",
     "sass-loader": "^13.3.0",

@@ -18,7 +18,7 @@
  */
 
 import * as React from "react";
-import { DatePicker } from "@patternfly/react-core/dist/js/components/DatePicker";
+import { DatePicker } from "@patternfly/react-core/dist/esm/components/DatePicker";
 import "./Constraint.css";
 import "./ConstraintDate.css";
 import { ConstraintProps } from "./Constraint";

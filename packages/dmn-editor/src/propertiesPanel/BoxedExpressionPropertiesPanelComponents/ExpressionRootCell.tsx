@@ -23,8 +23,8 @@ import { DescriptionField } from "../Fields";
 import { BoxedExpressionIndex } from "../../boxedExpressions/boxedExpressionIndex";
 import { AllExpressionsWithoutTypes } from "../../dataTypes/DataTypeSpec";
 import { useBoxedExpressionUpdater } from "./useBoxedExpressionUpdater";
-import { ClipboardCopy } from "@patternfly/react-core/dist/js/components/ClipboardCopy";
-import { FormGroup } from "@patternfly/react-core/dist/js/components/Form";
+import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy";
+import { FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { useDmnEditorStore } from "../../store/StoreContext";
 import { useDmnEditorI18n } from "../../i18n";
 

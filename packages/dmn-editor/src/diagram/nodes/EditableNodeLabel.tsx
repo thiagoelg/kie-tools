@@ -26,7 +26,7 @@ import { UniqueNameIndex } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/
 import { buildFeelQNameFromXmlQName } from "../../feel/buildFeelQName";
 import { DMN_LATEST__tNamedElement } from "@kie-tools/dmn-marshaller";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
-import { Truncate } from "@patternfly/react-core/dist/js/components/Truncate";
+import { Truncate } from "@patternfly/react-core/dist/esm/components/Truncate";
 import { DMN16_SPEC } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/Dmn16Spec";
 import { invalidInlineFeelNameStyle } from "../../feel/InlineFeelNameInput";
 import { generateUuid } from "@kie-tools/boxed-expression-component/dist/api";

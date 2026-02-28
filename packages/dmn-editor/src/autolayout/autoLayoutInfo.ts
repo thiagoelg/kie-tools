@@ -20,7 +20,8 @@
 import { generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
 import { DC__Bounds } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/ts-gen/types";
 import { addNamespaceToHref, parseXmlHref } from "@kie-tools/dmn-marshaller/dist/xml/xmlHrefs";
-import ELK, * as Elk from "elkjs/lib/elk.bundled.js";
+import ELK from "elkjs/lib/elk.bundled";
+import { ElkNode, ElkExtendedEdge, LayoutOptions } from "elkjs/lib/elk-api";
 import { Edge, Node } from "reactflow";
 import { NodeType } from "../diagram/connections/graphStructure";
 import { DmnDiagramEdgeData } from "../diagram/edges/Edges";
@@ -64,7 +65,7 @@ const PARENT_NODE_ELK_OPTIONS = {
 
 export interface AutolayoutParentNode {
   decisionServiceSection: "output" | "encapsulated" | "n/a";
-  elkNode: Elk.ElkNode;
+  elkNode: ElkNode;
   contained: Set<string>;
   dependents: Set<string>;
   dependencies: Set<string>;
@@ -100,7 +101,7 @@ export async function getAutoLayoutedInfo({
     Used to tell ELK that dependencies of nodes' children should be considered the node's dependency too.
     This allows us to not rely on INCLUDE_STRATEGY hierarchy handling on ELK, keeping disjoint graph components separate, rendering side-by-side.
    */
-  const fakeEdgesForElk = new Set<Elk.ElkExtendedEdge>();
+  const fakeEdgesForElk = new Set<ElkExtendedEdge>();
 
   const adjMatrix = getAdjMatrix(__readonly_drgEdges);
 
@@ -227,7 +228,7 @@ export async function getAutoLayoutedInfo({
       snapGrid: __readonly_snapGrid,
       isAlternativeInputDataShape: __readonly_isAlternativeInputDataShape,
     });
-    const elkNode: Elk.ElkNode = {
+    const elkNode: ElkNode = {
       id: node.id,
       width: node.data.shape["dc:Bounds"]?.["@_width"] ?? defaultSize["@_width"],
       height: node.data.shape["dc:Bounds"]?.["@_height"] ?? defaultSize["@_height"],
@@ -367,13 +368,13 @@ export async function getAutoLayoutedInfo({
 }
 
 async function runElk(
-  nodes: Elk.ElkNode[],
+  nodes: ElkNode[],
   edges: { id: string; sources: string[]; targets: string[] }[],
-  options: Elk.LayoutOptions = {}
-): Promise<{ isHorizontal: boolean; nodes: Elk.ElkNode[] | undefined; edges: Elk.ElkExtendedEdge[] | undefined }> {
+  options: LayoutOptions = {}
+): Promise<{ isHorizontal: boolean; nodes: ElkNode[] | undefined; edges: ElkExtendedEdge[] | undefined }> {
   const isHorizontal = options?.["elk.direction"] === "RIGHT";
 
-  const graph: Elk.ElkNode = {
+  const graph: ElkNode = {
     id: "root",
     layoutOptions: options,
     children: nodes,
@@ -389,9 +390,9 @@ async function runElk(
 }
 
 export function visitNodeAndNested(
-  elkNode: Elk.ElkNode,
+  elkNode: ElkNode,
   positionOffset: { x: number; y: number },
-  visitor: (elkNode: Elk.ElkNode, positionOffset: { x: number; y: number }) => void
+  visitor: (elkNode: ElkNode, positionOffset: { x: number; y: number }) => void
 ) {
   visitor(elkNode, positionOffset);
   for (const nestedNode of elkNode.children ?? []) {

@@ -20,26 +20,26 @@
 import { DMN_LATEST__tDefinitions } from "@kie-tools/dmn-marshaller";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
 import { buildXmlHref } from "@kie-tools/dmn-marshaller/dist/xml/xmlHrefs";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button/Button";
-import { SearchInput } from "@patternfly/react-core/dist/js/components/SearchInput";
-import { Text, TextContent } from "@patternfly/react-core/dist/js/components/Text";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
-import { TimesIcon } from "@patternfly/react-icons/dist/js/icons/times-icon";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button/Button";
+import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
+import { Text, TextContent } from "@patternfly/react-core/dist/esm/components/Text";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { TimesIcon } from "@patternfly/react-icons/dist/esm/icons/times-icon";
 import * as React from "react";
 import { useCallback, useMemo, useState } from "react";
 import { DmnObjectListItem } from "../externalNodes/DmnObjectListItem";
 import { DiagramLhsPanel } from "../store/Store";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { Unpacked } from "../tsExt/tsExt";
-import { Divider } from "@patternfly/react-core/dist/js/components/Divider";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { computeContainingDecisionServiceHrefsByDecisionHrefs } from "../store/computed/computeContainingDecisionServiceHrefsByDecisionHrefs.ts";
 import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateHeader,
-} from "@patternfly/react-core/dist/js/components/EmptyState";
-import CubesIcon from "@patternfly/react-icons/dist/js/icons/cubes-icon";
+} from "@patternfly/react-core/dist/esm/components/EmptyState";
+import CubesIcon from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
 import { useDmnEditorI18n } from "../i18n";
 
 export const MIME_TYPE_FOR_DMN_EDITOR_DRG_NODE = "kie-dmn-editor--drg-node";

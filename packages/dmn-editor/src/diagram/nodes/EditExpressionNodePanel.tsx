@@ -18,7 +18,7 @@
  */
 
 import * as React from "react";
-import { Label } from "@patternfly/react-core/dist/js/components/Label";
+import { Label } from "@patternfly/react-core/dist/esm/components/Label";
 import { useDmnEditorStoreApi } from "../../store/StoreContext";
 import { useSettings } from "../../settings/DmnEditorSettingsContext";
 import { useDmnEditorI18n } from "../../i18n";

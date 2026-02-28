@@ -18,10 +18,10 @@
  */
 
 import * as React from "react";
-import { Text } from "@patternfly/react-core/dist/js/components/Text";
-import { Title } from "@patternfly/react-core/dist/js/components/Title";
-import { FormGroup } from "@patternfly/react-core/dist/js/components/Form";
-import { ClipboardCopy } from "@patternfly/react-core/dist/js/components/ClipboardCopy";
+import { Text } from "@patternfly/react-core/dist/esm/components/Text";
+import { Title } from "@patternfly/react-core/dist/esm/components/Title";
+import { FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy";
 import { useDmnEditorI18n } from "../../i18n";
 
 export function SelectExpressionCell(props: { selectedObjectId: string }) {

@@ -22,7 +22,7 @@ import { useCallback, useState } from "react";
 import { buildXmlHref } from "@kie-tools/dmn-marshaller/dist/xml/xmlHrefs";
 import { DiagramLhsPanel, DmnEditorTab } from "../store/Store";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import {
   EmptyState,
   EmptyStateBody,
@@ -30,16 +30,16 @@ import {
   EmptyStateActions,
   EmptyStateHeader,
   EmptyStateFooter,
-} from "@patternfly/react-core/dist/js/components/EmptyState";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { CubesIcon } from "@patternfly/react-icons/dist/js/icons/cubes-icon";
+} from "@patternfly/react-core/dist/esm/components/EmptyState";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { CubesIcon } from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
 import { DmnObjectListItem } from "./DmnObjectListItem";
-import { Text, TextContent } from "@patternfly/react-core/dist/js/components/Text";
-import { Divider } from "@patternfly/react-core/dist/js/components/Divider";
+import { Text, TextContent } from "@patternfly/react-core/dist/esm/components/Text";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import { EMPTY_IMPORT_NAME_NAMESPACE_IDENTIFIER } from "../includedModels/IncludedModels";
 import { useDmnEditor } from "../DmnEditorContext";
-import { SearchInput } from "@patternfly/react-core/dist/js/components/SearchInput";
-import { TimesIcon } from "@patternfly/react-icons/dist/js/icons/times-icon";
+import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
+import { TimesIcon } from "@patternfly/react-icons/dist/esm/icons/times-icon";
 import { useExternalModels } from "../includedModels/DmnEditorDependenciesContext";
 import { useDmnEditorI18n } from "../i18n";
 

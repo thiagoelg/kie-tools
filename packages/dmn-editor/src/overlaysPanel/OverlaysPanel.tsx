@@ -18,15 +18,15 @@
  */
 
 import * as React from "react";
-import { Switch } from "@patternfly/react-core/dist/js/components/Switch";
-import { Form, FormGroup } from "@patternfly/react-core/dist/js/components/Form";
-import { Divider } from "@patternfly/react-core/dist/js/components/Divider";
-import { Slider } from "@patternfly/react-core/dist/js/components/Slider";
+import { Switch } from "@patternfly/react-core/dist/esm/components/Switch";
+import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
+import { Slider } from "@patternfly/react-core/dist/esm/components/Slider";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { useLayoutEffect, useRef } from "react";
-import { Icon } from "@patternfly/react-core/dist/js/components/Icon";
-import { Tooltip } from "@patternfly/react-core/dist/js/components/Tooltip";
-import { HelpIcon } from "@patternfly/react-icons/dist/js/icons/help-icon";
+import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
+import { HelpIcon } from "@patternfly/react-icons/dist/esm/icons/help-icon";
 import { useSettings } from "../settings/DmnEditorSettingsContext";
 import { useDmnEditorI18n } from "../i18n";
 

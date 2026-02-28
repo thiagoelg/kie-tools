@@ -26,12 +26,12 @@ import { TypeRefLabel } from "../dataTypes/TypeRefLabel";
 import { NodeIcon } from "../icons/Icons";
 import { getNodeTypeFromDmnObject } from "../diagram/maths/DmnMaths";
 import { buildFeelQNameFromNamespace } from "../feel/buildFeelQName";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { DmnBuiltInDataType, generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
 import { useDmnEditorStore } from "../store/StoreContext";
 import { useExternalModels } from "../includedModels/DmnEditorDependenciesContext";
 import { DMN16_SPEC } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/Dmn16Spec";
-import { Tooltip } from "@patternfly/react-core/dist/js/components/Tooltip";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
 import { NODE_TYPES } from "../diagram/nodes/NodeTypes";
 import { useDmnEditorI18n } from "../i18n";
 

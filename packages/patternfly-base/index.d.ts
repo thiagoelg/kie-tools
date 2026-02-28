@@ -18,10 +18,14 @@
  */
 
 import * as webpack from "webpack";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 declare const def: {
   webpackModuleRules: webpack.RuleSetRule[];
   individualRules: Record<string, webpack.RuleSetRule>;
+  plugins: {
+    MiniCssExtractPlugin: typeof MiniCssExtractPlugin;
+  };
 };
 
 export default def;

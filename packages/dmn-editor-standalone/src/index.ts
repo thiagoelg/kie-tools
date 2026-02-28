@@ -21,6 +21,7 @@
 /// <reference path="./global.d.ts" /> // Required for bundling types
 
 import dmnEnvelopeJs from "../dist/envelope.js";
+import dmnEnvelopeCss from "../dist/envelope.css";
 import { StateControl } from "@kie-tools-core/editor/dist/channel";
 import { DmnEditorStandaloneChannelApiImpl, DmnEditorStandaloneResource } from "./DmnEditorStandaloneChannelApiImpl";
 import { DmnEditorStandaloneApi } from "./DmnEditorStandaloneApi";
@@ -59,6 +60,10 @@ export function open(args: {
       body {
         background-color: #fff !important;
       }
+    </style>
+
+    <style>
+      ${dmnEnvelopeCss}
     </style>
 
     <meta charset="UTF-8" />

@@ -19,11 +19,11 @@
 
 import * as React from "react";
 import { useMemo, useState, useCallback, useRef, useEffect } from "react";
-import { Title } from "@patternfly/react-core/dist/js/components/Title";
+import { Title } from "@patternfly/react-core/dist/esm/components/Title";
 import { FeelInput } from "@kie-tools/feel-input-component/dist";
 import "./ConstraintsExpression.css";
-import { HelperText, HelperTextItem } from "@patternfly/react-core/dist/js/components/HelperText";
-import InfoIcon from "@patternfly/react-icons/dist/js/icons/info-icon";
+import { HelperText, HelperTextItem } from "@patternfly/react-core/dist/esm/components/HelperText";
+import InfoIcon from "@patternfly/react-icons/dist/esm/icons/info-icon";
 import { DmnBuiltInDataType } from "@kie-tools/boxed-expression-component/dist/api";
 import { TypeHelper } from "./Constraints";
 import { useDmnEditorI18n } from "../i18n";

@@ -27,17 +27,17 @@ import {
   DrawerContent,
   DrawerContentBody,
   DrawerPanelContent,
-} from "@patternfly/react-core/dist/js/components/Drawer";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
-import { InfrastructureIcon } from "@patternfly/react-icons/dist/js/icons/infrastructure-icon";
-import { PlusCircleIcon } from "@patternfly/react-icons/dist/js/icons/plus-circle-icon";
+} from "@patternfly/react-core/dist/esm/components/Drawer";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { InfrastructureIcon } from "@patternfly/react-icons/dist/esm/icons/infrastructure-icon";
+import { PlusCircleIcon } from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
 import { State } from "../store/Store";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { DataTypesEmptyState } from "./DataTypesEmptyState";
 import { DataTypePanel } from "./DataTypePanel";
 import { findDataTypeById, isStruct } from "./DataTypeSpec";
 import { DataTypeName } from "./DataTypeName";
-import { Label } from "@patternfly/react-core/dist/js/components/Label";
+import { Label } from "@patternfly/react-core/dist/esm/components/Label";
 import { DMN16_SPEC } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/Dmn16Spec";
 import { invalidInlineFeelNameStyle } from "../feel/InlineFeelNameInput";
 import {
@@ -47,9 +47,9 @@ import {
   DropdownToggle,
   DropdownToggleAction,
 } from "@patternfly/react-core/deprecated";
-import { PasteIcon } from "@patternfly/react-icons/dist/js/icons/paste-icon";
-import { InputGroup, InputGroupItem } from "@patternfly/react-core/dist/js/components/InputGroup";
-import { SearchInput } from "@patternfly/react-core/dist/js/components/SearchInput";
+import { PasteIcon } from "@patternfly/react-icons/dist/esm/icons/paste-icon";
+import { InputGroup, InputGroupItem } from "@patternfly/react-core/dist/esm/components/InputGroup";
+import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput";
 import {
   ImportJavaClassesWizard,
   ImportJavaClassesI18nDictionariesProvider,

@@ -19,7 +19,7 @@
 
 import * as React from "react";
 
-import { DrawerHead, DrawerPanelContent } from "@patternfly/react-core/dist/js/components/Drawer";
+import { DrawerHead, DrawerPanelContent } from "@patternfly/react-core/dist/esm/components/Drawer";
 import { GlobalDiagramProperties } from "./GlobalDiagramProperties";
 import { SingleNodeProperties } from "./SingleNodeProperties";
 import { MultipleNodeProperties } from "./MultipleNodeProperties";

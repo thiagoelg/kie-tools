@@ -20,6 +20,8 @@
 const path = require("path");
 const BG_IMAGES_DIRNAME = "bgimages";
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 function posixPath(pathStr) {
   return pathStr.split(path.sep).join(path.posix.sep);
 }
@@ -27,7 +29,7 @@ function posixPath(pathStr) {
 const scssRule = {
   test: /\.s[ac]ss$/i,
   use: [
-    require.resolve("style-loader"),
+    MiniCssExtractPlugin.loader,
     require.resolve("css-loader"),
     {
       loader: require.resolve("sass-loader"),
@@ -43,7 +45,7 @@ const scssRule = {
 
 const cssRule = {
   test: /\.css$/,
-  use: [require.resolve("style-loader"), require.resolve("css-loader")],
+  use: [MiniCssExtractPlugin.loader, require.resolve("css-loader")],
 };
 
 const fontsRule = {
@@ -165,5 +167,8 @@ module.exports = {
     backgroundSvgRule,
     genericSvgRule,
     imagesRule,
+  },
+  plugins: {
+    MiniCssExtractPlugin,
   },
 };

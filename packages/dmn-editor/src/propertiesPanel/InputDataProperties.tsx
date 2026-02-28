@@ -20,9 +20,9 @@
 import * as React from "react";
 import { DMN_LATEST__tInputData } from "@kie-tools/dmn-marshaller";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
-import { ClipboardCopy } from "@patternfly/react-core/dist/js/components/ClipboardCopy";
-import { FormGroup } from "@patternfly/react-core/dist/js/components/Form";
-import { TextArea } from "@patternfly/react-core/dist/js/components/TextArea";
+import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy";
+import { FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { TextArea } from "@patternfly/react-core/dist/esm/components/TextArea";
 import { DocumentationLinksFormGroup } from "./DocumentationLinksFormGroup";
 import { TypeRefSelector } from "../dataTypes/TypeRefSelector";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";

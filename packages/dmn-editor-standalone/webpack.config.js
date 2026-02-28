@@ -23,6 +23,7 @@ const path = require("path");
 const { env } = require("./env");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ProvidePlugin } = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (webpackEnv) =>
   merge(common(webpackEnv), {
@@ -47,11 +48,16 @@ module.exports = (webpackEnv) =>
         process: require.resolve("process/browser.js"),
         Buffer: ["buffer", "Buffer"],
       }),
+      new MiniCssExtractPlugin(),
     ],
     module: {
       rules: [
         {
           test: /envelope\.js$/,
+          type: "asset/source",
+        },
+        {
+          test: /envelope\.css$/,
           type: "asset/source",
         },
       ],

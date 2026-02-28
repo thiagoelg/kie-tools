@@ -19,11 +19,11 @@
 
 import * as React from "react";
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { FormGroup } from "@patternfly/react-core/dist/js/components/Form";
+import { FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
 import { InlineFeelNameInput } from "../feel/InlineFeelNameInput";
-import { TextArea } from "@patternfly/react-core/dist/js/components/TextArea";
+import { TextArea } from "@patternfly/react-core/dist/esm/components/TextArea";
 import { ExpressionPath } from "../boxedExpressions/boxedExpressionIndex";
-import { TextInput } from "@patternfly/react-core/dist/js/components/TextInput";
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { TypeRefSelector } from "../dataTypes/TypeRefSelector";
 import { UniqueNameIndex } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/Dmn16Spec";
 import { State } from "../store/Store";

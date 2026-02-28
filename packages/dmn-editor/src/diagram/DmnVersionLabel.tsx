@@ -18,8 +18,8 @@
  */
 
 import * as React from "react";
-import { Label } from "@patternfly/react-core/dist/js/components/Label";
-import { Popover, PopoverPosition } from "@patternfly/react-core/dist/js/components/Popover";
+import { Label } from "@patternfly/react-core/dist/esm/components/Label";
+import { Popover, PopoverPosition } from "@patternfly/react-core/dist/esm/components/Popover";
 import { useMemo } from "react";
 import { DMN_LATEST_VERSION } from "@kie-tools/dmn-marshaller";
 import { useDmnEditorI18n } from "../i18n";

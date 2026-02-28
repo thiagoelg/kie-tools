@@ -22,23 +22,23 @@ import { generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
 import { ns as dmn12ns } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_2/ts-gen/meta";
 import { DMN_LATEST__tImport } from "@kie-tools/dmn-marshaller";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { Card, CardBody, CardHeader, CardTitle } from "@patternfly/react-core/dist/js/components/Card";
-import { Divider } from "@patternfly/react-core/dist/js/components/Divider";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { Card, CardBody, CardHeader, CardTitle } from "@patternfly/react-core/dist/esm/components/Card";
+import { Divider } from "@patternfly/react-core/dist/esm/components/Divider";
 import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStateHeader,
   EmptyStateFooter,
-} from "@patternfly/react-core/dist/js/components/EmptyState";
-import { Form, FormGroup } from "@patternfly/react-core/dist/js/components/Form";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/js/components/Modal";
-import { PageSection } from "@patternfly/react-core/dist/js/components/Page";
+} from "@patternfly/react-core/dist/esm/components/EmptyState";
+import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import { PageSection } from "@patternfly/react-core/dist/esm/components/Page";
 import { Select, SelectGroup, SelectOption, SelectVariant } from "@patternfly/react-core/deprecated";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
-import { Gallery } from "@patternfly/react-core/dist/js/layouts/Gallery";
-import { CubesIcon } from "@patternfly/react-icons/dist/js/icons/cubes-icon";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { Gallery } from "@patternfly/react-core/dist/esm/layouts/Gallery";
+import { CubesIcon } from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
 import { basename, dirname, extname } from "path";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { ExternalModel } from "../DmnEditor";
@@ -55,15 +55,15 @@ import { useExternalModels } from "./DmnEditorDependenciesContext";
 import { allPmmlImportNamespaces, getPmmlNamespace } from "../pmml/pmml";
 import { allDmnImportNamespaces } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/Dmn16Spec";
 import { getNamespaceOfDmnImport } from "./importNamespaces";
-import { Alert, AlertVariant } from "@patternfly/react-core/dist/js/components/Alert/Alert";
+import { Alert, AlertVariant } from "@patternfly/react-core/dist/esm/components/Alert/Alert";
 import { KebabToggle } from "@patternfly/react-core/deprecated";
-import { TrashIcon } from "@patternfly/react-icons/dist/js/icons/trash-icon";
+import { TrashIcon } from "@patternfly/react-icons/dist/esm/icons/trash-icon";
 import { useInViewSelect } from "../responsiveness/useInViewSelect";
 import { useCancelableEffect } from "@kie-tools-core/react-hooks/dist/useCancelableEffect";
 import { State } from "../store/Store";
 import "./IncludedModels.css";
-import { Popover, PopoverPosition } from "@patternfly/react-core/dist/js/components/Popover";
-import { AlertActionCloseButton, AlertActionLink } from "@patternfly/react-core/dist/js/components/Alert";
+import { Popover, PopoverPosition } from "@patternfly/react-core/dist/esm/components/Popover";
+import { AlertActionCloseButton, AlertActionLink } from "@patternfly/react-core/dist/esm/components/Alert";
 import { useSettings } from "../settings/DmnEditorSettingsContext";
 import { DmnLatestModel } from "@kie-tools/dmn-marshaller";
 import { useDmnEditorI18n } from "../i18n";

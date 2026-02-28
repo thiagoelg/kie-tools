@@ -21,6 +21,7 @@
 /// <reference path="./global.d.ts" /> // Required for bundling types
 
 import bpmnEnvelopeJs from "../dist/envelope.js";
+import bpmnEnvelopeCss from "../dist/envelope.css";
 import { StateControl } from "@kie-tools-core/editor/dist/channel";
 import { BpmnEditorStandaloneChannelApiImpl, BpmnEditorStandaloneResource } from "./BpmnEditorStandaloneChannelApiImpl";
 import { BpmnEditorStandaloneApi } from "./BpmnEditorStandaloneApi";
@@ -59,6 +60,9 @@ export function open(args: {
       body {
         background-color: #fff !important;
       }
+    </style>
+    <style>
+      ${bpmnEnvelopeCss}
     </style>
 
     <meta charset="UTF-8" />

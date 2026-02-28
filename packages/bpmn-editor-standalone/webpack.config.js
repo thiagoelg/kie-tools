@@ -54,6 +54,10 @@ module.exports = (webpackEnv) =>
           test: /envelope\.js$/,
           type: "asset/source",
         },
+        {
+          test: /envelope\.css$/,
+          type: "asset/source",
+        },
       ],
     },
     optimization: {

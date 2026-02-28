@@ -18,7 +18,7 @@
  */
 
 import * as React from "react";
-import OptimizeIcon from "@patternfly/react-icons/dist/js/icons/optimize-icon";
+import OptimizeIcon from "@patternfly/react-icons/dist/esm/icons/optimize-icon";
 import { useDmnEditorStoreApi } from "../store/StoreContext";
 import { getAutoLayoutedInfo } from "./autoLayoutInfo";
 import { useExternalModels } from "../includedModels/DmnEditorDependenciesContext";

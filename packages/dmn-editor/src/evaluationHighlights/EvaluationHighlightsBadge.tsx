@@ -19,8 +19,9 @@
 
 import * as React from "react";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
-import { Label } from "@patternfly/react-core/dist/js/components/Label";
-import { OffIcon, OnIcon } from "@patternfly/react-icons/dist/js/icons";
+import { Label } from "@patternfly/react-core/dist/esm/components/Label";
+import { OffIcon } from "@patternfly/react-icons/dist/esm/icons/off-icon";
+import { OnIcon } from "@patternfly/react-icons/dist/esm/icons/on-icon";
 import { useDmnEditorI18n } from "../i18n";
 
 export function EvaluationHighlightsBadge() {

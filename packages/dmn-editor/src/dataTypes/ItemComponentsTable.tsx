@@ -18,27 +18,27 @@
  */
 
 import { DmnBuiltInDataType, generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { Switch } from "@patternfly/react-core/dist/js/components/Switch";
-import { CopyIcon } from "@patternfly/react-icons/dist/js/icons/copy-icon";
-import { CutIcon } from "@patternfly/react-icons/dist/js/icons/cut-icon";
-import { PasteIcon } from "@patternfly/react-icons/dist/js/icons/paste-icon";
-import { PlusCircleIcon } from "@patternfly/react-icons/dist/js/icons/plus-circle-icon";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { Switch } from "@patternfly/react-core/dist/esm/components/Switch";
+import { CopyIcon } from "@patternfly/react-icons/dist/esm/icons/copy-icon";
+import { CutIcon } from "@patternfly/react-icons/dist/esm/icons/cut-icon";
+import { PasteIcon } from "@patternfly/react-icons/dist/esm/icons/paste-icon";
+import { PlusCircleIcon } from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { TypeRefSelector } from "./TypeRefSelector";
 import { Dropdown, DropdownItem, DropdownSeparator, KebabToggle } from "@patternfly/react-core/deprecated";
-import { ImportIcon } from "@patternfly/react-icons/dist/js/icons/import-icon";
-import { AngleDownIcon } from "@patternfly/react-icons/dist/js/icons/angle-down-icon";
-import { AngleRightIcon } from "@patternfly/react-icons/dist/js/icons/angle-right-icon";
-import { EyeIcon } from "@patternfly/react-icons/dist/js/icons/eye-icon";
-import { TrashIcon } from "@patternfly/react-icons/dist/js/icons/trash-icon";
+import { ImportIcon } from "@patternfly/react-icons/dist/esm/icons/import-icon";
+import { AngleDownIcon } from "@patternfly/react-icons/dist/esm/icons/angle-down-icon";
+import { AngleRightIcon } from "@patternfly/react-icons/dist/esm/icons/angle-right-icon";
+import { EyeIcon } from "@patternfly/react-icons/dist/esm/icons/eye-icon";
+import { TrashIcon } from "@patternfly/react-icons/dist/esm/icons/trash-icon";
 import { AddItemComponent, DataType, DataTypeIndex, EditItemDefinition } from "./DataTypes";
 import { DataTypeName } from "./DataTypeName";
 import { canHaveConstraints, getNewItemDefinition, isStruct } from "./DataTypeSpec";
-import { Flex, FlexItem } from "@patternfly/react-core/dist/js/layouts/Flex";
-import { Title } from "@patternfly/react-core/dist/js/components/Title";
+import { Flex, FlexItem } from "@patternfly/react-core/dist/esm/layouts/Flex";
+import { Title } from "@patternfly/react-core/dist/esm/components/Title";
 import { UniqueNameIndex } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/Dmn16Spec";
 import {
   buildClipboardFromDataType,

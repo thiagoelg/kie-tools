@@ -22,6 +22,7 @@ const common = require("@kie-tools-core/webpack-base/webpack.common.config");
 const path = require("path");
 const patternflyBase = require("@kie-tools-core/patternfly-base");
 const { ProvidePlugin } = require("webpack");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = (webpackEnv) =>
   merge(common(webpackEnv), {
@@ -38,6 +39,8 @@ module.exports = (webpackEnv) =>
         process: require.resolve("process/browser.js"),
         Buffer: ["buffer", "Buffer"],
       }),
+      new patternflyBase.plugins.MiniCssExtractPlugin(),
+      // new BundleAnalyzerPlugin(),
     ],
     module: {
       rules: [

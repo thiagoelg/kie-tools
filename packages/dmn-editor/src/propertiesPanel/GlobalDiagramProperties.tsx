@@ -18,18 +18,18 @@
  */
 
 import * as React from "react";
-import { ClipboardCopy } from "@patternfly/react-core/dist/js/components/ClipboardCopy";
-import { Form, FormSection, FormGroup } from "@patternfly/react-core/dist/js/components/Form";
-import { TextArea } from "@patternfly/react-core/dist/js/components/TextArea";
-import { DataSourceIcon } from "@patternfly/react-icons/dist/js/icons/data-source-icon";
+import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy";
+import { Form, FormSection, FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { TextArea } from "@patternfly/react-core/dist/esm/components/TextArea";
+import { DataSourceIcon } from "@patternfly/react-icons/dist/esm/icons/data-source-icon";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { InlineFeelNameInput } from "../feel/InlineFeelNameInput";
 import { useState, useMemo, useCallback } from "react";
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/js/components/Modal";
-import { SyncAltIcon } from "@patternfly/react-icons/dist/js/icons/sync-alt-icon";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
+import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import { SyncAltIcon } from "@patternfly/react-icons/dist/esm/icons/sync-alt-icon";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
 import { generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
-import { TimesIcon } from "@patternfly/react-icons/dist/js/icons/times-icon";
+import { TimesIcon } from "@patternfly/react-icons/dist/esm/icons/times-icon";
 import { PropertiesPanelHeader } from "./PropertiesPanelHeader";
 import { useSettings } from "../settings/DmnEditorSettingsContext";
 import { useDmnEditorI18n } from "../i18n";

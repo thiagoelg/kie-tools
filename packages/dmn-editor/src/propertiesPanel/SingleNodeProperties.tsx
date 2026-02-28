@@ -20,7 +20,7 @@
 import * as React from "react";
 import { useState } from "react";
 
-import { Form, FormSection } from "@patternfly/react-core/dist/js/components/Form";
+import { Form, FormSection } from "@patternfly/react-core/dist/esm/components/Form";
 import { FontOptions } from "./FontOptions";
 import { ShapeOptions } from "./ShapeOptions";
 import { InputDataProperties } from "./InputDataProperties";
@@ -45,8 +45,8 @@ import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normali
 import { getNodeTypeFromDmnObject } from "../diagram/maths/DmnMaths";
 import { NodeIcon } from "../icons/Icons";
 import { GroupProperties } from "./GroupProperties";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { TimesIcon } from "@patternfly/react-icons/dist/js/icons/times-icon";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { TimesIcon } from "@patternfly/react-icons/dist/esm/icons/times-icon";
 import { PropertiesPanelHeader } from "./PropertiesPanelHeader";
 import { UnknownProperties } from "./UnknownProperties";
 import { useExternalModels } from "../includedModels/DmnEditorDependenciesContext";

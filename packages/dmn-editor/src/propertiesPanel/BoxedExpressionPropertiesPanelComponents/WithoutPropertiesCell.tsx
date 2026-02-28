@@ -18,14 +18,14 @@
  */
 
 import * as React from "react";
-import { Text, TextContent } from "@patternfly/react-core/dist/js/components/Text";
+import { Text, TextContent } from "@patternfly/react-core/dist/esm/components/Text";
 import {
   EmptyState,
   EmptyStateIcon,
   EmptyStateHeader,
   EmptyStateFooter,
-} from "@patternfly/react-core/dist/js/components/EmptyState";
-import CubeIcon from "@patternfly/react-icons/dist/js/icons/cube-icon";
+} from "@patternfly/react-core/dist/esm/components/EmptyState";
+import CubeIcon from "@patternfly/react-icons/dist/esm/icons/cube-icon";
 import { useDmnEditorI18n } from "../../i18n";
 
 export function WithoutPropertiesCell() {

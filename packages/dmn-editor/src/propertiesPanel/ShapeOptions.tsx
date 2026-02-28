@@ -19,9 +19,9 @@
 
 import * as React from "react";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { FormGroup, FormSection } from "@patternfly/react-core/dist/js/components/Form";
-import { TextInput } from "@patternfly/react-core/dist/js/components/TextInput";
-import { CubeIcon } from "@patternfly/react-icons/dist/js/icons/cube-icon";
+import { FormGroup, FormSection } from "@patternfly/react-core/dist/esm/components/Form";
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
+import { CubeIcon } from "@patternfly/react-icons/dist/esm/icons/cube-icon";
 import { PropertiesPanelHeader } from "./PropertiesPanelHeader";
 import { DC__Bounds } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_6/ts-gen/types";
 import { DMN_LATEST__DMNShape } from "@kie-tools/dmn-marshaller";
@@ -29,21 +29,21 @@ import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normali
 import { State } from "../store/Store";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
 import { addOrGetDrd } from "../mutations/addOrGetDrd";
-import { ArrowsAltVIcon } from "@patternfly/react-icons/dist/js/icons/arrows-alt-v-icon";
-import { ArrowsAltHIcon } from "@patternfly/react-icons/dist/js/icons/arrows-alt-h-icon";
-import { Tooltip } from "@patternfly/react-core/dist/js/components/Tooltip";
-import UndoAltIcon from "@patternfly/react-icons/dist/js/icons/undo-alt-icon";
+import { ArrowsAltVIcon } from "@patternfly/react-icons/dist/esm/icons/arrows-alt-v-icon";
+import { ArrowsAltHIcon } from "@patternfly/react-icons/dist/esm/icons/arrows-alt-h-icon";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
+import UndoAltIcon from "@patternfly/react-icons/dist/esm/icons/undo-alt-icon";
 import { ColorPicker } from "./ColorPicker";
-import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/js/components/ToggleGroup";
+import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/esm/components/ToggleGroup";
 import "./ShapeOptions.css";
 import { useExternalModels } from "../includedModels/DmnEditorDependenciesContext";
 import { MIN_NODE_SIZES } from "../diagram/nodes/DefaultSizes";
 import { NodeType } from "../diagram/connections/graphStructure";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
 import { DC__Dimension } from "@kie-tools/dmn-marshaller/dist/schemas/dmn-1_2/ts-gen/types";
 import { generateUuid } from "@kie-tools/boxed-expression-component/dist/api";
 import { useSettings } from "../settings/DmnEditorSettingsContext";
-import { Icon } from "@patternfly/react-core/dist/js/components/Icon";
+import { Icon } from "@patternfly/react-core/dist/esm/components/Icon";
 import { useDmnEditorI18n } from "../i18n";
 
 const DEFAULT_FILL_COLOR = { "@_blue": 255, "@_green": 255, "@_red": 255 };

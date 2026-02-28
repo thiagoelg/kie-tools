@@ -20,10 +20,10 @@
 import * as React from "react";
 import { DMN_LATEST__tGroup } from "@kie-tools/dmn-marshaller";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
-import { ClipboardCopy } from "@patternfly/react-core/dist/js/components/ClipboardCopy";
-import { FormGroup } from "@patternfly/react-core/dist/js/components/Form";
-import { TextArea } from "@patternfly/react-core/dist/js/components/TextArea";
-import { TextInput } from "@patternfly/react-core/dist/js/components/TextInput";
+import { ClipboardCopy } from "@patternfly/react-core/dist/esm/components/ClipboardCopy";
+import { FormGroup } from "@patternfly/react-core/dist/esm/components/Form";
+import { TextArea } from "@patternfly/react-core/dist/esm/components/TextArea";
+import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput";
 import { useDmnEditorStoreApi } from "../store/StoreContext";
 import { renameGroupNode } from "../mutations/renameNode";
 import { useSettings } from "../settings/DmnEditorSettingsContext";

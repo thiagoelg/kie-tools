@@ -17,8 +17,8 @@
  * under the License.
  */
 
-import { Modal, ModalVariant } from "@patternfly/react-core/dist/js/components/Modal";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
+import { Modal, ModalVariant } from "@patternfly/react-core/dist/esm/components/Modal";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
 import { Normalized } from "@kie-tools/dmn-marshaller/dist/normalization/normalize";
 import * as React from "react";
 import { DMN_LATEST__tDefinitions } from "@kie-tools/dmn-marshaller";

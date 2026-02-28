@@ -20,9 +20,9 @@
 import * as React from "react";
 import { useMemo, useCallback } from "react";
 import { ConstraintsExpression } from "./ConstraintsExpression";
-import { Tooltip } from "@patternfly/react-core/dist/js/components/Tooltip";
-import { HelperText, HelperTextItem } from "@patternfly/react-core/dist/js/components/HelperText";
-import { Label } from "@patternfly/react-core/dist/js/components/Label";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip";
+import { HelperText, HelperTextItem } from "@patternfly/react-core/dist/esm/components/HelperText";
+import { Label } from "@patternfly/react-core/dist/esm/components/Label";
 import { ConstraintComponentProps } from "./Constraints";
 import { DmnBuiltInDataType } from "@kie-tools/boxed-expression-component/dist/api";
 import { useDmnEditorI18n } from "../i18n";

@@ -22,13 +22,13 @@ import { Select, SelectGroup, SelectOption, SelectVariant } from "@patternfly/re
 import * as React from "react";
 import { useCallback, useRef, useState, useMemo } from "react";
 import { TypeRefLabel } from "./TypeRefLabel";
-import { ArrowUpIcon } from "@patternfly/react-icons/dist/js/icons/arrow-up-icon";
+import { ArrowUpIcon } from "@patternfly/react-icons/dist/esm/icons/arrow-up-icon";
 import { DmnEditorTab } from "../store/Store";
 import { useDmnEditorStore, useDmnEditorStoreApi } from "../store/StoreContext";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
 import { DataType } from "./DataTypes";
 import { builtInFeelTypeNames, builtInFeelTypes } from "./BuiltInFeelTypes";
-import { Flex } from "@patternfly/react-core/dist/js/layouts/Flex";
+import { Flex } from "@patternfly/react-core/dist/esm/layouts/Flex";
 import { useInViewSelect } from "../responsiveness/useInViewSelect";
 import { useExternalModels } from "../includedModels/DmnEditorDependenciesContext";
 import { useDmnEditorI18n } from "../i18n";

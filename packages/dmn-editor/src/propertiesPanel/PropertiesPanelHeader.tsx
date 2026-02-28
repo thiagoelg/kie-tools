@@ -20,10 +20,10 @@
 import * as React from "react";
 
 import { useMemo } from "react";
-import { Button, ButtonVariant } from "@patternfly/react-core/dist/js/components/Button";
-import { Truncate } from "@patternfly/react-core/dist/js/components/Truncate";
-import { AngleDownIcon } from "@patternfly/react-icons/dist/js/icons/angle-down-icon";
-import { AngleRightIcon } from "@patternfly/react-icons/dist/js/icons/angle-right-icon";
+import { Button, ButtonVariant } from "@patternfly/react-core/dist/esm/components/Button";
+import { Truncate } from "@patternfly/react-core/dist/esm/components/Truncate";
+import { AngleDownIcon } from "@patternfly/react-icons/dist/esm/icons/angle-down-icon";
+import { AngleRightIcon } from "@patternfly/react-icons/dist/esm/icons/angle-right-icon";
 import "./PropertiesPanelHeader.css";
 import { useDmnEditorI18n } from "../i18n";
 
