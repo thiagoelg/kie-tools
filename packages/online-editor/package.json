@@ -99,7 +99,7 @@
     "@kie-tools/playwright-base": "workspace:*",
     "@kie-tools/root-env": "workspace:*",
     "@kie-tools/tsconfig": "workspace:*",
-    "@playwright/test": "^1.45.2",
+    "@playwright/test": "^1.58.2",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^12.1.5",
     "@types/jest": "^29.5.12",

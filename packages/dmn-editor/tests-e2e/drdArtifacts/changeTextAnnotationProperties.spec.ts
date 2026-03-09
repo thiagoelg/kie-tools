@@ -71,7 +71,7 @@ test.describe("Change Properties - Text Annotation", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
 
     await expect(diagram.get()).toHaveScreenshot("change-text-annotation-font.png");
@@ -91,7 +91,7 @@ test.describe("Change Properties - Text Annotation", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
     await nodes.select({ name: DefaultNodeName.TEXT_ANNOTATION });
     await textAnnotationPropertiesPanel.resetFont();

@@ -36,7 +36,7 @@ export class Diagram {
   }
 
   public async resetFocus() {
-    return this.get().click({ position: { x: 0, y: 0 } });
+    return this.get().click({ position: { x: 1, y: 1 } });
   }
 
   public async select(args: { startPosition: { x: number; y: number }; endPosition: { x: number; y: number } }) {

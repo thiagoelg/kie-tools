@@ -86,7 +86,7 @@ test.describe("Change Properties - Input Data", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
 
     await expect(diagram.get()).toHaveScreenshot("change-input-data-font.png");
@@ -106,7 +106,7 @@ test.describe("Change Properties - Input Data", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
     await nodes.select({ name: DefaultNodeName.INPUT_DATA });
     await inputDataPropertiesPanel.resetFont();

@@ -106,7 +106,7 @@ test.describe("Change Properties - Decision", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
 
     await expect(diagram.get()).toHaveScreenshot("change-decision-font.png");
@@ -126,7 +126,7 @@ test.describe("Change Properties - Decision", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
     await nodes.select({ name: DefaultNodeName.DECISION });
     await decisionPropertiesPanel.resetFont();

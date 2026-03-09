@@ -85,7 +85,7 @@ test.describe("Change Properties - BKM", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
 
     await expect(diagram.get()).toHaveScreenshot("change-bkm-font.png");
@@ -105,7 +105,7 @@ test.describe("Change Properties - BKM", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
     await nodes.select({ name: DefaultNodeName.BKM });
     await bkmPropertiesPanel.resetFont();

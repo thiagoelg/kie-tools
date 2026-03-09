@@ -1288,8 +1288,8 @@ importers:
         specifier: ^1.24.0
         version: 1.26.1(@types/react@17.0.21)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@storybook/addon-links':
         specifier: ^7.3.2
         version: 7.6.13(react@17.0.2)
@@ -1508,8 +1508,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@storybook/addon-links':
         specifier: ^7.3.2
         version: 7.6.13(react@17.0.2)
@@ -1758,8 +1758,8 @@ importers:
         specifier: ^5.4.1
         version: 5.4.1(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@storybook/addon-links':
         specifier: ^7.3.2
         version: 7.6.13(react@17.0.2)
@@ -4155,8 +4155,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@storybook/addon-links':
         specifier: ^7.3.2
         version: 7.6.13(react@17.0.2)
@@ -4417,8 +4417,8 @@ importers:
         specifier: ^5.4.1
         version: 5.4.1(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@prettier/plugin-xml':
         specifier: ^3.4.1
         version: 3.4.1(prettier@3.3.2)
@@ -7634,8 +7634,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@testing-library/jest-dom':
         specifier: ^6.4.6
         version: 6.4.6(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@24.10.11)(node-notifier@8.0.2)(ts-node@10.9.2(@swc/core@1.3.92)(@types/node@24.10.11)(typescript@5.9.3)))
@@ -7803,8 +7803,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@types/yargs':
         specifier: ^17.0.35
         version: 17.0.35
@@ -9772,8 +9772,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@storybook/addon-links':
         specifier: ^7.3.2
         version: 7.6.13(react@17.0.2)
@@ -11015,8 +11015,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       '@playwright/test':
-        specifier: ^1.45.2
-        version: 1.45.2
+        specifier: ^1.58.2
+        version: 1.58.2
       '@storybook/addon-links':
         specifier: ^7.3.2
         version: 7.6.13(react@17.0.2)
@@ -17431,8 +17431,8 @@ packages:
     resolution: {integrity: sha512-ANaU19rQbK+lmmXhvBQQIZ6VHjtMxX99NBPeVBI5G7W/CI35UtWIlnmc+DEknbJd0fBWOhtWAzIBhFpDVgtWpA==}
     engines: {node: '>=18'}
 
-  '@playwright/test@1.45.2':
-    resolution: {integrity: sha512-JxG9eq92ET75EbVi3s+4sYbcG7q72ECeZNbdBlaMkGcNbiDQ4cAi8U2QP5oKkOx+1gpaiL1LDStmzCaEM1Z6fQ==}
+  '@playwright/test@1.58.2':
+    resolution: {integrity: sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -26753,23 +26753,23 @@ packages:
     resolution: {integrity: sha512-Dwtln5x/32/S16DKPzR7SXEz9JtXommoAgq1CPym7Ahe4svwY5eVKj5+blhAwU9hp8wIsKmskxZkIUGfmm6ubA==}
     engines: {node: '>=14.6'}
 
-  playwright-core@1.45.2:
-    resolution: {integrity: sha512-ha175tAWb0dTK0X4orvBIqi3jGEt701SMxMhyujxNrgd8K0Uy5wMSwwcQHtyB4om7INUkfndx02XnQ2p6dvLDw==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   playwright-core@1.51.0:
     resolution: {integrity: sha512-x47yPE3Zwhlil7wlNU/iktF7t2r/URR3VLbH6EknJd/04Qc/PSJ0EY3CMXipmglLG+zyRxW6HNo2EGbKLHPWMg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.45.2:
-    resolution: {integrity: sha512-ReywF2t/0teRvNBpfIgh5e4wnrI/8Su8ssdo5XsQKpjxJj+jspm00jSoz9BTg91TT0c9HRjXO7LBNVrgYj9X0g==}
+  playwright-core@1.58.2:
+    resolution: {integrity: sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==}
     engines: {node: '>=18'}
     hasBin: true
 
   playwright@1.51.0:
     resolution: {integrity: sha512-442pTfGM0xxfCYxuBa/Pu6B2OqxqqaYq39JS8QDMGThUvIOCd6s0ANDog3uwA0cHavVlnTQzGCN7Id2YekDSXA==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.58.2:
+    resolution: {integrity: sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -34397,9 +34397,9 @@ snapshots:
     dependencies:
       playwright-core: 1.51.0
 
-  '@playwright/test@1.45.2':
+  '@playwright/test@1.58.2':
     dependencies:
-      playwright: 1.45.2
+      playwright: 1.58.2
 
   '@pmmmwh/react-refresh-webpack-plugin@0.5.11(@types/webpack@4.41.39)(react-refresh@0.14.0)(type-fest@4.41.0)(webpack-dev-server@4.15.2(webpack@5.104.1(@swc/core@1.3.92)(esbuild@0.18.20)))(webpack-hot-middleware@2.25.4)(webpack@5.104.1(@swc/core@1.3.92)(esbuild@0.18.20))':
     dependencies:
@@ -46926,19 +46926,19 @@ snapshots:
       '@pnpm/resolve-workspace-range': 3.0.0
       ramda: '@pnpm/ramda@0.28.1'
 
-  playwright-core@1.45.2: {}
-
   playwright-core@1.51.0: {}
 
-  playwright@1.45.2:
-    dependencies:
-      playwright-core: 1.45.2
-    optionalDependencies:
-      fsevents: 2.3.2
+  playwright-core@1.58.2: {}
 
   playwright@1.51.0:
     dependencies:
       playwright-core: 1.51.0
+    optionalDependencies:
+      fsevents: 2.3.2
+
+  playwright@1.58.2:
+    dependencies:
+      playwright-core: 1.58.2
     optionalDependencies:
       fsevents: 2.3.2
 

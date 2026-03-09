@@ -60,7 +60,7 @@ test.describe("Change Properties - Group", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
 
     await expect(diagram.get()).toHaveScreenshot("change-group-font.png");
@@ -80,7 +80,7 @@ test.describe("Change Properties - Group", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
     await nodes.select({ name: DefaultNodeName.GROUP, position: NodePosition.TOP });
     await groupPropertiesPanel.resetFont();

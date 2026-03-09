@@ -93,7 +93,7 @@ test.describe("Change Properties - Decision Service", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
 
     await expect(diagram.get()).toHaveScreenshot("change-decision-service-font.png");
@@ -113,7 +113,7 @@ test.describe("Change Properties - Decision Service", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
     await nodes.select({ name: DefaultNodeName.DECISION_SERVICE, position: NodePosition.TOP });
     await decisionServicePropertiesPanel.resetFont();

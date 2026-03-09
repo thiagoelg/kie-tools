@@ -32,7 +32,7 @@
     "test-e2e:container:run": "start-server-and-test 'pnpm start' http://localhost:$(build-env dmnEditor.storybook.port)/iframe.html 'playwright-base-container run --additional-env=KIE_TOOLS_PLAYWRIGHT_CONTAINER__PORT=$(build-env dmnEditor.storybook.port) --container-workdir=incubator-kie-tools/packages/dmn-editor --container-name=kie-tools-playwright-containerization-dmn-editor'",
     "test-e2e:container:shell": "start-server-and-test 'pnpm start' http://localhost:$(build-env dmnEditor.storybook.port)/iframe.html 'playwright-base-container shell --additional-env=KIE_TOOLS_PLAYWRIGHT_CONTAINER__PORT=$(build-env dmnEditor.storybook.port) --container-workdir=incubator-kie-tools/packages/dmn-editor --container-name=kie-tools-playwright-containerization-dmn-editor'",
     "test-e2e:open": "pnpm exec playwright show-report dist-tests-e2e/reports",
-    "test-e2e:run": "pnpm exec playwright test"
+    "test-e2e:run": "pnpm exec playwright test -u"
   },
   "dependencies": {
     "@kie-tools-core/i18n": "workspace:*",
@@ -77,7 +77,7 @@
     "@kie-tools/root-env": "workspace:*",
     "@kie-tools/storybook-base": "workspace:*",
     "@kie-tools/tsconfig": "workspace:*",
-    "@playwright/test": "^1.45.2",
+    "@playwright/test": "^1.58.2",
     "@storybook/addon-links": "^7.3.2",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
     "@storybook/blocks": "^7.3.2",

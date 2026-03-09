@@ -99,7 +99,7 @@ test.describe("Change Properties - Knowledge Source", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
 
     await expect(diagram.get()).toHaveScreenshot("change-knowledge-source-font.png");
@@ -119,7 +119,7 @@ test.describe("Change Properties - Knowledge Source", () => {
       underline: true,
       striketrough: true,
       color: "#f12200",
-      fontFamily: "Verdana",
+      fontFamily: "Courier New",
     });
     await nodes.select({ name: DefaultNodeName.KNOWLEDGE_SOURCE });
     await knowledgeSourcePropertiesPanel.resetFont();
