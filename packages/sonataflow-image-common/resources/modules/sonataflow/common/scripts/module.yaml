@@ -18,7 +18,7 @@
 #
 schema_version: 1
 name: org.kie.sonataflow.common.scripts
-version: "main"
+version: "10.2.x"
 description: "SonataFlow images common scripts"
 
 envs:
