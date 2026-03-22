@@ -884,6 +884,7 @@ def kogitoServerlessOperatorBuildJob() {
             booleanParam(name: 'DRY_RUN', value: "${params.DRY_RUN}"),
             string(name: 'BASE_REF', value: "${params.BASE_REF}"),
             string(name: 'RELEASE_VERSION', value: "${params.RELEASE_VERSION}"),
+            string(name: 'UPLOAD_ASSET_URL', value: "${params.UPLOAD_ASSET_URL}"),
             string(name: 'RELEASE_CANDIDATE_VERSION', value: "${params.RELEASE_CANDIDATE_VERSION}"),
             string(name: 'PIPELINE_PATH', value: "${params.PIPELINE_PATH}")
         ]
@@ -1040,7 +1041,7 @@ def kieSandboxImageBuildJob() {
 }
 
 def kieSandboxAcceleratorQuarkusBuildJob() {
-    env.KIE_SANDBOX_IMAGE_JOB_RESULT = build(
+    env.KIE_SANDBOX_ACCELERATOR_QUARKUS_JOB_RESULT = build(
         job: "KIE/kie-tools/${params.PIPELINE_PATH}/individual-release-artifacts-jobs/kie-sandbox-accelerator-quarkus",
         parameters: [
             booleanParam(name: 'DRY_RUN', value: "${params.DRY_RUN}"),
@@ -1050,7 +1051,6 @@ def kieSandboxAcceleratorQuarkusBuildJob() {
             string(name: 'PIPELINE_PATH', value: "${params.PIPELINE_PATH}")
         ]
     ).result
-    env.KIE_SANDBOX_URL = openShiftUtils.getAppRoute("${env.OPENSHIFT_NAMESPACE}", 'kie-sandbox', "${pipelineVars.openshiftCredentialsId}")
 }
 
 def kieSandboxHelmChartBuildJob() {
