@@ -220,24 +220,13 @@ pipeline {
                     }
                 }
 
-                stage('JBPM Quarkus Dev UI') {
+                stage('JBPM Sonataflow Quarkus Dev UI') {
                     when {
-                        expression { env.JBPM_QUARKUS_DEVUI == 'true' }
+                        expression { env.JBPM_QUARKUS_DEVUI == 'true' || env.SONATAFLOW_QUARKUS_DEVUI == 'true' }
                     }
                     steps {
                         script {
-                            jbpmQuarkusDevuiBuildJob()
-                        }
-                    }
-                }
-
-                stage('Sonataflow Quarkus Dev UI') {
-                    when {
-                        expression { env.SONATAFLOW_QUARKUS_DEVUI == 'true' }
-                    }
-                    steps {
-                        script {
-                            sonataflowQuarkusDevuiBuildJob()
+                            jbpmSonataflowQuarkusDevuiBuildJob()
                         }
                     }
                 }
@@ -891,9 +880,9 @@ def kogitoServerlessOperatorBuildJob() {
     ).result
 }
 
-def jbpmQuarkusDevuiBuildJob() {
-    env.JBPM_QUARKUS_DEVUI_JOB_RESULT = build(
-        job: "KIE/kie-tools/${params.PIPELINE_PATH}/individual-release-artifacts-jobs/jbpm-quarkus-devui",
+def jbpmSonataflowQuarkusDevuiBuildJob() {
+    def result = build(
+        job: "KIE/kie-tools/${params.PIPELINE_PATH}/individual-release-artifacts-jobs/jbpm-sonataflow-quarkus-devui",
         parameters: [
             booleanParam(name: 'DRY_RUN', value: "${params.DRY_RUN}"),
             string(name: 'BASE_REF', value: "${params.BASE_REF}"),
@@ -902,19 +891,8 @@ def jbpmQuarkusDevuiBuildJob() {
             string(name: 'RELEASE_CANDIDATE_VERSION', value: "${params.RELEASE_CANDIDATE_VERSION}")
         ]
     ).result
-}
-
-def sonataflowQuarkusDevuiBuildJob() {
-    env.SONATAFLOW_QUARKUS_DEVUI_JOB_RESULT = build(
-        job: "KIE/kie-tools/${params.PIPELINE_PATH}/individual-release-artifacts-jobs/sonataflow-quarkus-devui",
-        parameters: [
-            booleanParam(name: 'DRY_RUN', value: "${params.DRY_RUN}"),
-            string(name: 'BASE_REF', value: "${params.BASE_REF}"),
-            string(name: 'RELEASE_VERSION', value: "${params.RELEASE_VERSION}"),
-            string(name: 'RELEASE_CANDIDATE_VERSION', value: "${params.RELEASE_CANDIDATE_VERSION}"),
-            string(name: 'PIPELINE_PATH', value: "${params.PIPELINE_PATH}")
-        ]
-    ).result
+    env.JBPM_QUARKUS_DEVUI_JOB_RESULT = result
+    env.SONATAFLOW_QUARKUS_DEVUI_JOB_RESULT = result
 }
 
 def sonataflowManagementConsoleBuildJob() {
