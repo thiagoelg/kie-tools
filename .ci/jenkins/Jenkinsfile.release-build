@@ -986,7 +986,9 @@ def kieSandboxExtendedServicesImageBuildJob() {
             string(name: 'PIPELINE_PATH', value: "${params.PIPELINE_PATH}")
         ]
     ).result
-    env.KIE_SANDBOX_EXTENDED_SERVICES_URL = openShiftUtils.getAppRoute("${env.OPENSHIFT_NAMESPACE}", 'kie-sandbox-extended-services', "${pipelineVars.openshiftCredentialsId}")
+    if (params.RELEASE_CANDIDATE_VERSION == '') {
+        env.KIE_SANDBOX_EXTENDED_SERVICES_URL = openShiftUtils.getAppRoute("${env.OPENSHIFT_NAMESPACE}", 'kie-sandbox-extended-services', "${pipelineVars.openshiftCredentialsId}")
+    }
 }
 
 def corsProxyImageBuildJob() {
@@ -1000,7 +1002,9 @@ def corsProxyImageBuildJob() {
             string(name: 'PIPELINE_PATH', value: "${params.PIPELINE_PATH}")
         ]
     ).result
-    env.KIE_SANDBOX_CORS_PROXY_URL = openShiftUtils.getAppRoute("${env.OPENSHIFT_NAMESPACE}", 'cors-proxy', "${pipelineVars.openshiftCredentialsId}")
+    if (params.RELEASE_CANDIDATE_VERSION == '') {
+        env.KIE_SANDBOX_CORS_PROXY_URL = openShiftUtils.getAppRoute("${env.OPENSHIFT_NAMESPACE}", 'cors-proxy', "${pipelineVars.openshiftCredentialsId}")
+    }
 }
 
 def kieSandboxImageBuildJob() {
@@ -1016,7 +1020,9 @@ def kieSandboxImageBuildJob() {
             string(name: 'PIPELINE_PATH', value: "${params.PIPELINE_PATH}")
         ]
     ).result
-    env.KIE_SANDBOX_URL = openShiftUtils.getAppRoute("${env.OPENSHIFT_NAMESPACE}", 'kie-sandbox', "${pipelineVars.openshiftCredentialsId}")
+    if (params.RELEASE_CANDIDATE_VERSION == '') {
+        env.KIE_SANDBOX_URL = openShiftUtils.getAppRoute("${env.OPENSHIFT_NAMESPACE}", 'kie-sandbox', "${pipelineVars.openshiftCredentialsId}")
+    }
 }
 
 def kieSandboxAcceleratorQuarkusBuildJob() {
