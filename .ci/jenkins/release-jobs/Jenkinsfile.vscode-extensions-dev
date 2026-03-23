@@ -31,6 +31,7 @@ pipeline {
         string(description: 'Release Version', name: 'RELEASE_VERSION', defaultValue: '0.0.0')
         string(description: 'Base Ref', name: 'BASE_REF')
         string(description: 'Upload Asset Url', name: 'UPLOAD_ASSET_URL')
+        string(description: 'Release Candidate Version', name: 'RELEASE_CANDIDATE_VERSION', defaultValue: '')
         string(name: 'PIPELINE_PATH', description: 'Path to run the pipeline')
     }
 
@@ -40,8 +41,10 @@ pipeline {
         KIE_TOOLS_BUILD__runEndToEndTests = 'false'
         KIE_TOOLS_BUILD__buildContainerImages = 'true'
 
+        RELEASE_ARTIFACTS_DIR = "${WORKSPACE}/release-artifacts"
+
         PNPM_FILTER_STRING = '-F kie-editors-dev-vscode-extension...'
-        
+
         MAVEN_ARGS = "-B -s ${WORKSPACE}/kie-settings.xml -Dmaven.repo.local=${WORKSPACE}/.maven"
     }
 
@@ -52,6 +55,7 @@ pipeline {
                     pipelineVars = load '.ci/jenkins/shared-scripts/pipelineVars.groovy'
                     buildUtils = load '.ci/jenkins/shared-scripts/buildUtils.groovy'
                     githubUtils = load '.ci/jenkins/shared-scripts/githubUtils.groovy'
+                    releaseUtils = load '.ci/jenkins/shared-scripts/releaseUtils.groovy'
                 }
             }
         }
@@ -128,7 +132,7 @@ pipeline {
 
         stage('Upload VS Code Extension (dev)') {
             when {
-                expression { !params.DRY_RUN }
+                expression { !params.DRY_RUN && params.RELEASE_CANDIDATE_VERSION == '' }
             }
             steps {
                 dir('kie-tools') {
@@ -141,6 +145,52 @@ pipeline {
                             "${pipelineVars.kieToolsBotGithubTokenCredentialsId}"
                         )
                     }
+                }
+            }
+        }
+
+        stage('Setup release candidate artifacts') {
+            when {
+                expression { !params.DRY_RUN && params.RELEASE_CANDIDATE_VERSION != '' }
+            }
+            steps {
+                script {
+                    env.KIE_EDITORS_DEV_VSCODE_EXTENSION_RELEASE_FILE = "apache-kie-${params.RELEASE_VERSION}-incubating-kie-editors-dev-vscode-extension.vsix"
+
+                    sh """#!/bin/bash -el
+                    mkdir ${env.RELEASE_ARTIFACTS_DIR}
+                    cp "kie-tools/packages/kie-editors-dev-vscode-extension/dist/kie_editors_dev_vscode_extension_${params.RELEASE_VERSION}.vsix" "${env.RELEASE_ARTIFACTS_DIR}/${env.KIE_EDITORS_DEV_VSCODE_EXTENSION_RELEASE_FILE}"
+                    """.trim()
+                }
+            }
+        }
+
+        stage('Sign artifacts for Apache release') {
+            when {
+                expression { !params.DRY_RUN && params.RELEASE_CANDIDATE_VERSION != '' }
+            }
+            steps {
+                dir("${env.RELEASE_ARTIFACTS_DIR}") {
+                    script {
+                        releaseUtils.setupSigningKey("${pipelineVars.asfReleaseGPGKeyCredentialsId}")
+                        releaseUtils.signArtifact("${env.KIE_EDITORS_DEV_VSCODE_EXTENSION_RELEASE_FILE}")
+                    }
+                }
+            }
+        }
+
+        stage('Publish Release Candidate artifacts') {
+            when {
+                expression { !params.DRY_RUN && params.RELEASE_CANDIDATE_VERSION != '' }
+            }
+            steps {
+                script {
+                    releaseUtils.publishArtifacts(
+                        "${env.RELEASE_ARTIFACTS_DIR}",
+                        "${pipelineVars.asfReleaseStagingRepository}",
+                        "${params.RELEASE_CANDIDATE_VERSION}",
+                        "${pipelineVars.asfReleaseSVNStagingCredentialsId}"
+                    )
                 }
             }
         }

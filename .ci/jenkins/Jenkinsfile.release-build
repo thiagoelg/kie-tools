@@ -717,6 +717,7 @@ def vscodeExtensionsDevBuildJob() {
             string(name: 'BASE_REF', value: "${params.BASE_REF}"),
             string(name: 'RELEASE_VERSION', value: "${params.RELEASE_VERSION}"),
             string(name: 'UPLOAD_ASSET_URL', value: "${params.UPLOAD_ASSET_URL}"),
+            string(name: 'RELEASE_CANDIDATE_VERSION', value: "${params.RELEASE_CANDIDATE_VERSION}"),
             string(name: 'PIPELINE_PATH', value: "${params.PIPELINE_PATH}")
         ]
     ).result
