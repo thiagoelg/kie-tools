@@ -46,8 +46,17 @@ def publishArtifacts(String artifactsDir, String releaseRepository, String relea
         svn co --depth=empty ${releaseRepository}/${releaseVersion} svn-kie
         cp ${artifactsDir}/* svn-kie
         cd svn-kie
+        echo "=== Files to upload ==="
+        ls -lh .
         svn add . --force
-        svn ci --non-interactive --no-auth-cache --username ${ASF_USERNAME} --password '${ASF_PASSWORD}' -m "Apache KIE ${releaseVersion} artifacts"
+        svn ci --non-interactive --no-auth-cache --username ${ASF_USERNAME} --password '${ASF_PASSWORD}' -m "Apache KIE ${releaseVersion} artifacts" 2>&1 || {
+            echo "=== SVN commit failed. Exit code: \$? ==="
+            echo "=== SVN info ==="
+            svn info
+            echo "=== SVN status ==="
+            svn status
+            exit 1
+        }
         rm -rf svn-kie
         """.trim()
     }

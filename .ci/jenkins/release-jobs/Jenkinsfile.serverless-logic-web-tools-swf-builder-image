@@ -196,10 +196,14 @@ pipeline {
                     sh """#!/bin/bash -el
                     mkdir ${env.RELEASE_ARTIFACTS_DIR}
                     docker save "${env.SERVERLESS_LOGIC_WEB_TOOLS__swfBuilderImageRegistry}/${env.SERVERLESS_LOGIC_WEB_TOOLS__swfBuilderImageAccount}/${env.SERVERLESS_LOGIC_WEB_TOOLS__swfBuilderImageName}:${params.RELEASE_VERSION}" | gzip -9 > "${env.RELEASE_ARTIFACTS_DIR}/${env.RELEASE_IMAGE_TAR_FILE}"
-                    echo "=== Docker image size ==="
+                    echo "=== Docker image size (uncompressed) ==="
                     docker images "${env.SERVERLESS_LOGIC_WEB_TOOLS__swfBuilderImageRegistry}/${env.SERVERLESS_LOGIC_WEB_TOOLS__swfBuilderImageAccount}/${env.SERVERLESS_LOGIC_WEB_TOOLS__swfBuilderImageName}:${params.RELEASE_VERSION}"
-                    echo "=== Artifact file size ==="
-                    ls -lh "${env.RELEASE_ARTIFACTS_DIR}/${env.RELEASE_IMAGE_TAR_FILE}"
+                    echo "=== Artifact file sizes (exact bytes) ==="
+                    ls -l "${env.RELEASE_ARTIFACTS_DIR}/"
+                    echo "=== Artifact file sizes (human readable) ==="
+                    ls -lh "${env.RELEASE_ARTIFACTS_DIR}/"
+                    FILESIZE=\$(stat -c%s "${env.RELEASE_ARTIFACTS_DIR}/${env.RELEASE_IMAGE_TAR_FILE}")
+                    echo "=== tar.gz exact size: \${FILESIZE} bytes (\$(echo "scale=2; \${FILESIZE}/1024/1024" | bc) MB) ==="
                     """.trim()
                 }
             }
