@@ -58,6 +58,7 @@ pipeline {
         KOGITO_SWF_BUILDER_JOB_RESULT = 'SKIPPED'
         KOGITO_SWF_DEVMODE_JOB_RESULT = 'SKIPPED'
         KOGITO_SERVERLESS_OPERATOR_JOB_RESULT = 'SKIPPED'
+        SONATAFLOW_QUARKUS_DEVUI_JOB_RESULT = 'SKIPPED'
     }
 
     stages {
@@ -411,7 +412,7 @@ pipeline {
 
                         stage('Kn Plugin Workflow') {
                             when {
-                                expression { env.KN_PLUGIN_WORKFLOW == 'true' && (env.SONATAFLOW_QUARKUS_DEVUI_JOB_RESULT == 'SUCCESS') }
+                                expression { env.KN_PLUGIN_WORKFLOW == 'true' && (env.SONATAFLOW_QUARKUS_DEVUI_JOB_RESULT == 'SUCCESS' || env.SONATAFLOW_QUARKUS_DEVUI_JOB_RESULT == 'SKIPPED') }
                             }
                             steps {
                                 script {
