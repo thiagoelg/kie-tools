@@ -69,6 +69,8 @@ digraph G {
   "bpmn-vscode-extension" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/form-code-generator-vscode-command" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/vscode-java-code-completion-extension-plugin" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
+  "@kie-tools/build-cache" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
+  "@kie-tools-scripts/build-env" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "chrome-extension-pack-kogito-kie-editors" [ color = "black", fontcolor = "black", style = "dashed, rounded" ];
   "@kie-tools/scesim-editor-envelope" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/chrome-extension-test-helper" [ color = "blue", fontcolor = "blue", style = "rounded" ];
@@ -123,7 +125,6 @@ digraph G {
   "@kie-tools/extended-services-api" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools/uniforms-patternfly-form-wrapper" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "dmn-vscode-extension" [ color = "blue", fontcolor = "blue", style = "rounded" ];
-  "@kie-tools-scripts/build-env" [ color = "blue", fontcolor = "blue", style = "rounded" ];
   "@kie-tools-core/keyboard-shortcuts" [ color = "purple", fontcolor = "purple", style = "rounded" ];
   "@kie-tools-core/notifications" [ color = "purple", fontcolor = "purple", style = "rounded" ];
   "@kie-tools-core/envelope-bus" [ color = "purple", fontcolor = "purple", style = "rounded" ];
@@ -292,6 +293,10 @@ digraph G {
   "bpmn-vscode-extension" -> "@kie-tools/bpmn-editor-envelope" [ style = "solid", color = "blue" ];
   "bpmn-vscode-extension" -> "@kie-tools/form-code-generator-vscode-command" [ style = "solid", color = "blue" ];
   "bpmn-vscode-extension" -> "@kie-tools/vscode-java-code-completion-extension-plugin" [ style = "dashed", color = "blue" ];
+  "@kie-tools/build-cache" -> "@kie-tools-scripts/build-env" [ style = "dashed", color = "black" ];
+  "@kie-tools/build-cache" -> "@kie-tools-scripts/run-script-if" [ style = "dashed", color = "black" ];
+  "@kie-tools/build-cache" -> "@kie-tools/eslint" [ style = "dashed", color = "black" ];
+  "@kie-tools/build-cache" -> "@kie-tools/jest-base" [ style = "dashed", color = "black" ];
   "@kie-tools-core/chrome-extension" -> "@kie-tools-core/editor" [ style = "solid", color = "purple" ];
   "chrome-extension-pack-kogito-kie-editors" -> "@kie-tools-core/chrome-extension" [ style = "solid", color = "black" ];
   "chrome-extension-pack-kogito-kie-editors" -> "@kie-tools/bpmn-editor-envelope" [ style = "solid", color = "black" ];

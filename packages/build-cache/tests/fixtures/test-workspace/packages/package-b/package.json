@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "@test/package-b",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "is-even": "1.0.0"
+  },
+  "devDependencies": {
+    "is-number": "7.0.0",
+    "typescript": "^5.0.0"
+  }
+}

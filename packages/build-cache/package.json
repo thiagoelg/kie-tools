@@ -1,0 +1,50 @@
+{
+  "private": true,
+  "name": "@kie-tools/build-cache",
+  "version": "0.0.0",
+  "description": "Build cache utilities for KIE Tools",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "homepage": "https://github.com/apache/incubator-kie-tools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apache/incubator-kie-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/apache/incubator-kie-tools/issues"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build:dev": "rimraf dist && tsc",
+    "build:prod": "pnpm lint && rimraf dist && tsc",
+    "lint": "run-script-if --bool \"$(build-env linters.run)\" --then \"kie-tools--eslint ./src\"",
+    "test": "run-script-if --ignore-errors \"$(build-env tests.ignoreFailures)\" --bool \"$(build-env tests.run)\" --then \"jest --silent --verbose --passWithNoTests\""
+  },
+  "devDependencies": {
+    "@kie-tools-scripts/build-env": "workspace:*",
+    "@kie-tools-scripts/run-script-if": "workspace:*",
+    "@kie-tools/eslint": "workspace:*",
+    "@kie-tools/jest-base": "workspace:*",
+    "@kie-tools/root-env": "workspace:*",
+    "@kie-tools/tsconfig": "workspace:*",
+    "@pnpm/lockfile.filtering": "^1001.0.31",
+    "@pnpm/lockfile.fs": "^1001.1.32",
+    "@pnpm/types": "^1001.3.0",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.9.3"
+  },
+  "kieTools": {
+    "requiredPreinstalledCliCommands": [
+      "node",
+      "pnpm"
+    ]
+  }
+}

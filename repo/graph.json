@@ -87,6 +87,7 @@
       { "id": "@kie-tools/form-code-generator-vscode-command" },
       { "id": "@kie-tools/vscode-java-code-completion-extension-plugin" },
       { "id": "@kie-tools/jbpm-form-code-generator-themes" },
+      { "id": "@kie-tools/build-cache" },
       { "id": "chrome-extension-pack-kogito-kie-editors" },
       { "id": "@kie-tools/scesim-editor-envelope" },
       { "id": "@kie-tools/chrome-extension-test-helper" },
@@ -627,6 +628,10 @@
         "target": "@kie-tools/form-code-generator-patternfly-theme",
         "weight": 1
       },
+      { "source": "@kie-tools/build-cache", "target": "@kie-tools-scripts/build-env", "weight": 1 },
+      { "source": "@kie-tools/build-cache", "target": "@kie-tools-scripts/run-script-if", "weight": 1 },
+      { "source": "@kie-tools/build-cache", "target": "@kie-tools/eslint", "weight": 1 },
+      { "source": "@kie-tools/build-cache", "target": "@kie-tools/jest-base", "weight": 1 },
       {
         "source": "chrome-extension-pack-kogito-kie-editors",
         "target": "@kie-tools-core/chrome-extension",
@@ -1678,6 +1683,7 @@
     ["@kie-tools/bpmn-editor-standalone", "packages/bpmn-editor-standalone"],
     ["@kie-tools/bpmn-marshaller", "packages/bpmn-marshaller"],
     ["bpmn-vscode-extension", "packages/bpmn-vscode-extension"],
+    ["@kie-tools/build-cache", "packages/build-cache"],
     ["@kie-tools-core/chrome-extension", "packages/chrome-extension"],
     ["chrome-extension-pack-kogito-kie-editors", "packages/chrome-extension-pack-kogito-kie-editors"],
     ["chrome-extension-serverless-workflow-editor", "packages/chrome-extension-serverless-workflow-editor"],
