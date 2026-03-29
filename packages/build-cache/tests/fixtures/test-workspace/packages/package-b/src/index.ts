@@ -37,5 +37,3 @@ export function getEvenNumbers(max: number): number[] {
 export function validateNumber(value: any): boolean {
   return isNumber(value);
 }
-
-// Made with Bob

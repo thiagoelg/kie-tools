@@ -18,12 +18,17 @@
  */
 
 import { execSync } from "child_process";
-import { existsSync, rmSync } from "fs";
-import { join } from "path";
+import { existsSync, rmSync, cpSync, mkdirSync } from "fs";
+import { join, dirname } from "path";
 
 /**
  * Test workspace helper for managing the test fixture workspace.
  * Provides paths and setup/cleanup utilities for tests.
+ *
+ * This class creates an immutable fixtures approach by:
+ * 1. Copying fixtures from the source directory to a temporary working directory
+ * 2. Running all tests against the copy
+ * 3. Cleaning up the temporary directory after tests
  */
 export class TestWorkspace {
   public readonly root: string;
@@ -32,8 +37,13 @@ export class TestWorkspace {
   public readonly packageC: string;
   public readonly lockfilePath: string;
 
-  constructor(fixturesDir: string) {
-    this.root = join(fixturesDir, "test-workspace");
+  private readonly fixturesSource: string;
+  private readonly workingDir: string;
+
+  constructor(fixturesDir: string, workingDir: string) {
+    this.fixturesSource = join(fixturesDir, "test-workspace");
+    this.workingDir = workingDir;
+    this.root = join(workingDir, "test-workspace");
     this.packageA = join(this.root, "packages", "package-a");
     this.packageB = join(this.root, "packages", "package-b");
     this.packageC = join(this.root, "packages", "package-c");
@@ -41,30 +51,63 @@ export class TestWorkspace {
   }
 
   /**
-   * Sets up the test workspace by installing dependencies if needed.
-   * This generates a real pnpm-lock.yaml file.
+   * Sets up the test workspace by:
+   * 1. Copying fixtures from source to working directory
+   * 2. Installing dependencies using the committed lockfile
    */
   setup(): void {
-    if (!existsSync(this.lockfilePath)) {
-      console.log("Setting up test workspace...");
-      execSync("pnpm install --frozen-lockfile=false", {
-        cwd: this.root,
-        stdio: "inherit",
-      });
+    // Create working directory if it doesn't exist
+    if (!existsSync(this.workingDir)) {
+      mkdirSync(this.workingDir, { recursive: true });
+    }
+
+    // Copy fixtures to working directory
+    if (existsSync(this.root)) {
+      rmSync(this.root, { recursive: true, force: true });
+    }
+
+    console.log(`Copying fixtures from ${this.fixturesSource} to ${this.root}...`);
+    cpSync(this.fixturesSource, this.root, { recursive: true });
+
+    // Install dependencies using the committed lockfile
+    // This ensures consistent initial state across all test runs
+    console.log("Installing dependencies in test workspace...");
+    execSync("pnpm install --frozen-lockfile", {
+      cwd: this.root,
+      stdio: "inherit",
+    });
+  }
+
+  /**
+   * Cleans up the test workspace by removing the entire working directory.
+   * This ensures the original fixtures remain untouched.
+   */
+  cleanup(): void {
+    if (existsSync(this.workingDir)) {
+      rmSync(this.workingDir, { recursive: true, force: true });
     }
   }
 
   /**
-   * Cleans up the test workspace by removing node_modules and lockfile.
+   * Resets the workspace to a fresh copy of the fixtures.
+   * This is useful for ensuring test isolation.
    */
-  cleanup(): void {
-    const nodeModulesPath = join(this.root, "node_modules");
-    if (existsSync(nodeModulesPath)) {
-      rmSync(nodeModulesPath, { recursive: true, force: true });
+  reset(): void {
+    // Remove the current workspace
+    if (existsSync(this.root)) {
+      rmSync(this.root, { recursive: true, force: true });
     }
-    if (existsSync(this.lockfilePath)) {
-      rmSync(this.lockfilePath, { force: true });
-    }
+
+    // Copy fresh fixtures
+    console.log(`Resetting workspace from ${this.fixturesSource}...`);
+    cpSync(this.fixturesSource, this.root, { recursive: true });
+
+    // Reinstall dependencies using the committed lockfile
+    console.log("Reinstalling dependencies...");
+    execSync("pnpm install --frozen-lockfile", {
+      cwd: this.root,
+      stdio: "pipe",
+    });
   }
 
   /**
@@ -72,10 +115,23 @@ export class TestWorkspace {
    * Useful for tests that modify package.json files.
    */
   reinstall(): void {
-    execSync("pnpm install --frozen-lockfile=false", {
-      cwd: this.root,
-      stdio: "pipe",
-    });
+    try {
+      execSync("pnpm install --frozen-lockfile=false", {
+        cwd: this.root,
+        stdio: "pipe",
+      });
+    } catch (error: any) {
+      // If pnpm install fails, throw a more descriptive error
+      const stderr = error.stderr?.toString() || "";
+      const stdout = error.stdout?.toString() || "";
+      throw new Error(
+        `Failed to reinstall dependencies in test workspace.\n` +
+          `Command: pnpm install --frozen-lockfile=false\n` +
+          `Exit code: ${error.status}\n` +
+          `Stdout: ${stdout}\n` +
+          `Stderr: ${stderr}`
+      );
+    }
   }
 
   /**
@@ -89,9 +145,8 @@ export class TestWorkspace {
 /**
  * Creates a TestWorkspace instance for the given fixtures directory.
  * @param fixturesDir - Path to the fixtures directory (typically __dirname + '/fixtures')
+ * @param workingDir - Path to the temporary working directory (typically __dirname + '/../dist-tests/fixtures-{timestamp}')
  */
-export function createTestWorkspace(fixturesDir: string): TestWorkspace {
-  return new TestWorkspace(fixturesDir);
+export function createTestWorkspace(fixturesDir: string, workingDir: string): TestWorkspace {
+  return new TestWorkspace(fixturesDir, workingDir);
 }
-
-// Made with Bob

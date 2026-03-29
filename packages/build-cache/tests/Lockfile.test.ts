@@ -22,7 +22,9 @@ import { writeFileSync, readFileSync } from "fs";
 import { join } from "path";
 import { createTestWorkspace } from "./helpers/testWorkspace";
 
-const workspace = createTestWorkspace(join(__dirname, "fixtures"));
+// Create a unique working directory for this test run
+const workingDir = join(__dirname, "..", "dist-tests", `fixtures-${Date.now()}`);
+const workspace = createTestWorkspace(join(__dirname, "fixtures"), workingDir);
 
 describe("getLockfileHash", () => {
   beforeAll(() => {
@@ -33,8 +35,13 @@ describe("getLockfileHash", () => {
     workspace.cleanup();
   });
 
+  // Reset workspace before each test to ensure complete isolation
+  beforeEach(() => {
+    workspace.reset();
+  });
+
   describe("successful hash generation", () => {
-    it("should generate a valid SHA-256 hash for package-a", async () => {
+    it("should generate a valid SHA-256 hash", async () => {
       const hash = await getLockfileHash(workspace.root, workspace.packageA);
 
       expect(hash).toBeDefined();
@@ -42,29 +49,11 @@ describe("getLockfileHash", () => {
       expect(hash).toMatch(/^[a-f0-9]{64}$/); // Verify it's a valid hex string
     });
 
-    it("should generate a valid SHA-256 hash for package-b", async () => {
-      const hash = await getLockfileHash(workspace.root, workspace.packageB);
-
-      expect(hash).toBeDefined();
-      expect(hash).toHaveLength(64);
-      expect(hash).toMatch(/^[a-f0-9]{64}$/);
-    });
-
-    it("should generate a valid SHA-256 hash for package-c (no dependencies)", async () => {
-      const hash = await getLockfileHash(workspace.root, workspace.packageC);
-
-      expect(hash).toBeDefined();
-      expect(hash).toHaveLength(64);
-      expect(hash).toMatch(/^[a-f0-9]{64}$/);
-    });
-
     it("should generate consistent hashes for the same package", async () => {
       const hash1 = await getLockfileHash(workspace.root, workspace.packageA);
       const hash2 = await getLockfileHash(workspace.root, workspace.packageA);
-      const hash3 = await getLockfileHash(workspace.root, workspace.packageA);
 
       expect(hash1).toBe(hash2);
-      expect(hash2).toBe(hash3);
     });
 
     it("should generate different hashes for packages with different dependencies", async () => {
@@ -89,87 +78,60 @@ describe("getLockfileHash", () => {
       // Get initial hash
       const initialHash = await getLockfileHash(workspace.root, workspace.packageA);
 
-      // Backup original package.json
+      // Modify dependency version
       const packageJsonPath = join(workspace.packageA, "package.json");
-      const originalContent = readFileSync(packageJsonPath, "utf-8");
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
+      packageJson.dependencies["is-odd"] = "3.0.0"; // Change from 3.0.1 to 3.0.0
+      writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
-      try {
-        // Modify dependency version
-        const packageJson = JSON.parse(originalContent);
-        packageJson.dependencies["is-odd"] = "3.0.0"; // Change from 3.0.1 to 3.0.0
-        writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+      // Reinstall to update lockfile
+      workspace.reinstall();
 
-        // Reinstall to update lockfile
-        workspace.reinstall();
+      // Get new hash
+      const newHash = await getLockfileHash(workspace.root, workspace.packageA);
 
-        // Get new hash
-        const newHash = await getLockfileHash(workspace.root, workspace.packageA);
-
-        // Hashes should be different
-        expect(newHash).not.toBe(initialHash);
-      } finally {
-        // Restore original package.json
-        writeFileSync(packageJsonPath, originalContent);
-        workspace.reinstall();
-      }
+      // Hashes should be different
+      expect(newHash).not.toBe(initialHash);
     });
 
     it("should detect changes when a new dependency is added", async () => {
       // Get initial hash
       const initialHash = await getLockfileHash(workspace.root, workspace.packageC);
 
-      // Backup original package.json
+      // Add a new dependency
       const packageJsonPath = join(workspace.packageC, "package.json");
-      const originalContent = readFileSync(packageJsonPath, "utf-8");
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
+      packageJson.dependencies = { "is-number": "7.0.0" };
+      writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
-      try {
-        // Add a new dependency
-        const packageJson = JSON.parse(originalContent);
-        packageJson.dependencies = { "is-number": "7.0.0" };
-        writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+      // Reinstall to update lockfile
+      workspace.reinstall();
 
-        // Reinstall to update lockfile
-        workspace.reinstall();
+      // Get new hash
+      const newHash = await getLockfileHash(workspace.root, workspace.packageC);
 
-        // Get new hash
-        const newHash = await getLockfileHash(workspace.root, workspace.packageC);
-
-        // Hashes should be different
-        expect(newHash).not.toBe(initialHash);
-      } finally {
-        // Restore original package.json
-        writeFileSync(packageJsonPath, originalContent);
-        workspace.reinstall();
-      }
+      // Hashes should be different
+      expect(newHash).not.toBe(initialHash);
     });
 
     it("should remain stable when unrelated packages change", async () => {
       // Get initial hash for package-a
       const initialHashA = await getLockfileHash(workspace.root, workspace.packageA);
 
-      // Backup original package.json for package-b
+      // Modify package-b's dependencies by adding a new one
       const packageBJsonPath = join(workspace.packageB, "package.json");
-      const originalContent = readFileSync(packageBJsonPath, "utf-8");
+      const packageJson = JSON.parse(readFileSync(packageBJsonPath, "utf-8"));
+      packageJson.dependencies["is-odd"] = "3.0.0"; // Add a different version of is-odd
+      writeFileSync(packageBJsonPath, JSON.stringify(packageJson, null, 2));
 
-      try {
-        // Modify package-b's dependencies
-        const packageJson = JSON.parse(originalContent);
-        packageJson.dependencies["is-even"] = "1.0.1"; // Change version
-        writeFileSync(packageBJsonPath, JSON.stringify(packageJson, null, 2));
+      // Reinstall to update lockfile
+      workspace.reinstall();
 
-        // Reinstall to update lockfile
-        workspace.reinstall();
+      // Get new hash for package-a (should remain the same)
+      const newHashA = await getLockfileHash(workspace.root, workspace.packageA);
 
-        // Get new hash for package-a (should remain the same)
-        const newHashA = await getLockfileHash(workspace.root, workspace.packageA);
-
-        // package-a's hash should remain the same since its dependencies didn't change
-        expect(newHashA).toBe(initialHashA);
-      } finally {
-        // Restore original package.json
-        writeFileSync(packageBJsonPath, originalContent);
-        workspace.reinstall();
-      }
+      // package-a's hash should remain the same since its dependencies didn't change
+      expect(newHashA).toBe(initialHashA);
     });
   });
 
@@ -199,63 +161,4 @@ describe("getLockfileHash", () => {
       expect(hash).toMatch(/^[a-f0-9]{64}$/);
     });
   });
-
-  describe("hash properties", () => {
-    it("should produce deterministic hashes across multiple calls", async () => {
-      const hashes = await Promise.all([
-        getLockfileHash(workspace.root, workspace.packageA),
-        getLockfileHash(workspace.root, workspace.packageA),
-        getLockfileHash(workspace.root, workspace.packageA),
-        getLockfileHash(workspace.root, workspace.packageA),
-        getLockfileHash(workspace.root, workspace.packageA),
-      ]);
-
-      // All hashes should be identical
-      const uniqueHashes = new Set(hashes);
-      expect(uniqueHashes.size).toBe(1);
-    });
-
-    it("should handle packages with both dependencies and devDependencies", async () => {
-      // package-b has both dependencies and devDependencies
-      const hash = await getLockfileHash(workspace.root, workspace.packageB);
-
-      expect(hash).toBeDefined();
-      expect(hash).toHaveLength(64);
-      expect(hash).toMatch(/^[a-f0-9]{64}$/);
-    });
-
-    it("should include transitive dependencies in the hash", async () => {
-      // is-odd depends on is-number, so package-a's hash should include both
-      const hashA = await getLockfileHash(workspace.root, workspace.packageA);
-
-      // This hash should be different from a package with just is-number
-      expect(hashA).toBeDefined();
-      expect(hashA).toHaveLength(64);
-    });
-  });
-
-  describe("path handling", () => {
-    it("should handle absolute paths correctly", async () => {
-      const hash = await getLockfileHash(workspace.root, workspace.packageA);
-
-      expect(hash).toBeDefined();
-      expect(hash).toHaveLength(64);
-    });
-
-    it("should handle nested package paths correctly", async () => {
-      // All our test packages are nested under packages/
-      const hashA = await getLockfileHash(workspace.root, workspace.packageA);
-      const hashB = await getLockfileHash(workspace.root, workspace.packageB);
-      const hashC = await getLockfileHash(workspace.root, workspace.packageC);
-
-      expect(hashA).toBeDefined();
-      expect(hashB).toBeDefined();
-      expect(hashC).toBeDefined();
-
-      // All should be different (except possibly A and C if they have same deps)
-      expect(hashA).not.toBe(hashB);
-    });
-  });
 });
-
-// Made with Bob

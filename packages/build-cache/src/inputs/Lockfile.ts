@@ -40,7 +40,18 @@ export const getLockfileHash: HashInput = async function (root: string, pkgDir: 
     throw new Error(`No lockfile found in ${root}`);
   }
 
-  const filtered = filterLockfileByImporters(lockfile, [relative(root, pkgDir) as ProjectId], {
+  const relativePath = relative(root, pkgDir) as ProjectId;
+
+  // Check if the package exists in the lockfile's importers
+  // If not, we'll still generate a hash (of empty packages) rather than throwing
+  // This allows the function to work for packages that don't have dependencies yet
+  if (lockfile.importers && !lockfile.importers[relativePath]) {
+    // Package doesn't exist in lockfile, return hash of empty packages
+    const hash = createHash("sha256").update(JSON.stringify({})).digest("hex");
+    return hash;
+  }
+
+  const filtered = filterLockfileByImporters(lockfile, [relativePath], {
     failOnMissingDependencies: false,
     include: {
       dependencies: true,
@@ -54,24 +65,3 @@ export const getLockfileHash: HashInput = async function (root: string, pkgDir: 
 
   return hash;
 };
-
-// CLI execution support
-if (require.main === module) {
-  const root = process.cwd();
-  const pkgDir = process.argv[2];
-
-  if (!pkgDir) {
-    console.error("Error: Package directory argument is required");
-    console.error("Usage: node Lockfile.js <package-directory>");
-    process.exit(1);
-  }
-
-  getLockfileHash(root, pkgDir)
-    .then((hash) => {
-      console.log(hash);
-    })
-    .catch((error) => {
-      console.error("Error generating lockfile hash:", error);
-      process.exit(1);
-    });
-}

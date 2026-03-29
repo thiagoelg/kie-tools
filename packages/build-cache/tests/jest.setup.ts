@@ -17,20 +17,12 @@
  * under the License.
  */
 
-const { varsWithName, getOrDefault, composeEnv } = require("@kie-tools-scripts/build-env");
+/**
+ * Jest setup file to initialize @pnpm/logger before tests run.
+ * This is required because @pnpm/lockfile.fs depends on @pnpm/logger
+ * being properly initialized at module load time.
+ */
 
-module.exports = composeEnv([], {
-  vars: varsWithName({
-    TEST_VAR_A: {
-      default: "default-value-a",
-      description: "Test variable for package-a",
-    },
-  }),
-  get env() {
-    return {
-      testPackageA: {
-        testVarA: getOrDefault(this.vars.TEST_VAR_A),
-      },
-    };
-  },
-});
+// Import @pnpm/logger to ensure it's initialized before any tests run
+// This sets up the bole logger that @pnpm/lockfile.fs expects
+import "@pnpm/logger";

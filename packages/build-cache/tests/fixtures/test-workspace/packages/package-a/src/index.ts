@@ -32,5 +32,3 @@ export function getOddNumbers(max: number): number[] {
   }
   return result;
 }
-
-// Made with Bob

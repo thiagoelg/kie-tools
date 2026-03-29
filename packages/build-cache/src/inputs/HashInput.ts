@@ -31,5 +31,3 @@
  * @returns A promise that resolves to a hash string
  */
 export type HashInput<TArgs extends any[] = []> = (root: string, pkgDir: string, ...args: TArgs) => Promise<string>;
-
-// Made with Bob

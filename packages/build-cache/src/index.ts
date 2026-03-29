@@ -19,5 +19,4 @@
 
 export * from "./inputs/HashInput";
 export * from "./inputs/Lockfile";
-
-// Made with Bob
+export * from "./inputs/Sources";

@@ -39,5 +39,3 @@ module.exports = composeEnv([], {
     };
   },
 });
-
-// Made with Bob
