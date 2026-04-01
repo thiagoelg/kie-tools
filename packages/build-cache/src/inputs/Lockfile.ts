@@ -26,8 +26,6 @@ import type { HashInput } from "./HashInput";
 
 /**
  * Generates a hash of the lockfile dependencies for a specific package.
- * This hash can be used for build caching to detect when dependencies have changed.
- * Implements the HashInput type.
  *
  * @param root - The root directory of the workspace (typically process.cwd())
  * @param pkgDir - The package directory path (e.g., "packages/my-package")

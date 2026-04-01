@@ -41,8 +41,6 @@ export interface SourcesHashOptions {
 
 /**
  * Generates a hash of source files based on include and exclude patterns.
- * This hash can be used for build caching to detect when source files have changed.
- * Implements the HashInput type with an additional options parameter.
  *
  * @param root - The root directory of the workspace (typically process.cwd())
  * @param pkgDir - The package directory path (e.g., "packages/my-package")

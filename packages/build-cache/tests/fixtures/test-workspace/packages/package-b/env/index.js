@@ -17,25 +17,18 @@
  * under the License.
  */
 
-const { varsWithName, getOrDefault, composeEnv } = require("@kie-tools-scripts/build-env");
+const { varsWithName, getOrDefault } = require("@kie-tools-scripts/build-env");
 
-module.exports = composeEnv([], {
+module.exports = {
   vars: varsWithName({
-    TEST_VAR_B: {
-      default: "default-value-b",
-      description: "Test variable for package-b",
-    },
-    TEST_ENABLE_FEATURE: {
-      default: "false",
-      description: "Enable test feature",
+    PACKAGE_B__testVarC: {
+      default: "default-value-c",
+      description: "Test variable C for package-b",
     },
   }),
   get env() {
     return {
-      testPackageB: {
-        testVarB: getOrDefault(this.vars.TEST_VAR_B),
-        enableFeature: getOrDefault(this.vars.TEST_ENABLE_FEATURE) === "true",
-      },
+      testVarC: getOrDefault(this.vars.PACKAGE_B__testVarC),
     };
   },
-});
+};
