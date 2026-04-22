@@ -136,19 +136,28 @@ func (d *DeploymentReconciler) ensureObjects(ctx context.Context, workflow *oper
 		d.ensurers.DeploymentByDeploymentModel(workflow).Ensure(ctx, workflow, pl,
 			d.deploymentModelMutateVisitors(workflow, pl, image, userPropsCM.(*v1.ConfigMap), managedPropsCM.(*v1.ConfigMap))...)
 	if err != nil {
-		workflow.Status.Manager().MarkFalse(api.RunningConditionType, api.DeploymentUnavailableReason, "Unable to perform the deploy due to ", err)
+		workflow.Status.Manager().MarkFalsef(api.RunningConditionType, api.DeploymentUnavailableReason, "Unable to perform the deploy due to: %v ", err)
 		_, _ = d.PerformStatusUpdate(ctx, workflow)
 		return reconcile.Result{}, nil, err
 	}
 
 	service, _, err := d.ensurers.ServiceByDeploymentModel(workflow).Ensure(ctx, workflow, common.ServiceMutateVisitor(workflow))
 	if err != nil {
-		workflow.Status.Manager().MarkFalse(api.RunningConditionType, api.DeploymentUnavailableReason, "Unable to make the service available due to ", err)
+		workflow.Status.Manager().MarkFalsef(api.RunningConditionType, api.DeploymentUnavailableReason, "Unable to make the service available due to: %v ", err)
 		_, _ = d.PerformStatusUpdate(ctx, workflow)
 		return reconcile.Result{}, nil, err
 	}
 
 	objs := []client.Object{deployment, managedPropsCM, service}
+
+	podDisruptionBudget, err := NewPodDisruptionBudgetHandler(d.StateSupport).Ensure(ctx, workflow)
+	if err != nil {
+		return reconcile.Result{}, nil, err
+	}
+	if podDisruptionBudget != nil {
+		objs = append(objs, podDisruptionBudget)
+	}
+
 	eventingObjs, err := common.NewKnativeEventingHandler(d.StateSupport, pl).Ensure(ctx, workflow)
 	if err != nil {
 		return reconcile.Result{}, nil, err
@@ -235,14 +244,13 @@ func (d *DeploymentReconciler) scheduleWorkflowStatusChangeNotification(ctx cont
 }
 
 func notifyWorkflowStatusChange(cli client.Client, wfName, wfNamespace string) error {
-	var err error
-	var uri string
 	retryErr := retry.RetryOnConflict(retry.DefaultBackoff, func() error {
+		var err error
+		var uri string
 		workflow := &operatorapi.SonataFlow{}
 		if err = cli.Get(context.Background(), types.NamespacedName{Name: wfName, Namespace: wfNamespace}, workflow); err != nil {
 			return err
 		}
-		workflow = workflow.DeepCopy()
 		available := workflow.Status.GetCondition(api.RunningConditionType).IsTrue()
 		if uri, err = eventing.GetWorkflowDefinitionEventsTargetURL(cli, workflow); err != nil {
 			return fmt.Errorf("failed to get workflow definition events target url to send the workflow definition status update event: %v", err)

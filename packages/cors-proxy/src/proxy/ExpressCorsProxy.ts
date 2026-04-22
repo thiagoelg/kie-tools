@@ -21,6 +21,7 @@ import * as https from "https";
 import fetch from "node-fetch";
 import { Request, Response } from "express";
 import { HttpsProxyAgent } from "https-proxy-agent";
+import * as minimatch from "minimatch";
 import { GIT_CORS_CONFIG, isGitOperation } from "./git";
 import { CorsProxyHeaderKeys, CorsConfig, CorsProxy } from "@kie-tools/cors-proxy-api/dist";
 
@@ -37,16 +38,15 @@ export class ExpressCorsProxy implements CorsProxy<Request, Response> {
 
   constructor(
     private readonly args: {
-      origin: string;
+      allowedOrigins: string[];
+      allowedHosts: string[];
       verbose: boolean;
       hostsToUseHttp: string[];
     }
   ) {
     this.logger = new Logger(args.verbose);
 
-    this.logger.debug("");
-    this.logger.debug("Proxy Configuration:");
-    this.logger.debug("* Accept Origin Header: ", `"${args.origin}"`);
+    this.logger.debug("\nProxy Configuration:");
     this.logger.debug("* Verbose: ", args.verbose);
     this.logger.debug("");
   }
@@ -56,44 +56,49 @@ export class ExpressCorsProxy implements CorsProxy<Request, Response> {
       const info = this.resolveRequestInfo(req);
 
       this.logger.log("New request: ", info.targetUrl);
-      this.logger.debug("Request Method: ", req.method);
-      this.logger.debug("Request Headers: ", req.headers);
+      this.logger.debugEscapeNewLines("Request Method: ", req.method);
+      this.logger.debugEscapeNewLines("Request Headers: ", req.headers);
 
-      // Creating the headers for the new request
+      // Build outgoing headers
       const outHeaders: Record<string, string> = { ...info?.corsConfig?.customHeaders };
 
       Object.keys(req.headers).forEach((header) => {
         if (!BANNED_PROXY_HEADERS.includes(header) && !outHeaders[header]) {
           if (!info.corsConfig || info.corsConfig.allowHeaders.includes(header)) {
-            outHeaders[header] = req.headers[header] as string;
+            const value = req.headers[header];
+            // header value can be string | string[] | undefined
+            if (Array.isArray(value)) {
+              outHeaders[header] = value.join(", ");
+            } else if (typeof value === "string") {
+              outHeaders[header] = value;
+            }
           }
         }
       });
 
-      // TO DO: Figure out why this gzip encoding is broken with insecure tls certificates!
-      if (req.headers[CorsProxyHeaderKeys.INSECURELY_DISABLE_TLS_CERTIFICATE_VALIDATION] === "true") {
-        outHeaders["accept-encoding"] = "identity";
-      }
       // Force uncompressed response if encoding is disabled via header
       if (req.headers[CorsProxyHeaderKeys.DISABLE_ENCODING] === "true") {
         outHeaders["accept-encoding"] = "identity";
       }
 
+      // Useful for Atlassian Bitbucket Data Center XSRF-check-failed issue
+      if (req.headers[CorsProxyHeaderKeys.ADD_PROXIED_URL_AS_ORIGIN] === "true") {
+        outHeaders["Origin"] = info.proxyUrl.origin;
+      }
+
       this.logger.log("Proxying to: ", info.proxyUrl.toString());
-      this.logger.debug("Proxy Method: ", req.method);
+      this.logger.debugEscapeNewLines("Proxy Method: ", req.method);
       this.logger.debug("Proxy Headers: ", outHeaders);
 
       const proxyResponse = await fetch(info.proxyUrl, {
         method: req.method,
         headers: outHeaders,
         redirect: "manual",
+        // pass the original request stream for non-GET/HEAD methods
         body: req.method !== "GET" && req.method !== "HEAD" ? req : undefined,
         agent: this.getProxyAgent(info),
       });
       this.logger.debug("Proxy Response status: ", proxyResponse.status);
-
-      // Setting up the headers to the original response...
-      res.header("Access-Control-Allow-Origin", this.args.origin);
 
       if (req.method == "OPTIONS") {
         res.header("Access-Control-Allow-Methods", info.corsConfig?.allowMethods.join(", ") ?? "*");
@@ -104,7 +109,11 @@ export class ExpressCorsProxy implements CorsProxy<Request, Response> {
         proxyResponse.headers.set("location", info.targetUrl);
       }
 
+      // Copy allowed headers to response
       proxyResponse.headers.forEach((value, header) => {
+        if (header.toLowerCase() === "access-control-allow-origin") {
+          return;
+        }
         if (!info.corsConfig || info.corsConfig.exposeHeaders.includes(header)) {
           res.setHeader(header, value);
         }
@@ -118,31 +127,71 @@ export class ExpressCorsProxy implements CorsProxy<Request, Response> {
 
       res.status(proxyResponse.status);
 
-      this.logger.debug("Writting Response...");
-      if (proxyResponse.body) {
-        const stream = proxyResponse.body.pipe(res);
-        stream.on("close", () => {
-          this.logger.log("Request succesfully proxied!");
+      this.logger.debug("Streaming response to client...");
+
+      try {
+        if (proxyResponse.body) {
+          // Prevent client-side truncation due to mismatched content-length
+          try {
+            res.removeHeader("content-encoding");
+            res.removeHeader("content-length");
+          } catch (e) {
+            // ignore if not settable
+          }
+
+          proxyResponse.body.on("error", (e: any) => {
+            this.logger.warn("Stream error while proxying response: ", e);
+            // make sure connection is closed and middleware chain proceeds
+            try {
+              if (!res.headersSent) {
+                res.status(502);
+              }
+              res.end();
+            } catch (err) {
+              // ignore
+            }
+            next();
+          });
+
+          // Pipe and let Node manage ending the response
+          proxyResponse.body.pipe(res).on("finish", () => {
+            this.logger.log("Request successfully proxied!");
+          });
+        } else {
+          this.logger.log("Request successfully proxied (no body).");
           res.end();
-        });
-        stream.on("error", (e) => {
-          this.logger.warn("Something went wrong when writting the new response... ", e);
-          next();
-        });
-      } else {
-        this.logger.log("Request succesfully proxied!");
-        res.end();
+        }
+      } catch (err: any) {
+        this.logger.warn("Unexpected error while streaming response: ", err);
+        next();
       }
-    } catch (err) {
-      this.logger.warn("Couldn't handle request correctly due to: ", err.message);
+    } catch (err: any) {
+      this.logger.warn("Couldn't handle request correctly due to: ", err?.message ?? err);
       next();
     }
   }
 
+  private validateTargetUrl(targetUrl: string): boolean {
+    const protocol = /^https?:\/\//.test(targetUrl) ? "" : "https:/";
+    const parsedTargetUrl = new URL(protocol + targetUrl);
+
+    return this.args.allowedHosts.some((pattern) => minimatch(parsedTargetUrl.hostname, pattern));
+  }
+
   private resolveRequestInfo(request: Request): ProxyRequestInfo {
+    const origin = request.header("origin");
     const targetUrl: string = (request.headers[CorsProxyHeaderKeys.TARGET_URL] as string) ?? request.url;
+
+    if (!origin || !this.args.allowedOrigins.includes(origin)) {
+      throw new Error(`Origin ${origin} is not allowed`);
+    }
+
     if (!targetUrl || targetUrl == "/") {
       throw new Error("Couldn't resolve the target URL...");
+    }
+
+    if (!this.validateTargetUrl(targetUrl)) {
+      throw new Error(`The target URL is not allowed. Requested: ${targetUrl}`);
     }
 
     const proxyUrl = new URL(`protocol://${targetUrl.substring(1)}`);
@@ -152,7 +201,7 @@ export class ExpressCorsProxy implements CorsProxy<Request, Response> {
     return new ProxyRequestInfo({
       targetUrl,
       proxyUrl: proxyUrlString,
-      corsConfig: this.resolveCorsConfig(targetUrl, request),
+      corsConfig: this.resolveCorsConfig(proxyUrlString ?? targetUrl, request),
       insecurelyDisableTLSCertificateValidation:
         request.headers[CorsProxyHeaderKeys.INSECURELY_DISABLE_TLS_CERTIFICATE_VALIDATION] === "true",
     });
@@ -229,6 +278,19 @@ class Logger {
       return;
     }
     console.debug(message, arg ?? "");
+  }
+
+  /**
+   * This is used when some very basic user input sanitization is needed before it is posted in the logs,
+   * to avoid completely uncontrolled logging of user input.
+   * @param message
+   * @param arg
+   */
+  public debugEscapeNewLines(message: string, arg?: any) {
+    if (!this.verbose) {
+      return;
+    }
+    console.debug(message.replace(/\r?\n|\r/g, "_"), arg ?? "");
   }
 
   public warn(message: string, arg?: any) {

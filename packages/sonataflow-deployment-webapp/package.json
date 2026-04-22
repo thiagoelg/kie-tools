@@ -18,9 +18,9 @@
     "build:dev": "rimraf dist && webpack --env dev",
     "build:prod": "pnpm lint && pnpm test && rimraf dist && webpack",
     "lint": "run-script-if --bool \"$(build-env linters.run)\" --then \"kie-tools--eslint ./src\"",
-    "start": "concurrently 'pnpm start:dev-webapp' 'pnpm start:sonataflow-dev-app'",
+    "start": "concurrently --no-colors 'pnpm start:dev-webapp' 'pnpm start:sonataflow-dev-app'",
     "start:dev-webapp": "webpack serve --host 0.0.0.0 --env dev",
-    "start:sonataflow-dev-app": "npm --prefix ./node_modules/@kie-tools/sonataflow-dev-app run start",
+    "start:sonataflow-dev-app": "CORS_DOMAIN=http://localhost:$(build-env sonataFlowDeploymentWebapp.dev.port) npm --prefix ./node_modules/@kie-tools/sonataflow-dev-app run start",
     "test": "run-script-if --ignore-errors \"$(build-env tests.ignoreFailures)\" --bool \"$(build-env tests.run)\" --then \"jest --silent --verbose --passWithNoTests\""
   },
   "dependencies": {
@@ -45,8 +45,8 @@
     "openapi-types": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^6.29.0",
-    "typescript": "^5.5.3"
+    "react-router-dom": "^6.30.2",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -73,9 +73,9 @@
     "terser-webpack-plugin": "^5.3.9",
     "ts-jest": "^29.1.5",
     "url": "^0.11.3",
-    "webpack": "^5.94.0",
+    "webpack": "^5.104.1",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.15.1",
+    "webpack-dev-server": "^4.15.2",
     "webpack-merge": "^5.9.0"
   }
 }

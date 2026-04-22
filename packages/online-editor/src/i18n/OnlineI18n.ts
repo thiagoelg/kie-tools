@@ -17,7 +17,7 @@
  * under the License.
  */
 
-import { ReferenceDictionary, Wrapped } from "@kie-tools-core/i18n/dist/core";
+import { ReferenceDictionary } from "@kie-tools-core/i18n/dist/core";
 import { CommonI18n } from "@kie-tools/i18n-common-dictionary";
 import { DmnUnitablesI18n } from "@kie-tools/unitables-dmn/dist/i18n";
 import { GistEnabledAuthProviderType, SupportedGitAuthProviders } from "../authProviders/AuthProvidersApi";
@@ -55,7 +55,7 @@ interface OnlineDictionary
       error: {
         title: string;
         explanation: string;
-        message: Array<string | Wrapped<"jira">>;
+        message: string;
       };
     };
     editorToolbar: {
@@ -380,14 +380,14 @@ interface OnlineDictionary
       error: {
         title: string;
         explanation: string;
-        message: Array<string | Wrapped<"jira">>;
+        message: string;
       };
       table: DmnUnitablesI18n;
       modal: {
         initial: {
           runDmnModels: string;
           explanation: string;
-          notificationPanelExplanation: Array<string | Wrapped<"icon">>;
+          notificationPanelExplanation: string;
         };
         wizard: {
           title: string;
@@ -406,77 +406,9 @@ interface OnlineDictionary
             message: string;
             helper: string;
           };
-          macos: {
-            install: {
-              download: string;
-              openFile: Array<string | Wrapped<"file">>;
-              dragFileToApplicationsFolder: Array<string | Wrapped<"file" | "folder">>;
-            };
-            start: {
-              stopped: {
-                startInstruction: string;
-                launchExtendedServices: Array<string | Wrapped<"file">>;
-              };
-              firstTime: {
-                title: string;
-                openApplicationsFolder: Array<string | Wrapped<"folder">>;
-                openAndCancel: Array<string | Wrapped<"file">>;
-                again: string;
-                openInstruction: Array<string | Wrapped<"file" | "again">>;
-              };
-              alreadyRanBefore: string;
-              launchExtendedServices: Array<string | Wrapped<"file">>;
-              advanced: {
-                title: string;
-                runFollowingCommand: string;
-              };
-            };
-          };
-          windows: {
-            install: {
-              keepDownload: string;
-              moveTheFile: Array<string | Wrapped<"file">>;
-            };
-            start: {
-              stopped: {
-                startInstruction: string;
-                launchExtendedServices: Array<string | Wrapped<"file">>;
-              };
-              firstTime: {
-                title: string;
-                openFolder: Array<string | Wrapped<"file">>;
-                runAnyway: string;
-              };
-              alreadyRanBefore: string;
-              launchExtendedServices: Array<string | Wrapped<"file">>;
-              advanced: {
-                title: string;
-                runFollowingCommand: string;
-              };
-            };
-          };
-          linux: {
-            install: {
-              download: string;
-              installAppIndicator: string;
-              ubuntuDependency: Array<string | Wrapped<"package">>;
-              fedoraDependency: Array<string | Wrapped<"package">>;
-              extractContent: Array<string | Wrapped<"file">>;
-              binaryExplanation: Array<string | Wrapped<"file">>;
-            };
-            start: {
-              openTerminal: string;
-              goToFolder: Array<string | Wrapped<"file">>;
-              runCommand: string;
-              advanced: {
-                title: string;
-                runFollowingCommand: Array<string | Wrapped<"file">>;
-              };
-            };
-          };
           footerWaitingToConnect: string;
           advancedSettings: {
-            title: Array<string | Wrapped<"port">>;
+            title: string;
             label: string;
             helperTextInvalid: string;
           };
@@ -507,11 +439,6 @@ interface OnlineDictionary
           install: string;
           outdated: string;
           disconnected: string;
-        };
-      };
-      modal: {
-        initial: {
-          subHeader: string;
         };
       };
     };

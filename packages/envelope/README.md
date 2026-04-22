@@ -17,6 +17,10 @@
 
 ## Envelope
 
+Thin wrapper around [**_Multiplying Architecture_**](../../repo/MULTIPLYING_ARCHITECTURE.md) **`Envelopes`** adding a "view" component for **`Envelopes`** rendering visual elements.
+
+This package also allows **`Envelopes`** to be physically inside `div` or `iframe` elements, for supporting Module Federation.
+
 ---
 
 Apache KIE (incubating) is an effort undergoing incubation at The Apache Software

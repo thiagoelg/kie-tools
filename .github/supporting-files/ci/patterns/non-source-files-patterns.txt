@@ -1,4 +1,3 @@
-*.md
 *.icns
 *.ico
 *.gif
@@ -16,3 +15,4 @@ NOTICE
 .ci
 ./_intellij-project
 .github/CODEOWNERS
+.rat-excludes

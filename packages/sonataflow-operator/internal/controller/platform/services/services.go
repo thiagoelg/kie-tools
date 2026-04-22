@@ -53,9 +53,9 @@ import (
 )
 
 const (
-	quarkusHibernateORMDatabaseGeneration string = "QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION"
-	quarkusFlywayMigrateAtStart           string = "QUARKUS_FLYWAY_MIGRATE_AT_START"
-	WaitingKnativeEventing                       = "WaitingKnativeEventing"
+	quarkusFlywayMigrateAtStart            = "QUARKUS_FLYWAY_MIGRATE_AT_START"
+	kogitoJobsServiceLoadJobsErrorStrategy = "KOGITO_JOBS_SERVICE_LOADJOBERRORSTRATEGY"
+	WaitingKnativeEventing                 = "WaitingKnativeEventing"
 )
 
 type PlatformServiceHandler interface {
@@ -122,10 +122,31 @@ type PlatformServiceHandler interface {
 
 	// Returns whether job based, service based or no DB migration is needed
 	GetDBMigrationStrategy() operatorapi.DBMigrationStrategyType
+
+	// AcceptsHPA returns true if the service accepts an external HPA configuration.
+	AcceptsHPA() bool
+
+	// AcceptsPDB returns true if the service accepts the operator managed PDB generation.
+	AcceptsPDB() bool
+
+	// GetPDBSpec returns the configured PodDisruptionBudgetSpec for the given service.
+	GetPDBSpec() *operatorapi.PodDisruptionBudgetSpec
 }
 
 type DataIndexHandler struct {
 	platform *operatorapi.SonataFlowPlatform
+}
+
+func (d *DataIndexHandler) AcceptsHPA() bool {
+	return true
+}
+
+func (d *DataIndexHandler) AcceptsPDB() bool {
+	return true
+}
+
+func (d *DataIndexHandler) GetPDBSpec() *operatorapi.PodDisruptionBudgetSpec {
+	return d.platform.Spec.Services.DataIndex.ServiceSpec.PodTemplate.PodDisruptionBudget
 }
 
 // GetDBMigrationStrategy returns DB migration approach
@@ -296,7 +317,7 @@ func (d *DataIndexHandler) ConfigurePersistence(containerSpec *corev1.Container)
 		dbMigrationStrategyService := isDBMigrationStrategyService(d.platform.Spec.Services.DataIndex.Persistence)
 
 		// specific to DataIndex
-		c.Env = append(c.Env, corev1.EnvVar{Name: quarkusHibernateORMDatabaseGeneration, Value: "update"}, corev1.EnvVar{Name: quarkusFlywayMigrateAtStart, Value: dbMigrationStrategyService})
+		c.Env = append(c.Env, corev1.EnvVar{Name: quarkusFlywayMigrateAtStart, Value: dbMigrationStrategyService})
 		return c
 	}
 	return containerSpec
@@ -341,6 +362,18 @@ func (d *DataIndexHandler) CheckKSinkInjected() (bool, error) {
 
 type JobServiceHandler struct {
 	platform *operatorapi.SonataFlowPlatform
+}
+
+func (d *JobServiceHandler) AcceptsHPA() bool {
+	return false
+}
+
+func (d *JobServiceHandler) AcceptsPDB() bool {
+	return false
+}
+
+func (d *JobServiceHandler) GetPDBSpec() *operatorapi.PodDisruptionBudgetSpec {
+	return nil
 }
 
 // GetDBMigrationStrategy returns db migration approach otherwise
@@ -489,8 +522,8 @@ func (j *JobServiceHandler) ConfigurePersistence(containerSpec *corev1.Container
 		dbMigrationStrategyService := isDBMigrationStrategyService(j.platform.Spec.Services.JobService.Persistence)
 
 		// Specific to Job Service
-		c.Env = append(c.Env, corev1.EnvVar{Name: "QUARKUS_FLYWAY_MIGRATE_AT_START", Value: dbMigrationStrategyService})
-		c.Env = append(c.Env, corev1.EnvVar{Name: "KOGITO_JOBS_SERVICE_LOADJOBERRORSTRATEGY", Value: "FAIL_SERVICE"})
+		c.Env = append(c.Env, corev1.EnvVar{Name: quarkusFlywayMigrateAtStart, Value: dbMigrationStrategyService})
+		c.Env = append(c.Env, corev1.EnvVar{Name: kogitoJobsServiceLoadJobsErrorStrategy, Value: "FAIL_SERVICE"})
 		return c
 	}
 	return containerSpec

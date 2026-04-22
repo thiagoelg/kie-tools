@@ -56,11 +56,7 @@ export const de: TranslatedDictionary<OnlineI18n> = {
     error: {
       title: `${de_common.terms?.oops}!`,
       explanation: `Der ${de_common.names?.dmnRunner} konnte aufgrund eines Fehlers nicht gerendert werden.`,
-      message: [
-        `Dieses ${de_common.names?.dmn} hat ein Konstrukt, das nicht unterstützt wird. Bitte beziehen Sie sich auf `,
-        wrapped("jira"),
-        " und melden Sie einen Fehler. Vergessen Sie nicht, die aktuelle Datei und die verwendeten Eingaben hochzuladen",
-      ],
+      message: `Dieses ${de_common.names?.dmn} hat ein Konstrukt, das nicht unterstützt wird. Bitte beziehen Sie sich auf ${"{jira}"} und melden Sie einen Fehler. Vergessen Sie nicht, die aktuelle Datei und die verwendeten Eingaben hochzuladen`,
     },
   },
   editorToolbar: {
@@ -465,11 +461,7 @@ export const de: TranslatedDictionary<OnlineI18n> = {
     error: {
       title: `${de_common.terms?.oops}!`,
       explanation: `Der ${de_common.names?.dmnRunner} konnte aufgrund eines Fehlers nicht dargestellt werden.`,
-      message: [
-        `Dieser ${de_common.names?.dmn} hat ein Konstrukt, das nicht unterstützt wird. Bitte beachten Sie `,
-        wrapped("jira"),
-        " und melden Sie ein Problem. Vergessen Sie nicht, die aktuelle Datei und die verwendeten Eingaben hochzuladen",
-      ],
+      message: `Dieser ${de_common.names?.dmn} hat ein Konstrukt, das nicht unterstützt wird. Bitte beachten Sie ${"{jira}"} und melden Sie ein Problem. Vergessen Sie nicht, die aktuelle Datei und die verwendeten Eingaben hochzuladen`,
     },
     table: { ...de_unitables },
     modal: {
@@ -477,15 +469,11 @@ export const de: TranslatedDictionary<OnlineI18n> = {
         runDmnModels: "Führen Sie Ihre Modelle aus und sehen Sie die Ergebnisse live, während Sie sie bearbeiten.",
         explanation:
           "Eingabeknoten werden zu interaktiven Feldern in einem automatisch generierten Formular, und die Ergebnisse werden als leicht lesbare Karten angezeigt.",
-        notificationPanelExplanation: [
-          `Das Problem-Panel`,
-          wrapped("icon"),
-          `, in der unteren rechten Ecke des Editors, zeigt Live-Auswertungsmeldungen an, um Sie bei der Modellierung Ihrer Entscheidungen zu unterstützen.`,
-        ],
+        notificationPanelExplanation: `Das Problem-Panel ${"{icon}"} ,in der unteren rechten Ecke des Editors, zeigt Live-Auswertungsmeldungen an, um Sie bei der Modellierung Ihrer Entscheidungen zu unterstützen.`,
       },
       wizard: {
         title: `${de_common.names?.extendedServices} ${de_common.terms?.setup}`,
-        description: `Wählen Sie Ihre ${de_common.terms?.os?.full} und folgen Sie den Anweisungen zur Installation und zum Start der ${de_common.names?.extendedServices}.`,
+        description: `Folgen Sie den Anweisungen zur Installation und zum Start der ${de_common.names?.extendedServices}.`,
         outdatedAlert: {
           title: `${de_common.names?.extendedServices} ist veraltet!`,
           message: `Es sieht so aus, als ob Sie eine inkompatible Version von ${de_common.names?.extendedServices} verwenden. Folgen Sie den nachstehenden Anweisungen, um sie zu aktualisieren.`,
@@ -500,112 +488,10 @@ export const de: TranslatedDictionary<OnlineI18n> = {
           message: `Beachten Sie, dass einige Funktionen wie der ${de_common.names?.dmnRunner}, ohne ${de_common.names?.extendedServices} nicht verfügbar sind.`,
           helper: `Stellen Sie sicher, dass ${de_common.names?.extendedServices} ausgeführt wird, und überprüfen Sie dann die Host- und Porteinstellungen.`,
         },
-        macos: {
-          install: {
-            download: ` ${de_common.names?.extendedServices}.`,
-            openFile: [wrapped("file"), "-Datei öffnen."],
-            dragFileToApplicationsFolder: ["Ziehen Sie ", wrapped("file"), " in den ", wrapped("folder"), " Ordner."],
-          },
-          start: {
-            stopped: {
-              startInstruction: `Wenn Sie das Symbol ${de_common.names?.extendedServices} in Ihrer Systemleiste sehen, klicken Sie einfach darauf und wählen Sie "${de_common.terms?.start}".`,
-              launchExtendedServices: [
-                `Wenn nicht, starten Sie die ${de_common.names?.extendedServices} Anwendung, indem Sie `,
-                wrapped("file"),
-                " ausführen.",
-              ],
-            },
-            firstTime: {
-              title: `Wenn Sie gerade ${de_common.names?.extendedServices} installiert haben:`,
-              openApplicationsFolder: ["Öffnen Sie den ", wrapped("folder"), " Ordner."],
-              again: "Nochmals",
-              openAndCancel: [
-                "Rechtsklick auf ",
-                wrapped("file"),
-                ` wählen Sie "${de_common.terms?.open}" und dann "${de_common.terms?.cancel}".`,
-              ],
-              openInstruction: [
-                "Rechtsklick auf ",
-                wrapped("file"),
-                " ",
-                wrapped("again"),
-                ` und wählen Sie dann "${de_common.terms?.open}".`,
-              ],
-            },
-            alreadyRanBefore: `Wenn Sie die ${de_common.names?.extendedServices} bereits installiert und ausgeführt haben:`,
-            launchExtendedServices: ["Starten Sie die ", wrapped("file")],
-            advanced: {
-              title: "Erweiterte Einstellungen",
-              runFollowingCommand: `Führen Sie den folgenden Befehl auf einer Terminal-Registerkarte aus, um ${de_common.names?.extendedServices} auf einem anderen Port zu starten:`,
-            },
-          },
-        },
-        windows: {
-          install: {
-            keepDownload: ` ${de_common.names?.extendedServices}. Beachten Sie, dass Sie wahrscheinlich mit der rechten Maustaste auf den Download klicken und "Behalten" wählen müssen`,
-            moveTheFile: ["Verschieben Sie die ", wrapped("file"), " Datei in Ihren bevorzugten Ordner."],
-          },
-          start: {
-            stopped: {
-              startInstruction: `Wenn Sie das Symbol ${de_common.names?.extendedServices} in Ihrer Systemleiste sehen, klicken Sie einfach darauf und wählen Sie "${de_common.terms?.start}".`,
-              launchExtendedServices: [
-                `Wenn nicht, starten Sie die ${de_common.names?.extendedServices}, indem Sie die `,
-                wrapped("file"),
-                " öffnen.",
-              ],
-            },
-            firstTime: {
-              title: `Wenn Sie gerade ${de_common.names?.extendedServices} installiert haben:`,
-              openFolder: ["Öffnen Sie den Ordner, in dem Sie die ", wrapped("file"), " Datei abgelegt haben."],
-              runAnyway: `Doppelklicken Sie auf die Datei und wählen Sie "Mehr Informationen" und klicken Sie dann auf die Schaltfläche "Trotzdem ausführen".`,
-            },
-            alreadyRanBefore: `Wenn Sie die ${de_common.names?.extendedServices} bereits installiert und vorher ausgeführt haben:`,
-            launchExtendedServices: ["Öffnen Sie die ", wrapped("file"), " Datei."],
-            advanced: {
-              title: "Erweiterte Einstellungen",
-              runFollowingCommand: `Führen Sie den folgenden Befehl in der Eingabeaufforderung aus, um ${de_common.names?.extendedServices} auf einem anderen Port zu starten:`,
-            },
-          },
-        },
-        linux: {
-          install: {
-            download: ` ${de_common.names?.extendedServices}.`,
-            installAppIndicator: "Installieren Sie die AppIndicator-Bibliothek für Ihr System:",
-            ubuntuDependency: [`${de_common.names?.ubuntu}: `, wrapped("package")],
-            fedoraDependency: [`${de_common.names?.fedora}: `, wrapped("package")],
-            extractContent: ["Extrahieren Sie den Inhalt von ", wrapped("file"), " an einen Ort Ihrer Wahl."],
-            binaryExplanation: [
-              `Die ${de_common.names?.extendedServices} Datei, `,
-              wrapped("file"),
-              ", ist eine einzelne ausführbare Datei, was bedeutet, dass Sie sie zu Ihrem PATH hinzufügen oder sogar so konfigurieren können, dass sie beim Start Ihres Computers ausgeführt wird.",
-            ],
-          },
-          start: {
-            openTerminal: " Öffnen Sie ein Terminal-Fenster.",
-            goToFolder: [
-              "Wechseln Sie zu dem Ordner, in dem Sie die ausführbare Datei ",
-              wrapped("file"),
-              " abgelegt haben.",
-            ],
-            runCommand: "Ausführen",
-            advanced: {
-              title: "Erweiterte Einstellungen",
-              runFollowingCommand: [
-                "Öffnen Sie ein Terminalfenster und führen Sie den folgenden Befehl in dem Verzeichnis aus, in dem Sie die ausführbare Datei ",
-                wrapped("file"),
-                " abgelegt haben:",
-              ],
-            },
-          },
-        },
         footerWaitingToConnect: `Warten auf die Verbindung zu ${de_common.names?.extendedServices}`,
         advancedSettings: {
-          title: [
-            `Der Standard-Port von ${de_common.names?.extendedServices} ist `,
-            wrapped("port"),
-            `. Wenn Sie diesen Port bereits für eine andere Anwendung verwenden, können Sie den Port, der für die Verbindung mit ${de_common.names?.extendedServices} verwendet wird, ändern.`,
-          ],
-          label: " Port",
+          title: `Der Standard-Port von ${de_common.names?.extendedServices} ist ${"{port"}"}. Wenn Sie diesen Port bereits für eine andere Anwendung verwenden, können Sie den Port, der für die Verbindung mit ${de_common.names?.extendedServices} verwendet wird, ändern.`,
+          label: " Erweitert",
           helperTextInvalid: "Ungültiger Port. Gültige Ports: 0 <= port <= 65353",
         },
       },
@@ -635,11 +521,6 @@ export const de: TranslatedDictionary<OnlineI18n> = {
         install: `Richten Sie ${de_common.names?.extendedServices} ein, um diese Funktion zu nutzen. Zum Installieren klicken.`,
         outdated: `${de_common.names?.extendedServices} ist veraltet. Klicken Sie zum Aktualisieren.`,
         disconnected: `${de_common.names?.extendedServices} ist nicht verbunden.`,
-      },
-    },
-    modal: {
-      initial: {
-        subHeader: `Erweitern Sie den ${de_common.names?.dmn} Editor`,
       },
     },
   },

@@ -48,10 +48,7 @@ import { Spinner } from "@patternfly/react-core/dist/js/components/Spinner";
 import { Divider } from "@patternfly/react-core/dist/js/components/Divider";
 import { EditorPageDockDrawer } from "./EditorPageDockDrawer";
 import { DmnRunnerContextProvider } from "../dmnRunner/DmnRunnerContextProvider";
-import {
-  LEGACY_DMN_EDITOR_EDITOR_CONFIG,
-  useEditorEnvelopeLocator,
-} from "../envelopeLocator/hooks/EditorEnvelopeLocatorContext";
+import { useEditorEnvelopeLocator } from "../envelopeLocator/hooks/EditorEnvelopeLocatorContext";
 import { usePreviewSvgs } from "../previewSvgs/PreviewSvgsContext";
 import { DmnLanguageService } from "@kie-tools/dmn-language-service";
 import { decoder } from "@kie-tools-core/workspaces-git-fs/dist/encoderdecoder/EncoderDecoder";
@@ -63,12 +60,12 @@ import {
   EmptyStateIcon,
   EmptyStateHeader,
 } from "@patternfly/react-core/dist/js/components/EmptyState";
-import { I18nDictionariesProvider, I18nWrapped } from "@kie-tools-core/i18n/dist/react-components";
 import { ExclamationTriangleIcon } from "@patternfly/react-icons/dist/js/icons/exclamation-triangle-icon";
 import { useEnv } from "../env/hooks/EnvContext";
 import { useSettings } from "../settings/SettingsContext";
 import { EditorEnvelopeLocatorFactory } from "../envelopeLocator/EditorEnvelopeLocatorFactory";
 import * as __path from "path";
+import { I18nWrappedTemplate } from "@kie-tools-core/i18n/dist/react-components";
 
 let saveVersion = 1;
 let refreshVersion = 0;
@@ -382,70 +379,22 @@ Error details: ${err}`);
             <TextContent>{i18n.editorPage.error.explanation}</TextContent>
             <br />
             <TextContent>
-              <I18nWrapped
-                components={{
+              <I18nWrappedTemplate
+                text={i18n.editorPage.error.message}
+                interpolationMap={{
                   jira: (
                     <a href={ISSUES_URL} target={"_blank"} rel={"noopener noreferrer"}>
                       {ISSUES_URL}
                     </a>
                   ),
                 }}
-              >
-                {i18n.editorPage.error.message}
-              </I18nWrapped>
+              />
             </TextContent>
           </EmptyStateBody>
         </EmptyState>
       </div>
     ),
     [i18n]
-  );
-
-  const { settings } = useSettings();
-
-  const settingsAwareEditorEnvelopeLocator = useMemo(() => {
-    if (settings.editors.useLegacyDmnEditor && fileRelativePath?.endsWith(".dmn")) {
-      return new EditorEnvelopeLocatorFactory().create({
-        targetOrigin: window.location.origin,
-        editorsConfig: [LEGACY_DMN_EDITOR_EDITOR_CONFIG],
-      });
-    }
-
-    return editorEnvelopeLocator;
-  }, [editorEnvelopeLocator, fileRelativePath, settings.editors.useLegacyDmnEditor]);
-
-  // `workspaceFilePromise` is ONLY updated when there's an external change on this file (e.g., on another tab), but
-  // when we jump between the classic and the new DMN Editor, `settingsAwareEditorEnvelopeLocator` changes,
-  // and if we don't update `embeddedEditorFile`, the new <EmbeddedEditor> will be rendered using the `embeddedEditorFile`
-  // that originally was used for opening the file, and the new chosen DMN Editor will display stale content.
-  useCancelableEffect(
-    useCallback(
-      ({ canceled }) => {
-        workspaceFilePromise.data?.workspaceFile.getFileContentsAsString().then((content) => {
-          if (canceled.get()) {
-            return;
-          }
-
-          setEmbeddedEditorFile((prev) =>
-            !prev
-              ? undefined
-              : {
-                  ...prev,
-                  getFileContents: async () => content,
-                }
-          );
-        });
-      },
-      //
-      // This is a very unusual case.
-      // `workspaceFilePromise.data` should've been here, but we can't really add it otherwise
-      // the <EmbeddedEditor> component will blink on any edit.
-      // `settingsAwareEditorEnvelopeLocator` is added because it is the only case where the
-      // <EmbeddedEditor> should update for the same workspaceFile.
-      //
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [settingsAwareEditorEnvelopeLocator]
-    )
   );
 
   return (
@@ -499,8 +448,8 @@ Error details: ${err}`);
                             kogitoWorkspace_resourceContentRequest={handleResourceContentRequest}
                             kogitoWorkspace_resourceListRequest={handleResourceListRequest}
                             kogitoEditor_setContentError={handleSetContentError}
-                            editorEnvelopeLocator={settingsAwareEditorEnvelopeLocator}
                             channelType={ChannelType.ONLINE_MULTI_FILE}
+                            editorEnvelopeLocator={editorEnvelopeLocator}
                             locale={locale}
                             workspaceRootAbsolutePosixPath={DEFAULT_WORKSPACE_ROOT_ABSOLUTE_POSIX_PATH}
                           />

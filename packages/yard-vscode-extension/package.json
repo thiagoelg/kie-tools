@@ -21,7 +21,7 @@
     "compile": "webpack --env dev",
     "lint": "run-script-if --bool \"$(build-env linters.run)\" --then \"kie-tools--eslint ./src\"",
     "pack:prod": "vsce package --githubBranch main --no-dependencies -o ./dist/yard_vscode_extension_$npm_package_version.vsix",
-    "run:webmode": "pnpm vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --version=stable",
+    "run:webmode": "pnpm exec vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --version=stable",
     "test-e2e": "run-script-if --ignore-errors \"$(build-env endToEndTests.ignoreFailures)\" --bool \"$(build-env endToEndTests.run)\" --then \"pnpm test-e2e:clean\" \"cpr e2e-tests/resources e2e-tests-tmp/resources\" \"tsc --project tsconfig.e2e-tests.json --skipLibCheck --sourceMap true\" \"extest setup-and-run --yarn -c max -u -e ./test-resources -o ./e2e-tests/settings.json out/*.test.js\"",
     "test-e2e:clean": "rimraf ./dist-tests-e2e && rimraf ./test-resources && rimraf ./out && rimraf ./e2e-tests-tmp && rimraf *.vsix",
     "test-e2e:clean:offline": "rimraf ./dist-tests-e2e && rimraf ./out && rimraf ./e2e-tests-tmp && rimraf *.vsix",
@@ -43,7 +43,7 @@
     "openapi-types": "^7.0.1",
     "vscode-languageserver-textdocument": "^1.0.4",
     "vscode-languageserver-types": "^3.16.0",
-    "yaml": "^2.3.2"
+    "yaml": "^2.8.3"
   },
   "devDependencies": {
     "@kie-tools-core/webpack-base": "workspace:*",
@@ -58,7 +58,7 @@
     "@types/vscode": "1.67.0",
     "@vscode/test-electron": "^2.3.6",
     "@vscode/test-web": "^0.0.66",
-    "@vscode/vsce": "^3.2.1",
+    "@vscode/vsce": "^3.7.1",
     "chai": "^4.3.10",
     "cpr": "^3.0.1",
     "mocha": "^10.6.0",
@@ -70,11 +70,11 @@
     "rimraf": "^3.0.2",
     "sanitize-filename-ts": "^1.0.2",
     "selenium-webdriver": "^4.27.0",
-    "typescript": "^5.5.3",
+    "typescript": "^5.9.3",
     "vscode-extension-tester": "^8.10.0",
-    "webpack": "^5.94.0",
+    "webpack": "^5.104.1",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.15.1",
+    "webpack-dev-server": "^4.15.2",
     "webpack-merge": "^5.9.0"
   },
   "engines": {

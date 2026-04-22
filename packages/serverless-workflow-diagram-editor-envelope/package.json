@@ -31,7 +31,7 @@
     "@kie-tools-core/operating-system": "workspace:*",
     "@kie-tools-core/vscode-java-code-completion": "workspace:*",
     "@kie-tools-core/workspace": "workspace:*",
-    "@kie-tools/kie-bc-editors": "workspace:*"
+    "@kie-tools/kie-bc-editors-common": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -41,6 +41,6 @@
     "@kie-tools/root-env": "workspace:*",
     "@kie-tools/tsconfig": "workspace:*",
     "rimraf": "^3.0.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.9.3"
   }
 }

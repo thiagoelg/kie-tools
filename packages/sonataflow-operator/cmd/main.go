@@ -24,6 +24,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/api/version"
 
@@ -37,7 +38,6 @@ import (
 	sourcesv1 "knative.dev/eventing/pkg/apis/sources/v1"
 	servingv1 "knative.dev/serving/pkg/apis/serving/v1"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
-	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
 	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/internal/controller"
 	"github.com/apache/incubator-kie-tools/packages/sonataflow-operator/internal/controller/cfg"
@@ -80,6 +80,11 @@ func init() {
 func main() {
 	var metricsAddr string
 	var enableLeaderElection bool
+	var leaseDuration *time.Duration
+	var renewDeadline *time.Duration
+	var retryPeriod *time.Duration
+	var qps *float64
+	var burst *int
 	var probeAddr string
 	var secureMetrics bool
 	var enableHTTP2 bool
@@ -90,12 +95,35 @@ func main() {
 	flag.BoolVar(&enableLeaderElection, "leader-elect", false,
 		"Enable leader election for controller manager. "+
 			"Enabling this will ensure there is only one active controller manager.")
+	// Flags for leader election tuning, resilient default values for production.
+	leaseDuration = flag.Duration("lease-duration", 60*time.Second, "Leader election lease duration")
+	renewDeadline = flag.Duration("renew-deadline", 40*time.Second, "Leader election renew deadline")
+	retryPeriod = flag.Duration("retry-period", 15*time.Second, "Leader election retry period")
+
+	// Flags for tuning client-go throttling
+	// 20 / 50	Very light operators
+	// 50 / 100	General-purpose OLM operators
+	// 100 / 200	Operators managing many CRDs or watching many namespaces
+	// 200 / 400	Extremely chatty operators (cluster-wide + many controllers)
+	qps = flag.Float64("qps", 50, "Maximum average QPS for Kubernetes client-go")
+	burst = flag.Int("burst", 100, "Maximum burst for Kubernetes client-go")
+
 	flag.BoolVar(&secureMetrics, "metrics-secure", false,
 		"If set the metrics endpoint is served securely")
 	flag.BoolVar(&enableHTTP2, "enable-http2", false,
 		"If set, HTTP/2 will be enabled for the metrics and webhook servers")
 	flag.StringVar(&controllerCfgPath, "controller-cfg-path", "", "The controller config file path.")
 	flag.Parse()
+
+	klog.InfoS("leader election configuration",
+		"leader-elect", enableLeaderElection,
+		"lease-duration", leaseDuration,
+		"renew-deadline", renewDeadline,
+		"retry-period", retryPeriod)
+
+	klog.InfoS("client-go throttling configuration",
+		"qps", qps,
+		"burst", burst)
 
 	manager.SetOperatorStartTime()
 
@@ -104,7 +132,7 @@ func main() {
 	// if the enable-http2 flag is false (the default), http/2 should be disabled
 	// due to its vulnerabilities. More specifically, disabling http/2 will
 	// prevent from being vulnerable to the HTTP/2 Stream Cancellation and
-	// Rapid Reset CVEs. For more information see:
+	// Rapid Reset CVEs. For development information see:
 	// - https://github.com/advisories/GHSA-qppj-fm5r-hxr3
 	// - https://github.com/advisories/GHSA-4374-p667-p6c8
 	disableHTTP2 := func(c *tls.Config) {
@@ -117,18 +145,16 @@ func main() {
 		tlsOpts = append(tlsOpts, disableHTTP2)
 	}
 
-	webhookServer := webhook.NewServer(webhook.Options{
-		TLSOpts: tlsOpts,
-	})
-
-	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
+	config := ctrl.GetConfigOrDie()
+	config.QPS = float32(*qps)
+	config.Burst = *burst
+	mgr, err := ctrl.NewManager(config, ctrl.Options{
 		Scheme: scheme,
 		Metrics: metricsserver.Options{
 			BindAddress:   metricsAddr,
 			SecureServing: secureMetrics,
 			TLSOpts:       tlsOpts,
 		},
-		WebhookServer:          webhookServer,
 		HealthProbeBindAddress: probeAddr,
 		LeaderElection:         enableLeaderElection,
 		LeaderElectionID:       "1be5e57d.kie.org",
@@ -143,6 +169,9 @@ func main() {
 		// if you are doing or is intended to do any operation such as perform cleanups
 		// after the manager stops then its usage might be unsafe.
 		// LeaderElectionReleaseOnCancel: true,
+		LeaseDuration: leaseDuration,
+		RenewDeadline: renewDeadline,
+		RetryPeriod:   retryPeriod,
 	})
 	if err != nil {
 		klog.V(log.E).ErrorS(err, "unable to start manager")

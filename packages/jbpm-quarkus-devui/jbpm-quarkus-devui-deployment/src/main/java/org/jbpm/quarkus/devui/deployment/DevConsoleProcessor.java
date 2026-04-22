@@ -58,7 +58,7 @@ import io.quarkus.vertx.http.runtime.management.ManagementInterfaceBuildTimeConf
 
 public class DevConsoleProcessor {
     private static final String STATIC_RESOURCES_PATH = "dev-static/";
-    private static final String BASE_RELATIVE_URL = "dev-ui/org.jbpm.jbpm-quarkus-devui";
+    private static final String BASE_RELATIVE_URL = "dev-ui/jbpm-quarkus-devui";
     private static final String NON_APPLICATION_BASE_RELATIVE_URL = "/q/" + BASE_RELATIVE_URL;
     private static final String DATA_INDEX_CAPABILITY = "org.kie.kogito.data-index";
     private static final GACT DEVCONSOLE_WEBJAR_ARTIFACT_KEY = new GACT("org.jbpm", "jbpm-quarkus-devui-deployment", null, "jar");
@@ -134,12 +134,12 @@ public class DevConsoleProcessor {
                 managementInterfaceBuildTimeConfig, launchModeBuildItem, true);
 
         String devUIUrl = getProperty(configurationBuildItem, systemPropertyBuildItems, "kogito.dev-ui.url");
-        String dataIndexUrl = getProperty(configurationBuildItem, systemPropertyBuildItems,
-                "kogito.data-index.url");
         String quarkusHttpHost = ConfigProvider.getConfig().getOptionalValue("quarkus.http.host", String.class)
                 .orElse("0.0.0.0");
         String quarkusHttpPort = ConfigProvider.getConfig().getOptionalValue("quarkus.http.port", String.class)
                 .orElse("8080");
+        String dataIndexUrl = ConfigProvider.getConfig().getOptionalValue("kogito.data-index.url", String.class)
+                .orElse("http://" + quarkusHttpHost + ":" + quarkusHttpPort + nonApplicationRootPathBuildItem.getNormalizedHttpRootPath());
 
         CardPageBuildItem cardPageBuildItem = new CardPageBuildItem();
 
@@ -214,7 +214,7 @@ public class DevConsoleProcessor {
         if (propertyConfig == null) {
             propertyConfig = configurationBuildItem
                     .getReadResult()
-                    .getRunTimeDefaultValues()
+                    .getRunTimeValues()
                     .get(propertyKey);
         }
 

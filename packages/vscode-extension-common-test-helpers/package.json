@@ -30,11 +30,11 @@
     "@types/chai": "^4.3.6",
     "@types/fs-extra": "^11.0.1",
     "@types/mocha": "^10.0.7",
-    "@types/node": "^22.14.1",
+    "@types/node": "^24.10.11",
     "@types/selenium-webdriver": "^4.1.27",
     "mocha": "^10.6.0",
     "rimraf": "^3.0.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.9.3",
     "vscode-extension-tester": "^8.10.0"
   },
   "peerDependencies": {

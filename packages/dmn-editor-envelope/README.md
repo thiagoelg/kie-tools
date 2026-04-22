@@ -17,7 +17,23 @@
 
 ## DMN Editor Envelope
 
-Package responsible for creating the necessary pumbling for `dmn-editor` to be used inside an Envelope.
+Package responsible for creating the necessary pumbling for [@kie-tools/dmn-editor](../dmn-editor/README.md) to be used inside an **`Envelope`** in [Multiplying Architecture](../envelope-bus/docs/ARCHITECTURE.md).
+
+### Features
+
+- Integration with external files for Included Models.
+- Keyboard Shortcuts for commands exposed by `<DmnEditor>`'s imperative handle.
+- Locale parameterization for internationalized labels.
+- State management for undo/redo stacks.
+- Bindings with DMN Editor's specific APIs such as importing Java classes.
+
+---
+
+## For development information see:
+
+- 👉 [DEV.md](./docs/DEV.md)
+- 👉 [TESTS.md](./docs/TESTS.md)
+- 👉 [ARCHITECTURE.md](./docs/ARCHITECTURE.md)
 
 ---
 

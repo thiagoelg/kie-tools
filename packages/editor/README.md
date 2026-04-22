@@ -15,9 +15,9 @@
    under the License.
 -->
 
-## Apache KIE Tools Editor API
+## @kie-tools-core/editor
 
-Interfaces to define Editors.
+Interfaces to define Editors as [**_Multiplying Architecture_**](../../repo/MULTIPLYING_ARCHITECTURE.md) **`Envelopes`**.
 
 ---
 
