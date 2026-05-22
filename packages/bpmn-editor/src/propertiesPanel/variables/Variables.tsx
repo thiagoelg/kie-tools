@@ -129,6 +129,7 @@ export function Variables({
               <Grid
                 md={6}
                 className={"kie-bpmn-editor--properties-panel--variables-entry"}
+                data-testid="kie-tools--bpmn-editor--variable-entry"
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(undefined)}
                 style={{ columnGap: "12px" }}
@@ -180,13 +181,21 @@ export function Variables({
                         });
                         if (!p || p["@_id"] === process["@_id"]) {
                           if (process.property?.[i]) {
-                            process.property[i]["@_itemSubjectRef"] = newItemDefinitionRef;
+                            if (newItemDefinitionRef) {
+                              process.property[i]["@_itemSubjectRef"] = newItemDefinitionRef;
+                            } else {
+                              delete process.property[i]["@_itemSubjectRef"];
+                            }
                           }
                         } else {
                           visitFlowElementsAndArtifacts(process, ({ element }) => {
                             if (element["@_id"] === p["@_id"] && element.__$$element === p.__$$element) {
                               if (element.property?.[i]) {
-                                element.property[i]["@_itemSubjectRef"] = newItemDefinitionRef;
+                                if (newItemDefinitionRef) {
+                                  element.property[i]["@_itemSubjectRef"] = newItemDefinitionRef;
+                                } else {
+                                  delete element.property[i]["@_itemSubjectRef"];
+                                }
                               }
                             }
                           });

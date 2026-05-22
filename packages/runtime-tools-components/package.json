@@ -24,10 +24,10 @@
     "lint": "run-script-if --bool \"$(build-env linters.run)\" --then \"kie-tools--eslint ./src\""
   },
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^13.0.5",
     "@kie-tools-core/editor": "workspace:*",
     "@kie-tools-core/operating-system": "workspace:*",
     "@kie-tools-core/patternfly-base": "workspace:*",
-    "@kie-tools/json-yaml-language-service": "workspace:*",
     "@kie-tools/runtime-tools-shared-gateway-api": "workspace:*",
     "@kie-tools/uniforms-patternfly": "workspace:*",
     "@patternfly/react-core": "^5.4.1",
@@ -36,22 +36,23 @@
     "@patternfly/react-table": "^5.4.1",
     "ajv": "^8.18.0",
     "ajv-formats": "^3.0.1",
-    "axios": "^1.13.5",
+    "axios": "^1.16.0",
     "copyfiles": "^2.4.1",
     "keycloak-js": "^23.0.5",
-    "lodash": "^4.17.23",
+    "lodash": "^4.18.1",
     "monaco-editor": "^0.39.0",
     "react-datetime-picker": "^3.5.0",
     "react-moment": "0.9.7",
     "react-router-dom": "^6.30.2",
     "uniforms": "^3.10.2",
     "uniforms-bridge-json-schema": "^3.10.2",
-    "uuid": "^8.3.2"
+    "uuid": "^11.1.1"
   },
   "devDependencies": {
     "@kie-tools/eslint": "workspace:*",
     "@kie-tools/root-env": "workspace:*",
     "@kie-tools/tsconfig": "workspace:*",
+    "@types/json-schema": "^7.0.11",
     "@types/lodash": "^4.14.168",
     "@types/react": "^17.0.6",
     "@types/react-datetime-picker": "^3.4.1",

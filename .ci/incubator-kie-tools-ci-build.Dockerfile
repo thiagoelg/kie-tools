@@ -100,8 +100,8 @@ RUN curl -s "https://get.sdkman.io" | bash && \
     sdk flush
 
 # Golang setup
-RUN wget https://go.dev/dl/go1.24.13.linux-amd64.tar.gz -P /tmp && \
-    sudo tar xzf /tmp/go1.24.13.linux-amd64.tar.gz -C /opt && rm /tmp/go1.24.13.linux-amd64.tar.gz && \
+RUN wget https://go.dev/dl/go1.26.1.linux-amd64.tar.gz -P /tmp && \
+    sudo tar xzf /tmp/go1.26.1.linux-amd64.tar.gz -C /opt && rm /tmp/go1.26.1.linux-amd64.tar.gz && \
     echo 'export GOPATH=${HOME}/go' | sudo tee /etc/profile.d/go.sh && \
     echo 'export PATH=${PATH}:/opt/go/bin:${GOPATH}/bin' | sudo tee -a /etc/profile.d/go.sh && \
     echo "source /etc/profile.d/go.sh" >> $HOME/.bashrc && \
@@ -121,13 +121,6 @@ RUN wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/opensh
 # Helm CLI setup
 RUN wget https://get.helm.sh/helm-v3.15.2-linux-amd64.tar.gz -P /tmp && \
     sudo tar -C /usr/bin/ -zxvf /tmp/helm-v3.15.2-linux-amd64.tar.gz linux-amd64/helm --strip-components 1 && rm /tmp/helm-v3.15.2-linux-amd64.tar.gz
-
-# Python setup
-RUN sudo update-alternatives --install /usr/local/bin/python python $(which python3) 1 && \
-    sudo update-alternatives --install /usr/local/bin/pip pip $(which pip3) 1
-
-# s2i (source-to-image) setup
-RUN go install github.com/openshift/source-to-image/cmd/s2i@v1.3.9
 
 # Env vars
 ENV HOME="/home/nonrootuser"

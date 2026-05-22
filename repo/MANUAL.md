@@ -215,7 +215,7 @@ Foundational package for other Maven-based packages to base themselves on.
 Used for writing `.mvn/maven.config` with `-Drevision`, `-Dmaven.repo.local.tail` and other necessary properties.
 And for centralized `<dependencyManagement>` and other necessary standard configurations
 
-All Maven-based packages should declare it as a `dependency` on their `package.json` files and its `pom.xml` as parent.
+All Maven-based framework agnostic (i.e not using Quarkus or Spring Boot) packages should declare it as a `dependency` on their `package.json` files and its `pom.xml` as parent.
 
 ```xml
 <parent>
@@ -223,6 +223,28 @@ All Maven-based packages should declare it as a `dependency` on their `package.j
   <artifactId>kie-tools-maven-base</artifactId>
   <version>${revision}</version>
   <relativePath>./node_modules/@kie-tools/maven-base/pom.xml</relativePath>
+</parent>
+```
+
+In case of Maven-based modules based on Quarkus, the following parent should be used:
+
+```xml
+<parent>
+  <groupId>org.kie</groupId>
+  <artifactId>kie-tools-quarkus-bom</artifactId>
+  <version>${revision}</version>
+  <relativePath>./node_modules/@kie-tools/quarkus-bom/pom.xml</relativePath>
+</parent>
+```
+
+In case of Maven-based modules based on Spring Boot, the following parent should be used:
+
+```xml
+<parent>
+  <groupId>org.kie</groupId>
+  <artifactId>kie-tools-spring-boot-bom</artifactId>
+  <version>${revision}</version>
+  <relativePath>./node_modules/@kie-tools/spring-boot-bom/pom.xml</relativePath>
 </parent>
 ```
 
@@ -361,6 +383,8 @@ There are, however, some things we can do to prevent ourselves from being in a d
   - Will users need to install it to be able to run our packages?
 - Licenses
   - See https://www.apache.org/licenses/
+
+> More information can be found in the [Dependency Management Guide](./DEPENDENCY_MANAGEMENT.md).
 
 ---
 

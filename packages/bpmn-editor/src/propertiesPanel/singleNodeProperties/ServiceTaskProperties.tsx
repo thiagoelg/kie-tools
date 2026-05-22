@@ -32,16 +32,14 @@ import { AsyncCheckbox } from "../asyncCheckbox/AsyncCheckbox";
 import { MultiInstanceProperties } from "../multiInstance/MultiInstanceProperties";
 import { MultiInstanceCheckbox } from "../multiInstanceCheckbox/MultiInstanceCheckbox";
 import { SlaDueDateInput } from "../slaDueDate/SlaDueDateInput";
-import {
-  BUSINESS_RULE_TASK_IMPLEMENTATIONS,
-  SERVICE_TASK_IMPLEMENTATIONS,
-} from "@kie-tools/bpmn-marshaller/dist/drools-extension";
+import { SERVICE_TASK_IMPLEMENTATIONS } from "@kie-tools/bpmn-marshaller/dist/drools-extension";
 import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/js/components/ToggleGroup";
 import { visitFlowElementsAndArtifacts } from "../../mutations/_elementVisitor";
 import { addOrGetProcessAndDiagramElements } from "../../mutations/addOrGetProcessAndDiagramElements";
 import { useBpmnEditorStore, useBpmnEditorStoreApi } from "../../store/StoreContext";
 import { TextInput } from "@patternfly/react-core/dist/js/components/TextInput";
 import { useBpmnEditorI18n } from "../../i18n";
+import { addOrGetOperations } from "../../mutations/addOrGetOperations";
 
 export function ServiceTaskProperties({
   serviceTask,
@@ -128,7 +126,14 @@ export function ServiceTaskProperties({
                 });
                 visitFlowElementsAndArtifacts(process, ({ element: e }) => {
                   if (e["@_id"] === serviceTask["@_id"] && e.__$$element === serviceTask.__$$element) {
+                    const { operation } = addOrGetOperations({
+                      definitions: s.bpmn.model.definitions,
+                      interfaceName: newInterface,
+                      operationRef: e["@_operationRef"],
+                      operationName: e["@_drools:serviceoperation"] || "",
+                    });
                     e["@_drools:serviceinterface"] = newInterface;
+                    e["@_operationRef"] = operation["@_id"];
                   }
                 });
               })
@@ -150,7 +155,14 @@ export function ServiceTaskProperties({
                 });
                 visitFlowElementsAndArtifacts(process, ({ element: e }) => {
                   if (e["@_id"] === serviceTask["@_id"] && e.__$$element === serviceTask.__$$element) {
+                    const { operation } = addOrGetOperations({
+                      definitions: s.bpmn.model.definitions,
+                      interfaceName: e["@_drools:serviceinterface"] || "",
+                      operationRef: e["@_operationRef"],
+                      operationName: newOperation,
+                    });
                     e["@_drools:serviceoperation"] = newOperation;
+                    e["@_operationRef"] = operation["@_id"];
                   }
                 });
               })

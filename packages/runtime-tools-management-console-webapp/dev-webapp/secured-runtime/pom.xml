@@ -25,9 +25,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.kie</groupId>
-    <artifactId>kie-tools-maven-base</artifactId>
+    <artifactId>kie-tools-quarkus-bom</artifactId>
     <version>${revision}</version>
-    <relativePath>../../node_modules/@kie-tools/maven-base/pom.xml</relativePath>
+    <relativePath>../../node_modules/@kie-tools/quarkus-bom/pom.xml</relativePath>
   </parent>
 
   <!-- This is a development app. It's better that we use an arbitrary string to not make this more complicated than it has to be. -->
@@ -119,7 +119,7 @@
     <dependency>
       <groupId>io.quarkiverse.oidc-proxy</groupId>
       <artifactId>quarkus-oidc-proxy</artifactId>
-      <version>0.2.2</version>
+      <version>0.3.2</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

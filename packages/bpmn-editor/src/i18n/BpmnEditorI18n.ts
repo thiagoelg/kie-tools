@@ -32,6 +32,13 @@ interface BpmnEditorDictionary
       emptyBpmnTitle: string;
       emptyBpmnBody: string;
       startByDraggingNodes: string;
+      createProcessTitle: string;
+      createProcessDescription: string;
+      processIdLabel: string;
+      processIdPlaceholder: string;
+      processIdInvalidText: string;
+      processIdSpacesNotAllowed: string;
+      startModeling: string;
     };
     bpmnTopRightPanels: {
       overlays: string;
@@ -59,6 +66,7 @@ interface BpmnEditorDictionary
       textAnnotation: string;
       customTasks: string;
       propertiesManagement: string;
+      moreItems: string;
     };
     versionUpgraded: string;
     bpmnLatestVersion: string;
@@ -149,6 +157,7 @@ interface BpmnEditorDictionary
       documentationPlaceholder: string;
       copy: string;
       copied: string;
+      regenerateIdButton: string;
       manage: string;
       notificationsProperties: {
         notifications: string;
@@ -217,6 +226,7 @@ interface BpmnEditorDictionary
       metadata: string;
       idNamespace: string;
       regenerateIdNamespace: string;
+      regenerateNamespace: string;
       idPlaceholder: string;
       namespace: string;
       namespacePlaceholder: string;
@@ -234,6 +244,7 @@ interface BpmnEditorDictionary
       processInstanceDescriptionPlaceholder: string;
       regenerateId: string;
       regenerateMessage: string;
+      regenerateNamespaceMessage: string;
       continueMessage: string;
       cancel: string;
       edgesNodesSelected: (size: number) => string;
